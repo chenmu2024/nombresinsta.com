@@ -45,11 +45,11 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, savedN
             </div>
             <div>
               <h3 className="text-xl font-bold text-slate-800">Favoritos</h3>
-              <p className="text-xs text-slate-400">{savedNames.length} guardados</p>
+              <p className="text-xs text-slate-500">{savedNames.length} guardados</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-2 bg-slate-50 rounded-full hover:bg-slate-100 transition">
-            <ChevronDown size={24} className="text-slate-400" />
+          <button onClick={onClose} className="p-2 bg-slate-50 rounded-full hover:bg-slate-100 transition" aria-label="Cerrar favoritos">
+            <ChevronDown size={24} className="text-slate-500" />
           </button>
         </div>
 
@@ -60,7 +60,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, savedN
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
                 <Heart size={32} className="text-slate-300" />
               </div>
-              <p className="text-slate-400">Aún no tienes favoritos.<br/>Dale ❤️ a los nombres que te gusten.</p>
+              <p className="text-slate-500">Aún no tienes favoritos.<br/>Dale ❤️ a los nombres que te gusten.</p>
               <button onClick={onClose} className="text-pink-600 font-bold text-sm hover:underline">
                 Volver a buscar
               </button>
@@ -72,14 +72,14 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, savedN
                 <div className="flex space-x-1">
                    <button 
                      onClick={() => onCopy(item.name)}
-                     className="p-2 text-slate-400 hover:text-blue-500 hover:bg-white rounded-lg transition"
+                     className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition"
                      title="Copiar"
                    >
                      <Copy size={16} />
                    </button>
                    <button 
                      onClick={() => onRemove(item)}
-                     className="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg transition"
+                     className="p-2 text-slate-400 hover:text-red-600 hover:bg-white rounded-lg transition"
                      title="Eliminar"
                    >
                      <Trash2 size={16} />
@@ -111,7 +111,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, savedN
             </div>
             <button 
               onClick={onClear}
-              className="w-full py-2 text-xs text-slate-400 hover:text-red-500 font-medium transition"
+              className="w-full py-2 text-xs text-slate-500 hover:text-red-600 font-medium transition"
             >
               Borrar lista
             </button>
@@ -162,7 +162,7 @@ const NameCard: React.FC<NameCardProps> = ({
           @{item.name}
         </span>
         {!isSavedView && (
-          <span className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mt-1">
+          <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-1">
             {item.category}
           </span>
         )}
@@ -175,8 +175,9 @@ const NameCard: React.FC<NameCardProps> = ({
             target="_blank" 
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="p-2 text-slate-400 hover:text-blue-500 hover:bg-white rounded-lg transition"
+            className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition"
             title="Verificar en Instagram"
+            aria-label={`Verificar @${item.name} en Instagram`}
           >
             <ExternalLink size={16} />
           </a>
@@ -188,6 +189,7 @@ const NameCard: React.FC<NameCardProps> = ({
                 ? 'text-red-500 bg-white shadow-sm'
                 : 'text-slate-400 hover:text-red-500 hover:bg-white'
             }`}
+            aria-label={isSaved ? "Quitar de favoritos" : "Añadir a favoritos"}
           >
             <Heart size={16} fill={isSaved ? "currentColor" : "none"} />
           </button>
@@ -375,14 +377,14 @@ const Generator: React.FC = () => {
   };
 
   const handleShare = async () => {
-      const text = `¡Mira estos nombres para Instagram que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.com`;
+      const text = `¡Mira estos nombres para Instagram que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.co`;
       
       if (navigator.share) {
           try {
               await navigator.share({
                   title: 'Mis Nombres Favoritos',
                   text: text,
-                  url: 'https://nombresinsta.com'
+                  url: 'https://nombresinsta.co'
               });
               showToastMsg("¡Compartido!");
           } catch (error) {
@@ -416,6 +418,7 @@ const Generator: React.FC = () => {
       <button
         onClick={() => setIsFavoritesOpen(true)}
         className={`fixed bottom-6 right-6 z-40 bg-slate-900 text-white p-4 rounded-full shadow-2xl shadow-pink-500/20 transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center ${savedNames.length > 0 ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}
+        aria-label="Ver favoritos guardados"
       >
         <div className="relative">
             <Heart fill="currentColor" size={24} className="text-white" />
@@ -473,12 +476,14 @@ const Generator: React.FC = () => {
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Palabra clave o Nombre..."
+                aria-label="Ingresa tu palabra clave o nombre"
                 className="w-full pl-12 pr-12 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:bg-white focus:border-pink-300 focus:ring-4 focus:ring-pink-100 transition-all outline-none text-lg font-medium text-slate-800 placeholder:text-slate-400 shadow-inner"
               />
               {keyword && (
                  <button 
                    onClick={clearKeyword}
                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500 transition"
+                   aria-label="Borrar texto"
                  >
                    <X size={20} />
                  </button>
@@ -612,12 +617,12 @@ const Generator: React.FC = () => {
                  <>
                     <div className="flex justify-between items-center px-2 mb-4">
                         <div className="flex items-baseline space-x-3">
-                            <h3 className="text-xl font-bold text-slate-800">Resultados</h3>
-                            <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded-lg">{results.length} ideas</span>
+                            <h2 className="text-xl font-bold text-slate-800">Resultados</h2>
+                            <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-lg">{results.length} ideas</span>
                         </div>
                         <button 
                            onClick={clearResults}
-                           className="text-xs text-slate-400 hover:text-slate-600 flex items-center hover:bg-slate-100 px-2 py-1 rounded-lg transition"
+                           className="text-xs text-slate-500 hover:text-slate-700 flex items-center hover:bg-slate-100 px-2 py-1 rounded-lg transition"
                         >
                             <RotateCcw size={12} className="mr-1" /> Limpiar Todo
                         </button>
@@ -639,7 +644,7 @@ const Generator: React.FC = () => {
 
                     {/* Related Searches Section (SEO & UX) */}
                     <div className="mt-12 pt-8 border-t border-slate-100">
-                        <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Quizás buscas también...</p>
+                        <p className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-4">Quizás buscas también...</p>
                         <div className="flex flex-wrap gap-3">
                             {['Nombres para Gatos', 'Ideas para Tiendas', 'Nicks Gamer', 'Aesthetic Cortos', 'Nombres de Parejas'].map(tag => (
                                 <button
@@ -679,7 +684,7 @@ const Generator: React.FC = () => {
                             <div className="w-16 h-16 bg-gradient-to-tr from-pink-100 to-purple-100 rounded-2xl rotate-3 flex items-center justify-center mx-auto mb-4 shadow-sm">
                                 <Sparkles className="text-pink-500" size={32} />
                             </div>
-                            <h3 className="text-2xl font-bold text-slate-800 mb-2">¿Sin inspiración?</h3>
+                            <h2 className="text-2xl font-bold text-slate-800 mb-2">¿Sin inspiración?</h2>
                             <p className="text-slate-500 max-w-sm mx-auto">
                                 Elige una categoría y nuestro <strong>Generador de Nombres</strong> creará ideas instantáneas para ti.
                             </p>
