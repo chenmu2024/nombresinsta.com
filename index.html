@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="https://picsum.photos/32/32" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generador de Nombres para Instagram | NombresInsta.com</title>
+    <meta name="description" content="Genera nombres para Instagram únicos, creativos y aesthetic. Herramienta gratuita para encontrar tu usuario ideal en segundos." />
+    <meta name="keywords" content="generador de nombres para instagram, nombres instagram, nombres aesthetic, usuario instagram, generador de nicks" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              insta: {
+                primary: '#E1306C',
+                purple: '#833AB4',
+                orange: '#F77737',
+                yellow: '#FCAF45',
+                blue: '#405DE6'
+              }
+            },
+            backgroundImage: {
+              'insta-gradient': 'linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D)',
+              'soft-gradient': 'linear-gradient(to right, #ece9e6, #ffffff)'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+</head>
+  <body class="bg-slate-50 text-slate-900 antialiased">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
