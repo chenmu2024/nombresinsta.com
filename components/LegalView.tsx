@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ArrowLeft, Mail, Shield, FileText, Users, Globe, Lock } from 'lucide-react';
+import { ArrowLeft, Mail, FileText, Users, Lock } from 'lucide-react';
 
 interface LegalViewProps {
   page: 'about' | 'contact' | 'privacy' | 'terms';

@@ -147,15 +147,19 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
   // 1. Minimal (Clean, Short, Punctuation heavy)
   if (category === NameCategory.ALL || category === NameCategory.MINIMAL) {
     add(base, NameCategory.MINIMAL); // Plain
-    add(`${base}.ig`, NameCategory.MINIMAL);
     add(`iam${base}`, NameCategory.MINIMAL);
     add(`${base}${base}`, NameCategory.MINIMAL); // Doubled
-    add(base.split('').join('.'), NameCategory.MINIMAL); // s.o.f.i.a
     
-    // Insert random period
-    if (base.length > 3) {
-      const splitIdx = Math.floor(Math.random() * (base.length - 1)) + 1;
-      add(`${base.slice(0, splitIdx)}.${base.slice(splitIdx)}`, NameCategory.MINIMAL);
+    // Period strategies - controlled by option
+    if (includePeriods) {
+        add(`${base}.ig`, NameCategory.MINIMAL);
+        add(base.split('').join('.'), NameCategory.MINIMAL); // s.o.f.i.a
+        
+        // Insert random period
+        if (base.length > 3) {
+          const splitIdx = Math.floor(Math.random() * (base.length - 1)) + 1;
+          add(`${base.slice(0, splitIdx)}.${base.slice(splitIdx)}`, NameCategory.MINIMAL);
+        }
     }
     
     // Spaced out
@@ -172,19 +176,26 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
         const pre = aestheticPrefixes[Math.floor(Math.random() * aestheticPrefixes.length)];
         const suf = aestheticSuffixes[Math.floor(Math.random() * aestheticSuffixes.length)];
         
-        if(Math.random() > 0.5) add(`${pre}.${base}`, NameCategory.AESTHETIC);
+        // Use period option here too
+        if(includePeriods && Math.random() > 0.5) add(`${pre}.${base}`, NameCategory.AESTHETIC);
         else add(`${pre}${base}`, NameCategory.AESTHETIC);
 
-        if(Math.random() > 0.5) add(`${base}.${suf}`, NameCategory.AESTHETIC);
+        if(includePeriods && Math.random() > 0.5) add(`${base}.${suf}`, NameCategory.AESTHETIC);
         else add(`${base}${suf}`, NameCategory.AESTHETIC);
     }
 
     // Transformations
     add(doubleVowels(base), NameCategory.AESTHETIC); // sofia -> sofiiia
     add(replaceChars(base), NameCategory.AESTHETIC); // cool -> kool
-    add(`its.${base}`, NameCategory.AESTHETIC);
-    add(`${base}.pov`, NameCategory.AESTHETIC);
-    add(`just.${base}`, NameCategory.AESTHETIC);
+    if(includePeriods) {
+        add(`its.${base}`, NameCategory.AESTHETIC);
+        add(`${base}.pov`, NameCategory.AESTHETIC);
+        add(`just.${base}`, NameCategory.AESTHETIC);
+    } else {
+        add(`its${base}`, NameCategory.AESTHETIC);
+        add(`${base}pov`, NameCategory.AESTHETIC);
+        add(`just${base}`, NameCategory.AESTHETIC);
+    }
   }
 
   // 3. Business (Official, localized, professional)
@@ -194,15 +205,17 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
         const suf = businessSuffixes[Math.floor(Math.random() * businessSuffixes.length)];
         
         add(`${pre}${base}`, NameCategory.BUSINESS);
-        add(`${pre}.${base}`, NameCategory.BUSINESS);
+        if(includePeriods) add(`${pre}.${base}`, NameCategory.BUSINESS);
         add(`${base}${suf}`, NameCategory.BUSINESS);
-        add(`${base}.${suf}`, NameCategory.BUSINESS);
+        if(includePeriods) add(`${base}.${suf}`, NameCategory.BUSINESS);
     }
     
     // Domain style
-    add(`${base}.com`, NameCategory.BUSINESS);
-    add(`www.${base}`, NameCategory.BUSINESS);
-    add(`${base}.net`, NameCategory.BUSINESS);
+    if(includePeriods) {
+        add(`${base}.com`, NameCategory.BUSINESS);
+        add(`www.${base}`, NameCategory.BUSINESS);
+        add(`${base}.net`, NameCategory.BUSINESS);
+    }
   }
 
   // 4. Funny (Self-deprecating, memes, Spanish humor)
@@ -229,7 +242,7 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
     const noun = randomNouns[Math.floor(Math.random() * randomNouns.length)];
     
     const r = Math.random();
-    if (r < 0.33) add(`${keyword || adj}.${noun}`, NameCategory.ALL);
+    if (r < 0.33 && includePeriods) add(`${keyword || adj}.${noun}`, NameCategory.ALL);
     else if (r < 0.66) add(`${noun}x${keyword || adj}`, NameCategory.ALL);
     else add(`${adj}${noun}`, NameCategory.ALL);
   }

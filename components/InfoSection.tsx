@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lightbulb, ShieldCheck, Zap, User, Briefcase, Gamepad2, Heart, CheckCircle2, XCircle } from 'lucide-react';
+import { Lightbulb, ShieldCheck, Zap, User, Briefcase, Heart, CheckCircle2, XCircle } from 'lucide-react';
 
 const InfoSection: React.FC = () => {
   return (
