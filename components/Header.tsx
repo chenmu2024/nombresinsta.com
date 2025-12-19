@@ -8,27 +8,48 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
+    <header className="sticky top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/50 supports-[backdrop-filter]:bg-white/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-18 md:h-20">
           <button 
             onClick={() => onNavigate('home')}
-            className="flex items-center space-x-2 hover:opacity-80 transition"
+            className="group flex items-center space-x-2.5 transition transform active:scale-95"
           >
-            <div className="bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white p-1.5 rounded-lg">
-              <Instagram size={24} />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 blur opacity-70 group-hover:opacity-100 transition duration-500 rounded-xl"></div>
+              <div className="relative bg-white text-transparent bg-clip-text bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 p-1.5 rounded-xl border border-white/50">
+                <Instagram size={26} className="text-pink-600" />
+              </div>
             </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+            <span className="text-2xl font-bold tracking-tight text-slate-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all duration-300">
               NombresInsta
             </span>
           </button>
           
-          <nav className="hidden md:flex space-x-8 text-gray-600 text-sm font-medium">
-            <button onClick={() => onNavigate('home', '#generator')} className="hover:text-pink-600 transition">Generador</button>
-            <button onClick={() => onNavigate('blog')} className="hover:text-pink-600 transition">Blog</button>
-            <button onClick={() => onNavigate('home', '#tips')} className="hover:text-pink-600 transition">Consejos</button>
-            <button onClick={() => onNavigate('home', '#faq')} className="hover:text-pink-600 transition">FAQ</button>
+          <nav className="hidden md:flex space-x-1 items-center">
+            {['Generador', 'Blog', 'Consejos', 'FAQ'].map((item) => {
+              const target = item === 'Blog' ? 'blog' : 'home';
+              const hash = item === 'Generador' ? '#generator' : item === 'Consejos' ? '#tips' : item === 'FAQ' ? '#faq' : undefined;
+              
+              return (
+                <button 
+                  key={item}
+                  onClick={() => onNavigate(target as ViewState, hash)}
+                  className="px-4 py-2 text-slate-600 text-sm font-semibold rounded-full hover:bg-pink-50 hover:text-pink-600 transition duration-300"
+                >
+                  {item}
+                </button>
+              );
+            })}
           </nav>
+          
+          {/* Mobile menu placeholder for future expansion, currently simple */}
+          <button 
+             onClick={() => onNavigate('home', '#generator')}
+             className="md:hidden bg-slate-900 text-white px-4 py-2 rounded-full text-xs font-bold"
+          >
+            Generar
+          </button>
         </div>
       </div>
     </header>
