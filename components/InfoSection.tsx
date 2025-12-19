@@ -14,7 +14,7 @@ const InfoSection: React.FC = () => {
             </div>
             <h3 className="text-2xl font-bold text-slate-900 mb-3">Rápido y Fácil</h3>
             <p className="text-slate-500 leading-relaxed">
-              Genera cientos de combinaciones en milisegundos. Sin registros, sin descargas, directo al grano.
+              Genera cientos de combinaciones de <strong>nombres para Instagram</strong> en milisegundos. Sin registros, sin descargas, 100% online.
             </p>
           </div>
           <div className="p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-pink-100/50 hover:-translate-y-1 transition duration-300 group">
@@ -23,16 +23,16 @@ const InfoSection: React.FC = () => {
             </div>
             <h3 className="text-2xl font-bold text-slate-900 mb-3">Ideas Aesthetic</h3>
             <p className="text-slate-500 leading-relaxed">
-              Algoritmos entrenados con las últimas tendencias visuales de Instagram para 2025.
+              Algoritmos entrenados con las últimas tendencias visuales de Instagram para 2025: Nombres aesthetic, soft y minimalistas.
             </p>
           </div>
           <div className="p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-green-100/50 hover:-translate-y-1 transition duration-300 group">
             <div className="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <ShieldCheck size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">100% Seguro</h3>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">100% Seguro y Gratis</h3>
             <p className="text-slate-500 leading-relaxed">
-              Todo funciona localmente en tu navegador. Tus ideas son tuyas; no guardamos ningún dato.
+              Todo funciona localmente en tu navegador. Tus ideas de nombres son tuyas; no guardamos ningún dato personal.
             </p>
           </div>
         </div>
@@ -43,9 +43,9 @@ const InfoSection: React.FC = () => {
           {/* Main Content */}
           <div className="lg:col-span-8 space-y-12 text-slate-600 leading-8 text-lg">
             <section>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Guía 2025: Cómo elegir el nombre perfecto</h2>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">Guía 2025: Cómo elegir el nombre perfecto para Instagram</h2>
               <p className="mb-6">
-                Tu nombre de usuario (@usuario) es tu identidad digital. Es lo primero que ven tus seguidores y lo que recordarán. Para crecer en Instagram en 2025, tu nombre debe ser fácil de encontrar y representar tu marca personal.
+                Tu <strong>nombre de usuario (@usuario)</strong> es tu identidad digital. Es lo primero que ven tus seguidores y lo que recordarán. Para crecer en Instagram en 2025, tu nombre debe ser fácil de encontrar, corto y representar tu marca personal. Nuestra herramienta te ayuda a encontrar esa disponibilidad difícil de conseguir.
               </p>
               
               {/* SEO Table */}
@@ -53,22 +53,22 @@ const InfoSection: React.FC = () => {
                 <table className="min-w-full text-sm md:text-base text-left">
                   <thead className="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
                     <tr>
-                      <th className="px-6 py-5">✅ Lo que SÍ funciona</th>
-                      <th className="px-6 py-5">❌ Lo que debes evitar</th>
+                      <th className="px-6 py-5">✅ Nombres que SÍ funcionan</th>
+                      <th className="px-6 py-5">❌ Nombres que debes evitar</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     <tr className="bg-white hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Nombres cortos y memorables</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Frases demasiado largas</td>
+                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Nombres cortos y fáciles de leer</td>
+                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Frases largas o confusas</td>
                     </tr>
                     <tr className="bg-slate-50/50 hover:bg-slate-50 transition">
                       <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Uso limpio de puntos (.)</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Exceso de números</td>
+                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Exceso de números aleatorios (12345)</td>
                     </tr>
                     <tr className="bg-white hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Palabras clave (ej. 'foto')</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Caracteres difíciles</td>
+                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Palabras clave (ej. 'arte', 'foto')</td>
+                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Caracteres especiales difíciles</td>
                     </tr>
                   </tbody>
                 </table>
@@ -85,7 +85,7 @@ const InfoSection: React.FC = () => {
                   <h3 className="text-2xl font-bold text-slate-900">Nombres para Instagram de Mujer</h3>
                 </div>
                 <p>
-                  ¿Buscas un nombre femenino y delicado? Para chicas, las tendencias actuales incluyen palabras en inglés como <em>"honey", "soft", "angel", "baby"</em> o prefijos como <em>"soy", "miss", "its"</em>. Nuestro generador combina tu nombre con estos elementos para crear opciones elegantes y "aesthetic" que destacan en el feed.
+                  ¿Buscas un nombre femenino, delicado y bonito? Para chicas, las tendencias actuales de 2025 incluyen palabras en inglés como <em>"honey", "soft", "angel", "baby"</em> o prefijos como <em>"soy", "miss", "its"</em>. Nuestro generador combina tu nombre o apodo con estos elementos para crear opciones elegantes y "aesthetic" que destacan en el feed.
                 </p>
               </div>
 
@@ -97,7 +97,7 @@ const InfoSection: React.FC = () => {
                   <h3 className="text-2xl font-bold text-slate-900">Nombres para Instagram de Hombre</h3>
                 </div>
                 <p>
-                  Para perfiles masculinos, la clave es la simplicidad, el estoicismo y el impacto. Usa el modo <strong>"Minimal"</strong> o <strong>"Funny"</strong>. Palabras como <em>"real", "official", "mr", "the"</em> o simplemente tu nombre con guiones bajos estratégicos suelen funcionar mejor para transmitir confianza.
+                  Para perfiles masculinos, la clave es la simplicidad, el estoicismo y el impacto. Usa el modo <strong>"Minimal"</strong> o <strong>"Funny"</strong> de nuestro generador. Palabras como <em>"real", "official", "mr", "the"</em> o simplemente tu nombre con guiones bajos estratégicos suelen funcionar mejor para transmitir confianza y seguidores.
                 </p>
               </div>
 
@@ -109,18 +109,18 @@ const InfoSection: React.FC = () => {
                   <h3 className="text-2xl font-bold text-slate-900">Nombres para Empresas y Marcas</h3>
                 </div>
                 <p>
-                  Si estás creando una cuenta profesional, selecciona la categoría <strong>"Business"</strong>. El generador añadirá términos profesionales como <em>"studio", "shop", "tienda", "oficial", "bazar"</em> o tu ubicación (<em>"mx", "es", "arg", "col"</em>). Esto es vital para el SEO local de Instagram.
+                  Si estás creando una cuenta profesional o de emprendimiento, selecciona la categoría <strong>"Business"</strong>. El generador añadirá términos profesionales como <em>"studio", "shop", "tienda", "oficial", "bazar"</em> o tu ubicación (<em>"mx", "es", "arg", "col"</em>). Esto es vital para el <strong>SEO local de Instagram</strong> y para que tus clientes te encuentren.
                 </p>
               </div>
             </section>
 
             <section id="faq" className="scroll-mt-24">
-              <h2 className="text-3xl font-bold text-slate-900 mb-8">Preguntas Frecuentes</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-8">Preguntas Frecuentes (FAQ)</h2>
               <div className="space-y-6">
                 {[
-                  { q: "¿Qué hago si el nombre que quiero está ocupado?", a: "Es el problema #1 en Instagram. Nuestra herramienta soluciona esto sugiriendo variaciones inteligentes: añadiendo puntos (.), guiones bajos (_) o sufijos de moda." },
-                  { q: "¿Qué son los nombres 'Aesthetic'?", a: "Los nombres aesthetic priorizan la apariencia visual. Suelen utilizar minúsculas, palabras en inglés suaves (como 'moon', 'honey') y caracteres limpios." },
-                  { q: "¿Es gratis este generador?", a: "Sí, NombresInsta.com es 100% gratuito. Puedes generar ilimitadas combinaciones sin registro." }
+                  { q: "¿Qué hago si el nombre de usuario que quiero está ocupado?", a: "Es el problema #1 en Instagram. Nuestra herramienta soluciona esto sugiriendo variaciones inteligentes: añadiendo puntos (.), guiones bajos (_) o sufijos de moda (como 'official' o 'vibe') que mantienen tu esencia pero están disponibles." },
+                  { q: "¿Qué son los nombres 'Aesthetic'?", a: "Los nombres aesthetic priorizan la apariencia visual y la calma. Suelen utilizar minúsculas, palabras en inglés suaves (como 'moon', 'honey', 'soft') y evitan el exceso de números." },
+                  { q: "¿Es gratis este generador de nombres?", a: "Sí, NombresInsta.com es una herramienta 100% gratuita y segura. Puedes generar ilimitadas combinaciones de nombres para Instagram, TikTok, Twitter o Twitch sin necesidad de registrarte ni descargar nada." }
                 ].map((faq, i) => (
                   <div key={i} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                     <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.q}</h3>

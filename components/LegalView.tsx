@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Mail, FileText, Users, Lock } from 'lucide-react';
+import { useSEO } from '../hooks/useSEO';
 
 interface LegalViewProps {
   page: 'about' | 'contact' | 'privacy' | 'terms';
@@ -7,6 +8,20 @@ interface LegalViewProps {
 }
 
 const LegalView: React.FC<LegalViewProps> = ({ page, onBack }) => {
+  // Dynamic Title & Description SEO using custom Hook
+  const seoData = {
+      about: { title: 'Sobre Nosotros | NombresInsta', desc: 'Conoce al equipo detrás del mejor generador de nombres en español.' },
+      contact: { title: 'Contacto | NombresInsta', desc: 'Contáctanos para soporte o colaboraciones.' },
+      privacy: { title: 'Política de Privacidad | NombresInsta', desc: 'Cómo protegemos tus datos en NombresInsta.' },
+      terms: { title: 'Términos de Uso | NombresInsta', desc: 'Términos y condiciones legales de uso.' }
+  };
+  
+  useSEO({
+    title: seoData[page].title,
+    description: seoData[page].desc,
+    url: `/${page}`
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [page]);

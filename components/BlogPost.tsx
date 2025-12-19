@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Calendar, Clock, Share2, Sparkles } from 'lucide-react';
 import { blogPosts } from '../data/blogData';
+import { useSEO } from '../hooks/useSEO';
 
 interface BlogPostProps {
   postId: string;
@@ -10,6 +11,13 @@ interface BlogPostProps {
 
 const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) => {
   const post = blogPosts.find(p => p.id === postId);
+
+  // Apply SEO tags specifically for this article
+  useSEO({
+    title: post ? `${post.title} | NombresInsta` : 'Artículo no encontrado | NombresInsta',
+    description: post ? post.excerpt : 'Artículo del blog sobre consejos para Instagram.',
+    url: post ? `/blog/${post.id}` : '/blog'
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

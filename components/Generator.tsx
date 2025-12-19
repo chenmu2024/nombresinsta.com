@@ -1,12 +1,133 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2 } from 'lucide-react';
+import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown } from 'lucide-react';
 import { NameCategory, GeneratedName } from '../types';
 import { generateNames } from '../utils/nameGenerator';
+import { useSEO } from '../hooks/useSEO';
+
+// --- Toast Component ---
+const Toast = ({ message, isVisible }: { message: string; isVisible: boolean }) => (
+  <div className={`fixed bottom-24 md:bottom-10 left-1/2 transform -translate-x-1/2 bg-slate-900/90 backdrop-blur text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-3 transition-all duration-300 z-[60] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0 pointer-events-none'}`}>
+    <Check size={18} className="text-green-400" />
+    <span className="font-medium text-sm">{message}</span>
+  </div>
+);
+
+// --- Favorites Modal Component ---
+interface FavoritesModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  savedNames: GeneratedName[];
+  onRemove: (item: GeneratedName) => void;
+  onCopy: (text: string) => void;
+  onShare: () => void;
+  onClear: () => void;
+}
+
+const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, savedNames, onRemove, onCopy, onShare, onClear }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center p-0 md:p-4">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"
+        onClick={onClose}
+      ></div>
+
+      {/* Modal Content */}
+      <div className="relative bg-white w-full md:w-[500px] md:rounded-3xl rounded-t-3xl shadow-2xl flex flex-col max-h-[85vh] animate-slide-up md:animate-scale-in">
+        
+        {/* Header */}
+        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white rounded-t-3xl sticky top-0 z-10">
+          <div className="flex items-center gap-2">
+            <div className="bg-pink-100 p-2 rounded-xl text-pink-600">
+               <Heart size={20} fill="currentColor" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-800">Favoritos</h3>
+              <p className="text-xs text-slate-400">{savedNames.length} guardados</p>
+            </div>
+          </div>
+          <button onClick={onClose} className="p-2 bg-slate-50 rounded-full hover:bg-slate-100 transition">
+            <ChevronDown size={24} className="text-slate-400" />
+          </button>
+        </div>
+
+        {/* List */}
+        <div className="overflow-y-auto p-6 space-y-3 custom-scrollbar">
+          {savedNames.length === 0 ? (
+            <div className="text-center py-10 space-y-4">
+              <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto">
+                <Heart size={32} className="text-slate-300" />
+              </div>
+              <p className="text-slate-400">Aún no tienes favoritos.<br/>Dale ❤️ a los nombres que te gusten.</p>
+              <button onClick={onClose} className="text-pink-600 font-bold text-sm hover:underline">
+                Volver a buscar
+              </button>
+            </div>
+          ) : (
+            savedNames.map(item => (
+              <div key={item.id} className="flex justify-between items-center p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-pink-200 transition group">
+                <span className="font-bold text-slate-700">@{item.name}</span>
+                <div className="flex space-x-1">
+                   <button 
+                     onClick={() => onCopy(item.name)}
+                     className="p-2 text-slate-400 hover:text-blue-500 hover:bg-white rounded-lg transition"
+                     title="Copiar"
+                   >
+                     <Copy size={16} />
+                   </button>
+                   <button 
+                     onClick={() => onRemove(item)}
+                     className="p-2 text-slate-400 hover:text-red-500 hover:bg-white rounded-lg transition"
+                     title="Eliminar"
+                   >
+                     <Trash2 size={16} />
+                   </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Footer Actions */}
+        {savedNames.length > 0 && (
+          <div className="p-6 border-t border-slate-100 bg-white rounded-b-3xl">
+            <div className="grid grid-cols-2 gap-3 mb-3">
+               <button 
+                 onClick={onShare}
+                 className="flex justify-center items-center gap-2 py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition active:scale-95"
+               >
+                 <Share2 size={18} />
+                 <span>Compartir</span>
+               </button>
+               <button 
+                 onClick={() => onCopy(savedNames.map(n => `@${n.name}`).join('\n'))}
+                 className="flex justify-center items-center gap-2 py-3 rounded-xl bg-pink-50 text-pink-700 font-bold hover:bg-pink-100 transition active:scale-95"
+               >
+                 <ClipboardList size={18} />
+                 <span>Copiar Todo</span>
+               </button>
+            </div>
+            <button 
+              onClick={onClear}
+              className="w-full py-2 text-xs text-slate-400 hover:text-red-500 font-medium transition"
+            >
+              Borrar lista
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 
 interface NameCardProps {
   item: GeneratedName;
   isSavedView?: boolean;
   isSaved: boolean;
+  isNew?: boolean; 
   copiedId: string | null;
   onToggleSave: (item: GeneratedName) => void;
   onCopy: (text: string, id: string) => void;
@@ -16,6 +137,7 @@ const NameCard: React.FC<NameCardProps> = ({
   item, 
   isSavedView = false, 
   isSaved, 
+  isNew = false,
   copiedId, 
   onToggleSave, 
   onCopy 
@@ -27,8 +149,14 @@ const NameCard: React.FC<NameCardProps> = ({
         isSavedView 
           ? 'border border-pink-100 shadow-sm' 
           : 'shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 border border-transparent hover:border-pink-100'
-      }`}
+      } ${isNew ? 'ring-2 ring-pink-100 ring-offset-2' : ''}`}
     >
+      {isNew && !isSavedView && (
+        <span className="absolute -top-2 -left-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm animate-pulse-slow">
+          NUEVO
+        </span>
+      )}
+
       <div className="flex flex-col min-w-0 mr-3">
         <span className="text-lg font-bold text-slate-700 font-sans tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all truncate">
           @{item.name}
@@ -42,7 +170,6 @@ const NameCard: React.FC<NameCardProps> = ({
       
       <div className="flex items-center space-x-1 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
         <div className="flex bg-slate-50 rounded-xl p-1 border border-slate-100 shadow-inner">
-           {/* Check Availability Link */}
           <a 
             href={`https://www.instagram.com/${item.name}/`} 
             target="_blank" 
@@ -54,7 +181,6 @@ const NameCard: React.FC<NameCardProps> = ({
             <ExternalLink size={16} />
           </a>
 
-          {/* Save/Favorite Button */}
           <button
             onClick={(e) => { e.stopPropagation(); onToggleSave(item); }}
             className={`p-2 rounded-lg transition ${
@@ -67,7 +193,6 @@ const NameCard: React.FC<NameCardProps> = ({
           </button>
         </div>
 
-        {/* Copy Indicator */}
         <div
           className={`p-2 rounded-xl transition-all duration-300 ${
             copiedId === item.id
@@ -79,7 +204,6 @@ const NameCard: React.FC<NameCardProps> = ({
         </div>
       </div>
 
-       {/* Mobile only copy indicator fallback */}
        <div className={`sm:hidden absolute right-4 top-1/2 -translate-y-1/2 transition-opacity ${copiedId === item.id ? 'opacity-100' : 'opacity-0'}`}>
           <div className="bg-green-500 text-white p-1.5 rounded-full shadow-md">
              <Check size={14} />
@@ -92,6 +216,12 @@ const NameCard: React.FC<NameCardProps> = ({
 const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', 'Arte', 'Foodie'];
 
 const Generator: React.FC = () => {
+  useSEO({
+    title: "Generador de Nombres para Instagram | Crea tu identidad Aesthetic",
+    description: "¿Buscas un nombre para Instagram único? Usa nuestro Generador gratuito 2025. Crea miles de usuarios aesthetic, para mujer, hombre y negocios. ¡Sin registro!",
+    url: "/"
+  });
+
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState<NameCategory>(NameCategory.ALL);
   const [options, setOptions] = useState({
@@ -99,11 +229,19 @@ const Generator: React.FC = () => {
     includePeriods: true,
     includeUnderscores: true
   });
+  
   const [results, setResults] = useState<GeneratedName[]>([]);
+  const [latestBatchIds, setLatestBatchIds] = useState<Set<string>>(new Set());
+
   const [savedNames, setSavedNames] = useState<GeneratedName[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [allCopied, setAllCopied] = useState(false);
+  
+  // UX States
+  const [showSettings, setShowSettings] = useState(false);
+  const [toast, setToast] = useState<{ msg: string; visible: boolean }>({ msg: '', visible: false });
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('nombresinsta_saved');
@@ -120,19 +258,41 @@ const Generator: React.FC = () => {
     localStorage.setItem('nombresinsta_saved', JSON.stringify(savedNames));
   }, [savedNames]);
 
+  const showToastMsg = (msg: string) => {
+    setToast({ msg, visible: true });
+    setTimeout(() => setToast(prev => ({ ...prev, visible: false })), 3000);
+  };
+
   const handleGenerate = (overrideKeyword?: string) => {
     setIsGenerating(true);
     const kw = overrideKeyword !== undefined ? overrideKeyword : keyword;
     
+    if (window.innerWidth < 1024) setShowSettings(false);
+
     setTimeout(() => {
-      const names = generateNames({
+      const newNames = generateNames({
         keyword: kw,
         category,
         ...options
       });
-      setResults(names);
+      
+      const newIds = new Set(newNames.map(n => n.id));
+      setLatestBatchIds(newIds);
+
+      setResults(prev => {
+        const combined = [...newNames, ...prev];
+        return combined.slice(0, 100); 
+      });
+      
       setIsGenerating(false);
-    }, 500); // Slightly longer for effect
+    }, 600); 
+  };
+
+  const handleSurpriseMe = () => {
+    const randomKeywords = ['Luna', 'Vibe', 'Soul', 'Glow', 'Nova', 'Zen', 'Echo', 'Sky'];
+    const random = randomKeywords[Math.floor(Math.random() * randomKeywords.length)];
+    setKeyword(random);
+    handleGenerate(random);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -148,39 +308,95 @@ const Generator: React.FC = () => {
 
   const clearKeyword = () => {
     setKeyword('');
-    setResults([]);
+  };
+
+  const clearResults = () => {
+      setResults([]);
+      setLatestBatchIds(new Set());
   };
 
   const toggleSave = (item: GeneratedName) => {
     if (savedNames.some(saved => saved.name === item.name)) {
       setSavedNames(savedNames.filter(saved => saved.name !== item.name));
+      showToastMsg("Eliminado de favoritos");
     } else {
       setSavedNames([item, ...savedNames]);
+      showToastMsg("Guardado en favoritos");
     }
   };
+
+  const removeFromModal = (item: GeneratedName) => {
+      setSavedNames(savedNames.filter(saved => saved.name !== item.name));
+  }
 
   const clearSaved = () => {
     if (confirm('¿Estás seguro de que quieres borrar tus favoritos?')) {
       setSavedNames([]);
+      showToastMsg("Favoritos borrados");
+      setIsFavoritesOpen(false);
     }
   };
 
-  const copyToClipboard = (text: string, id: string) => {
+  const copyToClipboard = (text: string, id: string | null = null) => {
     navigator.clipboard.writeText(text);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    if (id) {
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
+    }
+    showToastMsg("Copiado al portapapeles");
   };
 
-  const copyAllSaved = () => {
-    const text = savedNames.map(n => n.name).join('\n');
-    navigator.clipboard.writeText(text);
-    setAllCopied(true);
-    setTimeout(() => setAllCopied(false), 2000);
+  const handleShare = async () => {
+      const text = `¡Mira estos nombres para Instagram que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.com`;
+      
+      if (navigator.share) {
+          try {
+              await navigator.share({
+                  title: 'Mis Nombres Favoritos',
+                  text: text,
+                  url: 'https://nombresinsta.com'
+              });
+              showToastMsg("¡Compartido!");
+          } catch (error) {
+              // User cancelled or error
+              console.log('Share cancelled');
+          }
+      } else {
+          // Fallback to copy
+          copyToClipboard(text);
+          showToastMsg("Lista copiada (Compartir no soportado)");
+      }
   };
 
   return (
     <section id="generator" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       
+      <Toast message={toast.msg} isVisible={toast.visible} />
+
+      {/* Favorites Modal */}
+      <FavoritesModal 
+        isOpen={isFavoritesOpen} 
+        onClose={() => setIsFavoritesOpen(false)}
+        savedNames={savedNames}
+        onRemove={removeFromModal}
+        onCopy={(text) => copyToClipboard(text)}
+        onShare={handleShare}
+        onClear={clearSaved}
+      />
+
+      {/* Floating Action Button (Favorites Cart) */}
+      <button
+        onClick={() => setIsFavoritesOpen(true)}
+        className={`fixed bottom-6 right-6 z-40 bg-slate-900 text-white p-4 rounded-full shadow-2xl shadow-pink-500/20 transition-all duration-300 hover:scale-110 active:scale-95 flex items-center justify-center ${savedNames.length > 0 ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`}
+      >
+        <div className="relative">
+            <Heart fill="currentColor" size={24} className="text-white" />
+            <span className="absolute -top-3 -right-3 bg-pink-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-slate-900">
+                {savedNames.length}
+            </span>
+        </div>
+      </button>
+
       {/* Hero Header */}
       <div className="text-center mb-12 relative">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-pink-100 text-pink-600 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm animate-fade-in-up">
@@ -219,7 +435,7 @@ const Generator: React.FC = () => {
           <div className="glass-card-strong p-6 md:p-8 rounded-[2rem] sticky top-24 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10">
             
             {/* Input Area */}
-            <div className="relative group mb-6">
+            <div className="relative group mb-4">
               <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
                 <AtSign className="text-pink-500 group-focus-within:text-purple-600 transition-colors" size={20} />
               </div>
@@ -241,11 +457,21 @@ const Generator: React.FC = () => {
               )}
             </div>
 
+             {/* Surprise Me Feature */}
+             {!keyword && (
+               <button 
+                 onClick={handleSurpriseMe}
+                 className="text-xs font-semibold text-pink-500 hover:text-pink-600 flex items-center mb-4 ml-1 transition"
+               >
+                 <Dice5 size={14} className="mr-1" /> ¿Sin ideas? Sorpréndeme
+               </button>
+             )}
+
             {/* Generate Button */}
             <button
               onClick={() => handleGenerate()}
               disabled={isGenerating}
-              className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-2xl shadow-xl shadow-slate-900/20 transform transition-all hover:scale-[1.02] active:scale-95 flex justify-center items-center group mb-8"
+              className="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-2xl shadow-xl shadow-slate-900/20 transform transition-all hover:scale-[1.02] active:scale-95 flex justify-center items-center group mb-4"
             >
               {isGenerating ? (
                 <RefreshCw className="animate-spin mr-2" />
@@ -255,8 +481,17 @@ const Generator: React.FC = () => {
               {isGenerating ? 'Creando Magia...' : 'Generar Ideas'}
             </button>
 
-            {/* Settings */}
-            <div className="space-y-6">
+            {/* Mobile Toggle for Settings */}
+            <button
+              onClick={() => setShowSettings(!showSettings)}
+              className="lg:hidden w-full flex items-center justify-center space-x-2 py-3 text-slate-500 font-medium border border-slate-200 rounded-xl hover:bg-slate-50 transition"
+            >
+               <SlidersHorizontal size={16} />
+               <span>{showSettings ? 'Ocultar Filtros' : 'Ajustes Avanzados'}</span>
+            </button>
+
+            {/* Settings (Collapsible on Mobile, Visible on Desktop) */}
+            <div className={`space-y-6 ${showSettings ? 'block' : 'hidden'} lg:block transition-all duration-300 pt-4 lg:pt-0 border-t lg:border-none border-slate-100 mt-4 lg:mt-0`}>
               <div>
                 <label className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 block">Estilo Visual</label>
                 <div className="flex flex-wrap gap-2">
@@ -343,77 +578,51 @@ const Generator: React.FC = () => {
         {/* Results Column */}
         <div className="lg:col-span-8 space-y-6">
           
-          {/* Saved Names Section */}
-          {savedNames.length > 0 && (
-            <div className="bg-white rounded-[2rem] p-6 md:p-8 border border-pink-100 shadow-xl shadow-pink-100/50 mb-8 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-3 opacity-10">
-                 <Heart size={120} />
-              </div>
-              <div className="flex justify-between items-end mb-6 relative z-10">
-                <div>
-                    <h3 className="text-2xl font-bold text-slate-800 flex items-center mb-1">
-                    <Heart className="text-pink-500 mr-2 fill-pink-500" size={24} /> 
-                    Tus Favoritos
-                    </h3>
-                    <p className="text-slate-400 text-sm">Guardados automáticamente en tu navegador</p>
-                </div>
-                
-                <div className="flex space-x-2">
-                  <button 
-                    onClick={copyAllSaved}
-                    className={`text-xs px-4 py-2 rounded-xl flex items-center transition font-bold ${
-                      allCopied 
-                        ? 'bg-green-100 text-green-700' 
-                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                    }`}
-                  >
-                    {allCopied ? <Check size={14} className="mr-2" /> : <ClipboardList size={14} className="mr-2" />}
-                    {allCopied ? 'Copiado' : 'Copiar Todo'}
-                  </button>
-                  <button 
-                    onClick={clearSaved}
-                    className="text-xs px-4 py-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-red-50 hover:text-red-500 transition flex items-center font-bold"
-                  >
-                    <Trash2 size={14} className="mr-2" /> Borrar
-                  </button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 relative z-10">
-                {savedNames.map((item) => (
-                  <NameCard 
-                    key={`saved-${item.id}`} 
-                    item={item} 
-                    isSavedView={true} 
-                    isSaved={true}
-                    copiedId={copiedId}
-                    onToggleSave={toggleSave}
-                    onCopy={copyToClipboard}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
           {/* Generated Results */}
           <div className="min-h-[400px]">
              {results.length > 0 ? (
                  <>
                     <div className="flex justify-between items-center px-2 mb-4">
-                        <h3 className="text-xl font-bold text-slate-800">Resultados</h3>
-                        <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded-lg">{results.length} ideas</span>
+                        <div className="flex items-baseline space-x-3">
+                            <h3 className="text-xl font-bold text-slate-800">Resultados</h3>
+                            <span className="text-xs font-medium text-slate-400 bg-slate-100 px-2 py-1 rounded-lg">{results.length} ideas</span>
+                        </div>
+                        <button 
+                           onClick={clearResults}
+                           className="text-xs text-slate-400 hover:text-slate-600 flex items-center hover:bg-slate-100 px-2 py-1 rounded-lg transition"
+                        >
+                            <RotateCcw size={12} className="mr-1" /> Limpiar Todo
+                        </button>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {results.map((item, index) => (
-                        <div key={item.id} className="animate-fade-in-up" style={{animationDelay: `${index * 50}ms`}}>
+                        <div key={item.id} className="animate-fade-in-up" style={{animationDelay: `${index < 10 ? index * 50 : 0}ms`}}>
                             <NameCard 
                             item={item} 
                             isSaved={savedNames.some(saved => saved.name === item.name)}
+                            isNew={latestBatchIds.has(item.id)}
                             copiedId={copiedId}
                             onToggleSave={toggleSave}
                             onCopy={copyToClipboard}
                             />
                         </div>
                     ))}
+                    </div>
+
+                    {/* Generate More Button at Bottom of List (Continuous Flow) */}
+                    <div className="mt-8 flex justify-center">
+                       <button
+                         onClick={() => handleGenerate()}
+                         disabled={isGenerating}
+                         className="bg-white border border-slate-200 text-slate-600 hover:text-pink-600 hover:border-pink-300 font-bold py-3 px-8 rounded-full shadow-sm hover:shadow-md transition-all flex items-center space-x-2 group"
+                       >
+                         {isGenerating ? (
+                           <RefreshCw size={18} className="animate-spin" />
+                         ) : (
+                           <Sparkles size={18} className="group-hover:text-yellow-500 transition-colors" />
+                         )}
+                         <span>{isGenerating ? 'Generando...' : '✨ Generar Más Ideas'}</span>
+                       </button>
                     </div>
                  </>
              ) : (
@@ -423,15 +632,21 @@ const Generator: React.FC = () => {
                             <Search className="text-pink-400 opacity-80" size={32} />
                         </div>
                         <h3 className="text-xl font-bold text-slate-700 mb-2">Esperando tu inspiración</h3>
-                        <p className="text-slate-400 max-w-sm">
+                        <p className="text-slate-400 max-w-sm mb-6">
                             Escribe una palabra clave arriba (como "arte", "viajes" o tu nombre) para ver la magia.
                         </p>
+                        <button 
+                           onClick={handleSurpriseMe}
+                           className="text-sm font-semibold text-pink-500 bg-pink-50 px-4 py-2 rounded-full hover:bg-pink-100 transition flex items-center"
+                        >
+                           <Dice5 size={14} className="mr-2" /> ¡Sorpréndeme!
+                        </button>
                     </div>
                  )
              )}
              
              {/* Loading State Overlay */}
-             {isGenerating && (
+             {isGenerating && results.length === 0 && (
                  <div className="flex flex-col items-center justify-center py-20">
                      <div className="relative">
                          <div className="w-16 h-16 border-4 border-pink-100 border-t-pink-500 rounded-full animate-spin"></div>

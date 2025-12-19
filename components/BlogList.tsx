@@ -1,12 +1,19 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import { blogPosts } from '../data/blogData';
+import { useSEO } from '../hooks/useSEO';
 
 interface BlogListProps {
   onReadPost: (id: string) => void;
 }
 
 const BlogList: React.FC<BlogListProps> = ({ onReadPost }) => {
+  useSEO({
+    title: "Blog y Consejos | NombresInsta",
+    description: "Guías expertas sobre cómo elegir el nombre perfecto para Instagram, tendencias aesthetic 2025 y estrategias de marca personal.",
+    url: "/blog"
+  });
+
   return (
     <div className="bg-slate-50 min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
