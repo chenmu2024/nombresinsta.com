@@ -3,7 +3,7 @@ import { Instagram } from 'lucide-react';
 import { ViewState } from '../App';
 
 interface HeaderProps {
-  onNavigate: (view: ViewState, hash?: string) => void;
+  onNavigate: (view: ViewState, param?: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
           
           <nav className="hidden md:flex space-x-8 text-gray-600 text-sm font-medium">
             <button onClick={() => onNavigate('home', '#generator')} className="hover:text-pink-600 transition">Generador</button>
+            <button onClick={() => onNavigate('blog')} className="hover:text-pink-600 transition">Blog</button>
             <button onClick={() => onNavigate('home', '#tips')} className="hover:text-pink-600 transition">Consejos</button>
             <button onClick={() => onNavigate('home', '#faq')} className="hover:text-pink-600 transition">FAQ</button>
           </nav>

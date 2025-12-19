@@ -2,7 +2,7 @@ import React from 'react';
 import { ViewState } from '../App';
 
 interface FooterProps {
-  onNavigate: (view: ViewState, hash?: string) => void;
+  onNavigate: (view: ViewState, param?: string) => void;
 }
 
 const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -32,6 +32,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div>
             <h4 className="text-white font-semibold mb-4">Recursos</h4>
             <ul className="space-y-2 text-sm">
+              <li><button onClick={() => onNavigate('blog')} className="hover:text-white transition text-left">Blog & Artículos</button></li>
               <li><button onClick={() => onNavigate('about')} className="hover:text-white transition text-left">Sobre Nosotros</button></li>
               <li><button onClick={() => onNavigate('home', '#tips')} className="hover:text-white transition text-left">Guía de Nombres</button></li>
               <li><button onClick={() => onNavigate('home', '#faq')} className="hover:text-white transition text-left">Preguntas Frecuentes</button></li>
