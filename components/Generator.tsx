@@ -230,7 +230,7 @@ const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', '
 const Generator: React.FC = () => {
   useSEO({
     title: "Generador de Nombres para Instagram | Crea tu identidad Aesthetic",
-    description: "¿Buscas un nombre para Instagram único? Usa nuestro Generador gratuito 2025. Crea miles de usuarios aesthetic, para mujer, hombre y negocios. ¡Sin registro!",
+    description: "¿Necesitas un Generador de Nombres para Instagram? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.",
     url: "/"
   });
 
@@ -442,7 +442,7 @@ const Generator: React.FC = () => {
           </span>
         </h1>
         <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-8 font-light">
-          El generador de nombres para Instagram más inteligente. Sin registros, 100% gratis y diseñado para destacar.
+          El <strong>Generador de Nombres para Instagram</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
         </p>
         
         {/* Social Proof */}
@@ -452,7 +452,7 @@ const Generator: React.FC = () => {
           </div>
           <span className="text-slate-600 font-semibold">4.9/5</span>
           <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-          <span>1.4k+ Votos</span>
+          <span>1.4k+ Usuarios Felices</span>
         </div>
       </div>
 
@@ -472,7 +472,7 @@ const Generator: React.FC = () => {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="Tu nombre o palabra clave..."
+                placeholder="Palabra clave o Nombre..."
                 className="w-full pl-12 pr-12 py-4 rounded-2xl bg-slate-50 border-2 border-transparent focus:bg-white focus:border-pink-300 focus:ring-4 focus:ring-pink-100 transition-all outline-none text-lg font-medium text-slate-800 placeholder:text-slate-400 shadow-inner"
               />
               {keyword && (
@@ -506,7 +506,7 @@ const Generator: React.FC = () => {
               ) : (
                 <Wand2 className="mr-2 group-hover:rotate-12 transition-transform" />
               )}
-              {isGenerating ? 'Creando Magia...' : 'Generar Ideas'}
+              {isGenerating ? 'Creando Magia...' : 'Generar Nombres'}
             </button>
 
             {/* Mobile Toggle for Settings */}
@@ -681,7 +681,7 @@ const Generator: React.FC = () => {
                             </div>
                             <h3 className="text-2xl font-bold text-slate-800 mb-2">¿Sin inspiración?</h3>
                             <p className="text-slate-500 max-w-sm mx-auto">
-                                Elige una categoría y generaremos ideas instantáneas para ti.
+                                Elige una categoría y nuestro <strong>Generador de Nombres</strong> creará ideas instantáneas para ti.
                             </p>
                         </div>
 
