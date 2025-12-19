@@ -13,8 +13,6 @@ const randomNouns = ['panda', 'cactus', 'pixel', 'ninja', 'coffee', 'vibes', 'oc
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
 const cleanInput = (input: string): string => {
   return input.toLowerCase().replace(/[^a-z0-9]/g, '');
 };
@@ -84,6 +82,9 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
   if (category === NameCategory.ALL || category === NameCategory.FUNNY) {
     funnyPrefixes.forEach(pre => {
         if(Math.random() > 0.7) addName(`${pre}${base}`, NameCategory.FUNNY);
+    });
+    funnySuffixes.forEach(suf => {
+        if(Math.random() > 0.7) addName(`${base}${suf}`, NameCategory.FUNNY);
     });
     addName(`${base}_loading`, NameCategory.FUNNY);
     addName(`im_${base}`, NameCategory.FUNNY);

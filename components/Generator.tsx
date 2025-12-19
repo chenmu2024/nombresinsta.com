@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Copy, Check, Sparkles, RefreshCw, Hash, Type, AtSign } from 'lucide-react';
-import { NameCategory, GeneratedName, GeneratorOptions } from '../types';
+import { NameCategory, GeneratedName } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 
 const Generator: React.FC = () => {
