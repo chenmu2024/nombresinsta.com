@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Check, Sparkles, RefreshCw, Hash, Type, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, CalendarDays, Search, Wand2 } from 'lucide-react';
+import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2 } from 'lucide-react';
 import { NameCategory, GeneratedName } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 
