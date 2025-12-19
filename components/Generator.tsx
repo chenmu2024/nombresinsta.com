@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown } from 'lucide-react';
+import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Music } from 'lucide-react';
 import { NameCategory, GeneratedName } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 import { useSEO } from '../hooks/useSEO';
@@ -213,6 +213,18 @@ const NameCard: React.FC<NameCardProps> = ({
   );
 };
 
+// --- Quick Presets Data ---
+const QUICK_PRESETS = [
+    { label: 'Gamer / Streamer', icon: Gamepad2, color: 'bg-purple-100 text-purple-600', keyword: 'gamer', category: NameCategory.FUNNY },
+    { label: 'Estilo Aesthetic', icon: Sparkles, color: 'bg-pink-100 text-pink-600', keyword: 'vibes', category: NameCategory.AESTHETIC },
+    { label: 'Viajes & Blog', icon: Plane, color: 'bg-blue-100 text-blue-600', keyword: 'travel', category: NameCategory.AESTHETIC },
+    { label: 'Arte & Diseño', icon: Palette, color: 'bg-orange-100 text-orange-600', keyword: 'arte', category: NameCategory.MINIMAL },
+    { label: 'Negocios & Tienda', icon: Briefcase, color: 'bg-slate-100 text-slate-600', keyword: 'tienda', category: NameCategory.BUSINESS },
+    { label: 'Fotografía', icon: Camera, color: 'bg-indigo-100 text-indigo-600', keyword: 'ph', category: NameCategory.MINIMAL },
+    { label: 'Mascotas', icon: Cat, color: 'bg-yellow-100 text-yellow-600', keyword: 'patitas', category: NameCategory.FUNNY },
+    { label: 'Foodie / Cocina', icon: Coffee, color: 'bg-emerald-100 text-emerald-600', keyword: 'tasty', category: NameCategory.BUSINESS },
+];
+
 const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', 'Arte', 'Foodie'];
 
 const Generator: React.FC = () => {
@@ -236,7 +248,6 @@ const Generator: React.FC = () => {
   const [savedNames, setSavedNames] = useState<GeneratedName[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
-  const [allCopied, setAllCopied] = useState(false);
   
   // UX States
   const [showSettings, setShowSettings] = useState(false);
@@ -263,16 +274,21 @@ const Generator: React.FC = () => {
     setTimeout(() => setToast(prev => ({ ...prev, visible: false })), 3000);
   };
 
-  const handleGenerate = (overrideKeyword?: string) => {
+  const handleGenerate = (overrideKeyword?: string, overrideCategory?: NameCategory) => {
     setIsGenerating(true);
     const kw = overrideKeyword !== undefined ? overrideKeyword : keyword;
+    const cat = overrideCategory !== undefined ? overrideCategory : category;
     
     if (window.innerWidth < 1024) setShowSettings(false);
+
+    // If it's a preset/chip click, update the state to reflect what happened
+    if (overrideKeyword) setKeyword(overrideKeyword);
+    if (overrideCategory) setCategory(overrideCategory);
 
     setTimeout(() => {
       const newNames = generateNames({
         keyword: kw,
-        category,
+        category: cat,
         ...options
       });
       
@@ -280,12 +296,24 @@ const Generator: React.FC = () => {
       setLatestBatchIds(newIds);
 
       setResults(prev => {
+        // If we are starting a fresh search (empty results or new keyword context), replace.
+        // If we are just clicking "Generate More" with same keyword, append.
+        // But for simplicity in this logic, let's prepend if results exist.
+        if (overrideKeyword && overrideKeyword !== keyword) {
+             return newNames; // Fresh search
+        }
         const combined = [...newNames, ...prev];
         return combined.slice(0, 100); 
       });
       
       setIsGenerating(false);
     }, 600); 
+  };
+
+  const handlePresetClick = (preset: typeof QUICK_PRESETS[0]) => {
+      setKeyword(preset.keyword);
+      setCategory(preset.category);
+      handleGenerate(preset.keyword, preset.category);
   };
 
   const handleSurpriseMe = () => {
@@ -343,7 +371,7 @@ const Generator: React.FC = () => {
         setCopiedId(id);
         setTimeout(() => setCopiedId(null), 2000);
     }
-    showToastMsg("Copiado al portapapeles");
+    showToastMsg("Copiado! Verifica en Instagram");
   };
 
   const handleShare = async () => {
@@ -609,6 +637,23 @@ const Generator: React.FC = () => {
                     ))}
                     </div>
 
+                    {/* Related Searches Section (SEO & UX) */}
+                    <div className="mt-12 pt-8 border-t border-slate-100">
+                        <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Quizás buscas también...</p>
+                        <div className="flex flex-wrap gap-3">
+                            {['Nombres para Gatos', 'Ideas para Tiendas', 'Nicks Gamer', 'Aesthetic Cortos', 'Nombres de Parejas'].map(tag => (
+                                <button
+                                    key={tag}
+                                    onClick={() => handleTagClick(tag.replace('Nombres para ', '').replace('Ideas para ', ''))}
+                                    className="bg-white border border-slate-200 text-slate-600 px-4 py-2 rounded-full text-sm hover:border-pink-300 hover:text-pink-600 hover:shadow-sm transition flex items-center"
+                                >
+                                    <Search size={14} className="mr-2 text-slate-400" />
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Generate More Button at Bottom of List (Continuous Flow) */}
                     <div className="mt-8 flex justify-center">
                        <button
@@ -627,20 +672,42 @@ const Generator: React.FC = () => {
                  </>
              ) : (
                  !isGenerating && savedNames.length === 0 && (
-                    <div className="h-full flex flex-col items-center justify-center text-center p-10 border-2 border-dashed border-slate-200 rounded-[2rem] bg-white/50">
-                        <div className="w-20 h-20 bg-gradient-to-tr from-pink-100 to-purple-100 rounded-full flex items-center justify-center mb-6">
-                            <Search className="text-pink-400 opacity-80" size={32} />
+                    <div className="h-full flex flex-col items-center justify-center p-6 md:p-10 border-2 border-dashed border-slate-200 rounded-[2rem] bg-white/50">
+                        
+                        {/* New Visual Quick Presets for "Blank Page Syndrome" */}
+                        <div className="text-center mb-8">
+                            <div className="w-16 h-16 bg-gradient-to-tr from-pink-100 to-purple-100 rounded-2xl rotate-3 flex items-center justify-center mx-auto mb-4 shadow-sm">
+                                <Sparkles className="text-pink-500" size={32} />
+                            </div>
+                            <h3 className="text-2xl font-bold text-slate-800 mb-2">¿Sin inspiración?</h3>
+                            <p className="text-slate-500 max-w-sm mx-auto">
+                                Elige una categoría y generaremos ideas instantáneas para ti.
+                            </p>
                         </div>
-                        <h3 className="text-xl font-bold text-slate-700 mb-2">Esperando tu inspiración</h3>
-                        <p className="text-slate-400 max-w-sm mb-6">
-                            Escribe una palabra clave arriba (como "arte", "viajes" o tu nombre) para ver la magia.
-                        </p>
-                        <button 
-                           onClick={handleSurpriseMe}
-                           className="text-sm font-semibold text-pink-500 bg-pink-50 px-4 py-2 rounded-full hover:bg-pink-100 transition flex items-center"
-                        >
-                           <Dice5 size={14} className="mr-2" /> ¡Sorpréndeme!
-                        </button>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full max-w-2xl">
+                            {QUICK_PRESETS.map((preset) => (
+                                <button
+                                    key={preset.label}
+                                    onClick={() => handlePresetClick(preset)}
+                                    className="flex flex-col items-center justify-center p-4 bg-white border border-slate-100 rounded-2xl hover:border-pink-200 hover:shadow-md hover:-translate-y-1 transition-all group"
+                                >
+                                    <div className={`w-10 h-10 ${preset.color} rounded-full flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                                        <preset.icon size={20} />
+                                    </div>
+                                    <span className="text-xs font-bold text-slate-700 text-center">{preset.label}</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="mt-8 pt-6 border-t border-slate-200/60 w-full max-w-md text-center">
+                           <button 
+                             onClick={handleSurpriseMe}
+                             className="text-sm font-semibold text-slate-400 hover:text-pink-600 transition flex items-center justify-center mx-auto"
+                           >
+                              <Dice5 size={16} className="mr-2" /> O dame algo totalmente aleatorio
+                           </button>
+                        </div>
                     </div>
                  )
              )}
