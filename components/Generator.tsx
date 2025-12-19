@@ -104,14 +104,6 @@ const Generator: React.FC = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [allCopied, setAllCopied] = useState(false);
-  const [currentDate, setCurrentDate] = useState('');
-
-  useEffect(() => {
-    const date = new Date();
-    const month = date.toLocaleString('es-ES', { month: 'long' });
-    const year = date.getFullYear();
-    setCurrentDate(`${month.charAt(0).toUpperCase() + month.slice(1)} ${year}`);
-  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem('nombresinsta_saved');
