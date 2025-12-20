@@ -36,10 +36,10 @@ const InfoSection: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
         
         {/* Features Grid - Quick Value Props */}
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-8 mb-12 md:mb-24">
           <div className="p-6 md:p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition duration-300 group">
             <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <Zap size={24} className="md:w-7 md:h-7" />
@@ -72,10 +72,10 @@ const InfoSection: React.FC = () => {
         {/* Long Form SEO Content */}
         <div className="grid lg:grid-cols-12 gap-12" id="tips">
           
-          {/* Main Content */}
-          <div className="lg:col-span-8 space-y-12 text-slate-600 leading-8 text-lg">
+          {/* Main Content - Added min-w-0 to prevent grid overflow on mobile */}
+          <div className="lg:col-span-8 space-y-8 md:space-y-12 text-slate-600 leading-7 md:leading-8 text-base md:text-lg min-w-0">
             <section>
-              <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">El Mejor Generador de Nombres para Instagram en 2025</h2>
+              <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">El Mejor Generador de Nombres para Instagram en 2025</h2>
               <p className="mb-6">
                 Elegir el usuario perfecto es el primer paso para el éxito en redes sociales. Sin embargo, encontrar disponibilidad es cada vez más difícil. Por eso hemos creado el <strong>Generador de Nombres para Instagram</strong> definitivo. Esta herramienta no solo combina palabras al azar; utiliza inteligencia contextual para crear nombres de usuario (usernames) que sean legibles, memorables y "aesthetic".
               </p>
@@ -91,29 +91,29 @@ const InfoSection: React.FC = () => {
               </ul>
             </section>
 
-            {/* Do's and Don'ts Table */}
+            {/* Do's and Don'ts Table - Optimized padding for mobile */}
             <section>
               <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Consejos para elegir tu usuario</h3>
-              <div className="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm mb-8">
+              <div className="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm mb-8 w-full">
                 <table className="min-w-full text-sm md:text-base text-left">
                   <thead className="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
                     <tr>
-                      <th className="px-6 py-5 whitespace-nowrap">✅ Lo que hace un buen nombre</th>
-                      <th className="px-6 py-5 whitespace-nowrap">❌ Lo que debes evitar</th>
+                      <th className="px-4 md:px-6 py-4 md:py-5 whitespace-nowrap">✅ Lo que hace un buen nombre</th>
+                      <th className="px-4 md:px-6 py-4 md:py-5 whitespace-nowrap">❌ Lo que debes evitar</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     <tr className="bg-white hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start min-w-[200px]"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Corto y fácil de recordar</td>
-                      <td className="px-6 py-4 text-slate-500 min-w-[200px]"><XCircle size={20} className="text-red-400 inline mr-2" /> Demasiado largo o complejo</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 flex items-start min-w-[180px] md:min-w-[200px]"><CheckCircle2 size={20} className="text-green-500 mr-2 md:mr-3 mt-0.5 shrink-0" /> Corto y fácil de recordar</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 text-slate-500 min-w-[180px] md:min-w-[200px]"><XCircle size={20} className="text-red-400 inline mr-2" /> Demasiado largo o complejo</td>
                     </tr>
                     <tr className="bg-slate-50/50 hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Uso limpio de puntos (.)</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Exceso de números (juan12345)</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-2 md:mr-3 mt-0.5 shrink-0" /> Uso limpio de puntos (.)</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Exceso de números (juan12345)</td>
                     </tr>
                     <tr className="bg-white hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Define tu nicho o estilo</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Caracteres imposibles de escribir</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-2 md:mr-3 mt-0.5 shrink-0" /> Define tu nicho o estilo</td>
+                      <td className="px-4 md:px-6 py-3 md:py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Caracteres imposibles de escribir</td>
                     </tr>
                   </tbody>
                 </table>
@@ -128,7 +128,6 @@ const InfoSection: React.FC = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Categorías del Generador</h2>
               
               <div id="cat-mujer" className="bg-gradient-to-br from-pink-50 to-white p-6 md:p-8 rounded-[2rem] border border-pink-100 scroll-mt-24 shadow-sm">
-                {/* Adaptive Fix: Use flex-row + items-start to prevent icon stacking while handling text wrap properly */}
                 <div className="flex flex-row items-start mb-4">
                   <div className="bg-pink-100 p-2 rounded-lg mr-3 shrink-0">
                     <Heart className="text-pink-500" size={24} />
@@ -141,7 +140,6 @@ const InfoSection: React.FC = () => {
               </div>
 
               <div id="cat-hombre" className="bg-gradient-to-br from-blue-50 to-white p-6 md:p-8 rounded-[2rem] border border-blue-100 scroll-mt-24 shadow-sm">
-                 {/* Adaptive Fix: Use flex-row + items-start */}
                 <div className="flex flex-row items-start mb-4">
                   <div className="bg-blue-100 p-2 rounded-lg mr-3 shrink-0">
                     <User className="text-blue-500" size={24} />
@@ -154,7 +152,6 @@ const InfoSection: React.FC = () => {
               </div>
 
               <div id="cat-negocios" className="bg-gradient-to-br from-purple-50 to-white p-6 md:p-8 rounded-[2rem] border border-purple-100 scroll-mt-24 shadow-sm">
-                 {/* Adaptive Fix: Use flex-row + items-start */}
                 <div className="flex flex-row items-start mb-4">
                   <div className="bg-purple-100 p-2 rounded-lg mr-3 shrink-0">
                      <Briefcase className="text-purple-500" size={24} />
