@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, MoreHorizontal, ArrowLeft, Grid, Users, Bookmark, Settings, BadgeCheck, Bell } from 'lucide-react';
+import { X, MoreHorizontal, ArrowLeft, Grid, Users, Bookmark, BadgeCheck, Bell } from 'lucide-react';
 import { GeneratedName, Platform } from '../types';
 
 interface ProfilePreviewModalProps {

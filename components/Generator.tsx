@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Instagram, Youtube, Twitter, Music2, AlertCircle, History, AlignLeft, ArrowRightLeft, Eye } from 'lucide-react';
+import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, Trash2, ClipboardList, X, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Instagram, Youtube, Twitter, Music2, History, AlignLeft, ArrowRightLeft, Eye } from 'lucide-react';
 import { NameCategory, GeneratedName, Platform, LengthOption } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 import { useSEO } from '../hooks/useSEO';
@@ -251,8 +251,6 @@ const QUICK_PRESETS = [
     { label: 'Foodie / Cocina', icon: Coffee, color: 'bg-emerald-100 text-emerald-600', keyword: 'tasty', category: NameCategory.BUSINESS },
 ];
 
-const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', 'Arte', 'Foodie'];
-
 const Generator: React.FC = () => {
   const [platform, setPlatform] = useState<Platform>('instagram');
   const [keyword, setKeyword] = useState('');
@@ -387,11 +385,6 @@ const Generator: React.FC = () => {
     if (e.key === 'Enter') {
       handleGenerate();
     }
-  };
-
-  const handleTagClick = (tag: string) => {
-    setKeyword(tag);
-    handleGenerate(tag);
   };
 
   const clearKeyword = () => {
