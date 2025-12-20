@@ -441,14 +441,14 @@ const Generator: React.FC = () => {
   };
 
   const handleShare = async () => {
-      const text = `¡Mira estos nombres para ${platformTitles[platform]} que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.co`;
+      const text = `¡Mira estos nombres para ${platformTitles[platform]} que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.com`;
       
       if (navigator.share) {
           try {
               await navigator.share({
                   title: 'Mis Nombres Favoritos',
                   text: text,
-                  url: 'https://nombresinsta.co'
+                  url: 'https://nombresinsta.com'
               });
               showToastMsg("¡Compartido!");
           } catch (error) {

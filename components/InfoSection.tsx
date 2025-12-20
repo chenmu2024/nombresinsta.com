@@ -138,7 +138,7 @@ const InfoSection: React.FC = () => {
               <div className="space-y-6">
                 {[
                   { q: "¿Cómo funciona el Generador de Nombres para Instagram?", a: "Es muy sencillo. Solo ingresa una palabra clave (tu nombre, apodo o hobby) en el campo de texto. Nuestro Generador de Nombres para Instagram mezclará esa palabra con cientos de prefijos, sufijos y tendencias actuales para darte opciones únicas." },
-                  { q: "¿Es gratis este Generador de Nombres para Instagram?", a: "Sí, NombresInsta.co es una herramienta 100% gratuita. Puedes usar el Generador de Nombres para Instagram tantas veces como necesites sin pagar nada." },
+                  { q: "¿Es gratis este Generador de Nombres para Instagram?", a: "Sí, NombresInsta.com es una herramienta 100% gratuita. Puedes usar el Generador de Nombres para Instagram tantas veces como necesites sin pagar nada." },
                   { q: "¿Qué hago si el nombre está ocupado?", a: "Es común. Por eso nuestro Generador de Nombres para Instagram te da muchas variaciones. Si tu primera opción está tomada, prueba con las sugerencias que añaden puntos (.) o términos como 'official' que suelen estar libres." },
                   { q: "¿Sirve para otras redes sociales?", a: "¡Absolutamente! Aunque lo llamamos Generador de Nombres para Instagram, los resultados son perfectos para TikTok, Twitter (X), Twitch, YouTube y más." }
                 ].map((faq, i) => (

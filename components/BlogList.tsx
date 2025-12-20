@@ -1,12 +1,13 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { useSEO } from '../hooks/useSEO';
 
-const BlogList: React.FC = () => {
-  const navigate = useNavigate();
+interface BlogListProps {
+  onReadPost: (id: string) => void;
+}
 
+const BlogList: React.FC<BlogListProps> = ({ onReadPost }) => {
   useSEO({
     title: "Blog y Consejos | NombresInsta",
     description: "Guías expertas sobre cómo elegir el nombre perfecto para Instagram, tendencias aesthetic 2025 y estrategias de marca personal.",
@@ -36,7 +37,7 @@ const BlogList: React.FC = () => {
             <article 
               key={post.id} 
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group cursor-pointer"
-              onClick={() => navigate(`/blog/${post.id}`)}
+              onClick={() => onReadPost(post.id)}
             >
               {/* Image Placeholder / Gradient */}
               <div className={`h-48 w-full ${post.image} relative overflow-hidden`}>
@@ -68,7 +69,7 @@ const BlogList: React.FC = () => {
 
                 <div className="mt-auto pt-4 border-t border-slate-100">
                   <button 
-                    onClick={(e) => { e.stopPropagation(); navigate(`/blog/${post.id}`); }}
+                    onClick={(e) => { e.stopPropagation(); onReadPost(post.id); }}
                     className="text-pink-600 font-semibold text-sm flex items-center hover:translate-x-1 transition"
                   >
                     Leer Artículo <ArrowRight size={16} className="ml-1" />
