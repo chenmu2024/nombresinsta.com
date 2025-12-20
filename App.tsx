@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Header from './components/Header';
 import Generator from './components/Generator';
 
@@ -17,6 +17,20 @@ const LoadingFallback = () => <div className="lazy-placeholder w-full h-96 bg-tr
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewState>('home');
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+  // Initialize Dark Mode state from DOM
+  useEffect(() => {
+    if (document.documentElement.classList.contains('dark')) {
+      setDarkMode(true);
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    setDarkMode(isDark);
+    localStorage.theme = isDark ? 'dark' : 'light';
+  };
 
   const handleNavigate = (view: ViewState, param?: string) => {
     if (view === 'blog-post' && param) {
@@ -82,16 +96,16 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans">
-      <Header onNavigate={handleNavigate} />
+    <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
+      <Header onNavigate={handleNavigate} darkMode={darkMode} onToggleTheme={toggleDarkMode} />
       
       <main className="flex-grow relative">
         {currentView === 'home' && (
            <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 contain-strict">
               {/* Background optimized with will-change in CSS */}
-              <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-200/40 rounded-full mix-blend-multiply filter blur-[80px] animate-blob"></div>
-              <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-pink-200/40 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-2000"></div>
-              <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-blue-100/40 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-4000"></div>
+              <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-200/40 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob"></div>
+              <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-pink-200/40 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob animation-delay-2000"></div>
+              <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-blue-100/40 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob animation-delay-4000"></div>
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]"></div>
             </div>
         )}

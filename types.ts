@@ -7,6 +7,7 @@ export enum NameCategory {
 }
 
 export type Platform = 'instagram' | 'tiktok' | 'twitter' | 'youtube';
+export type LengthOption = 'any' | 'short' | 'medium' | 'long';
 
 export interface GeneratedName {
   id: string;
@@ -22,4 +23,7 @@ export interface GeneratorOptions {
   includeNumbers: boolean;
   includePeriods: boolean;
   includeUnderscores: boolean;
+  lengthPreference: LengthOption;
+  customPrefix?: string;
+  customSuffix?: string;
 }
