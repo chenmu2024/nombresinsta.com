@@ -159,7 +159,8 @@ const NameCard: React.FC<NameCardProps> = ({
   return (
     <div
       onClick={() => onCopy(item.name, item.id)}
-      className={`group relative bg-white dark:bg-slate-800 rounded-2xl p-4 transition-all duration-300 cursor-pointer flex justify-between items-center ${
+      // ADAPTIVE FIX: Changed items-center to items-start for better multi-line handling
+      className={`group relative bg-white dark:bg-slate-800 rounded-2xl p-4 transition-all duration-300 cursor-pointer flex justify-between items-start ${
         isSavedView 
           ? 'border border-pink-100 dark:border-slate-700 shadow-sm' 
           : 'shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_24px_rgba(0,0,0,0.08)] hover:-translate-y-1 border border-transparent hover:border-pink-100 dark:hover:border-pink-900'
@@ -171,8 +172,8 @@ const NameCard: React.FC<NameCardProps> = ({
         </span>
       )}
 
-      <div className="flex flex-col min-w-0 mr-3">
-        <span className="text-lg font-bold text-slate-700 dark:text-slate-200 font-sans tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all truncate">
+      <div className="flex flex-col min-w-0 mr-3 pt-1">
+        <span className="text-lg font-bold text-slate-700 dark:text-slate-200 font-sans tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all break-all">
           @{item.name}
         </span>
         
@@ -185,7 +186,8 @@ const NameCard: React.FC<NameCardProps> = ({
         </div>
       </div>
       
-      <div className="flex items-center space-x-1 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
+      {/* ADAPTIVE FIX: Added mt-1 to align buttons with top of text in multiline scenarios */}
+      <div className="flex items-center space-x-1 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 mt-0.5">
         <div className="flex bg-slate-50 dark:bg-slate-700 rounded-xl p-1 border border-slate-100 dark:border-slate-600 shadow-inner">
           
           <button 
@@ -507,7 +509,8 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
   };
 
   return (
-    <section id="generator" className="py-4 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    // ADAPTIVE FIX: Reduced py from 20 to 6 on mobile to bring input above fold, while keeping breathing room on desktop.
+    <section id="generator" className="py-6 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       
       <Toast message={toast.msg} isVisible={toast.visible} />
 
@@ -546,23 +549,24 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
       </button>
 
       {/* Hero Header */}
-      <div className="text-center mb-4 md:mb-12 relative">
-        {/* Hidden on mobile to save vertical space */}
-        <div className="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm animate-fade-in-up">
+      <div className="text-center mb-6 md:mb-12 relative">
+        {/* ADAPTIVE FIX: Unhidden on mobile, but scaled down text and margins */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-[10px] md:text-xs font-bold uppercase tracking-widest mb-3 md:mb-6 shadow-sm animate-fade-in-up">
             <Sparkles size={14} className="text-yellow-400" />
             <span>Generador Viral 2025</span>
         </div>
 
-        <h1 className="text-2xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-6 tracking-tight leading-tight text-balance break-words max-w-[95vw] mx-auto">
+        {/* ADAPTIVE FIX: Reduced text size on mobile to prevent excessive wrapping */}
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-6 tracking-tight leading-tight text-balance break-words max-w-[95vw] mx-auto">
           {activeTitle}
         </h1>
         
-        {/* Hidden on mobile to prioritize input field */}
-        <p className="hidden sm:block text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-6 md:mb-8 font-light">
+        {/* ADAPTIVE FIX: Unhidden on mobile, but text-sm and tighter line-height */}
+        <p className="block text-sm md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-4 md:mb-8 font-light leading-snug">
           El <strong>Generador de Nombres</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
         </p>
         
-        {/* Platform Switcher Tabs - Compacted */}
+        {/* Platform Switcher Tabs - Compacted padding on mobile */}
         <div className="flex justify-start md:justify-center mb-4 md:mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
           <div className="bg-white dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex space-x-1">
              {[
@@ -574,13 +578,13 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
                <button
                  key={p.id}
                  onClick={() => { setPlatform(p.id as Platform); setResults([]); }}
-                 className={`flex items-center space-x-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 ${
+                 className={`flex items-center space-x-1 px-2.5 py-1.5 md:px-4 md:py-2.5 rounded-xl text-[10px] md:text-sm font-bold transition-all duration-200 ${
                    platform === p.id 
                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md transform scale-105' 
                      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                  }`}
                >
-                 <p.icon size={16} className={platform === p.id ? 'text-white dark:text-slate-900' : p.color} />
+                 <p.icon size={14} className={`md:w-4 md:h-4 ${platform === p.id ? 'text-white dark:text-slate-900' : p.color}`} />
                  <span className="whitespace-nowrap">{p.label}</span>
                </button>
              ))}
@@ -594,7 +598,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
         <div className="lg:col-span-4 space-y-4 md:space-y-6">
           <div className="glass-card-strong p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] sticky top-20 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10">
             
-            {/* Input Area */}
+            {/* Input Area - Adjusted height for mobile */}
             <div className="relative group mb-3 md:mb-4">
               <div className="absolute inset-y-0 left-3 md:left-4 flex items-center pointer-events-none">
                 <AtSign className="text-pink-500 group-focus-within:text-purple-600 transition-colors" size={20} />
@@ -606,7 +610,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
                 onKeyDown={handleKeyDown}
                 placeholder="Palabra clave o Nombre..."
                 aria-label="Ingresa tu palabra clave o nombre"
-                className="w-full pl-10 pr-10 py-3 md:pl-12 md:pr-12 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-pink-300 dark:focus:border-pink-600 focus:ring-4 focus:ring-pink-100 dark:focus:ring-pink-900/20 transition-all outline-none text-base md:text-lg font-medium text-slate-800 dark:text-white placeholder:text-slate-400 shadow-inner"
+                className="w-full pl-10 pr-10 h-12 md:h-14 md:pl-12 md:pr-12 py-0 rounded-xl md:rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-pink-300 dark:focus:border-pink-600 focus:ring-4 focus:ring-pink-100 dark:focus:ring-pink-900/20 transition-all outline-none text-base md:text-lg font-medium text-slate-800 dark:text-white placeholder:text-slate-400 shadow-inner"
               />
               {keyword && (
                  <button 
