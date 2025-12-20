@@ -1,10 +1,41 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Lightbulb, ShieldCheck, Zap, User, Briefcase, Heart, CheckCircle2, XCircle } from 'lucide-react';
 
 const InfoSection: React.FC = () => {
+  
+  // FAQ Data extraction for both UI and Schema
+  const faqs = [
+    { q: "¿Cómo funciona el Generador de Nombres para Instagram?", a: "Es muy sencillo. Solo ingresa una palabra clave (tu nombre, apodo o hobby) en el campo de texto. Nuestro Generador de Nombres para Instagram mezclará esa palabra con cientos de prefijos, sufijos y tendencias actuales para darte opciones únicas." },
+    { q: "¿Es gratis este Generador de Nombres para Instagram?", a: "Sí, NombresInsta.com es una herramienta 100% gratuita. Puedes usar el Generador de Nombres para Instagram tantas veces como necesites sin pagar nada." },
+    { q: "¿Qué hago si el nombre está ocupado?", a: "Es común. Por eso nuestro Generador de Nombres para Instagram te da muchas variaciones. Si tu primera opción está tomada, prueba con las sugerencias que añaden puntos (.) o términos como 'official' que suelen estar libres." },
+    { q: "¿Sirve para otras redes sociales?", a: "¡Absolutamente! Aunque lo llamamos Generador de Nombres para Instagram, los resultados son perfectos para TikTok, Twitter (X), Twitch, YouTube y más." }
+  ];
+
+  // FAQ Schema JSON-LD
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.a
+      }
+    }))
+  };
+
   return (
     // content-visibility: auto skips rendering work for off-screen content
     <div className="bg-white border-t border-slate-100" style={{ contentVisibility: 'auto' }}>
+      
+      {/* Inject Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         
         {/* Features Grid - Quick Value Props */}
@@ -136,12 +167,7 @@ const InfoSection: React.FC = () => {
             <section id="faq" className="scroll-mt-24 mt-12">
               <h2 className="text-3xl font-bold text-slate-900 mb-8">Preguntas Frecuentes</h2>
               <div className="space-y-6">
-                {[
-                  { q: "¿Cómo funciona el Generador de Nombres para Instagram?", a: "Es muy sencillo. Solo ingresa una palabra clave (tu nombre, apodo o hobby) en el campo de texto. Nuestro Generador de Nombres para Instagram mezclará esa palabra con cientos de prefijos, sufijos y tendencias actuales para darte opciones únicas." },
-                  { q: "¿Es gratis este Generador de Nombres para Instagram?", a: "Sí, NombresInsta.com es una herramienta 100% gratuita. Puedes usar el Generador de Nombres para Instagram tantas veces como necesites sin pagar nada." },
-                  { q: "¿Qué hago si el nombre está ocupado?", a: "Es común. Por eso nuestro Generador de Nombres para Instagram te da muchas variaciones. Si tu primera opción está tomada, prueba con las sugerencias que añaden puntos (.) o términos como 'official' que suelen estar libres." },
-                  { q: "¿Sirve para otras redes sociales?", a: "¡Absolutamente! Aunque lo llamamos Generador de Nombres para Instagram, los resultados son perfectos para TikTok, Twitter (X), Twitch, YouTube y más." }
-                ].map((faq, i) => (
+                {faqs.map((faq, i) => (
                   <div key={i} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                     <h3 className="text-lg font-bold text-slate-900 mb-3">{faq.q}</h3>
                     <p className="text-slate-500">{faq.a}</p>
@@ -159,16 +185,16 @@ const InfoSection: React.FC = () => {
                   <p className="text-sm text-slate-400 mb-4">Navega por las categorías de nuestro <strong>Generador de Nombres para Instagram</strong>:</p>
                   <ul className="space-y-4">
                     {[
-                      { href: "#cat-mujer", color: "bg-pink-400", label: "Nombres para Mujer" },
-                      { href: "#cat-hombre", color: "bg-blue-400", label: "Nombres para Hombre" },
-                      { href: "#cat-negocios", color: "bg-purple-400", label: "Nombres de Empresas" },
-                      { href: "#generator", color: "bg-yellow-400", label: "Volver al Generador" }
+                      { href: "/#cat-mujer", color: "bg-pink-400", label: "Nombres para Mujer" },
+                      { href: "/#cat-hombre", color: "bg-blue-400", label: "Nombres para Hombre" },
+                      { href: "/#cat-negocios", color: "bg-purple-400", label: "Nombres de Empresas" },
+                      { href: "/#generator", color: "bg-yellow-400", label: "Volver al Generador" }
                     ].map((link, i) => (
                       <li key={i}>
-                        <a href={link.href} className="flex items-center p-3 rounded-xl hover:bg-slate-50 transition group">
+                        <Link to={link.href} className="flex items-center p-3 rounded-xl hover:bg-slate-50 transition group">
                           <span className={`w-3 h-3 ${link.color} rounded-full mr-4 group-hover:scale-125 transition-transform`}></span>
                           <span className="text-slate-600 font-medium group-hover:text-slate-900">{link.label}</span>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>

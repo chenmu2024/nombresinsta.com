@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Share2, Sparkles } from 'lucide-react';
 import { blogPosts } from '../data/blogData';
 import { useSEO } from '../hooks/useSEO';
 
-interface BlogPostProps {
-  postId: string;
-  onBack: () => void;
-  onGoToGenerator: () => void;
-}
-
-const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) => {
+const BlogPost: React.FC = () => {
+  const { postId } = useParams();
   const post = blogPosts.find(p => p.id === postId);
 
   // Apply SEO tags specifically for this article
@@ -28,7 +24,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) 
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-slate-800">Artículo no encontrado</h2>
-          <button onClick={onBack} className="text-pink-600 mt-4 hover:underline">Volver al Blog</button>
+          <Link to="/blog" className="text-pink-600 mt-4 hover:underline block">Volver al Blog</Link>
         </div>
       </div>
     );
@@ -40,12 +36,12 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) 
       <div className={`w-full h-64 md:h-80 ${post.image} relative`}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 relative z-10">
-          <button 
-            onClick={onBack}
+          <Link 
+            to="/blog"
             className="absolute top-8 left-4 md:left-0 text-white/90 hover:text-white bg-black/20 hover:bg-black/30 backdrop-blur px-4 py-2 rounded-lg flex items-center transition text-sm font-medium"
           >
             <ArrowLeft size={16} className="mr-2" /> Volver
-          </button>
+          </Link>
           
           <span className="inline-block bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide w-fit mb-3">
             {post.category}
@@ -89,12 +85,12 @@ const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) 
               <p className="text-slate-300 mb-6 leading-relaxed">
                 Pon en práctica estos consejos y genera miles de ideas únicas ahora mismo.
               </p>
-              <button 
-                onClick={onGoToGenerator}
-                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:scale-105 active:scale-95"
+              <Link 
+                to="/#generator"
+                className="w-full block bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:scale-105 active:scale-95"
               >
                 Generar Nombres Gratis
-              </button>
+              </Link>
             </div>
           </div>
         </div>
