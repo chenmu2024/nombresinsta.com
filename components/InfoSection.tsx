@@ -36,34 +36,34 @@ const InfoSection: React.FC = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         
         {/* Features Grid - Quick Value Props */}
-        <div className="grid md:grid-cols-3 gap-8 mb-24">
-          <div className="p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition duration-300 group">
-            <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <Zap size={28} />
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-16 md:mb-24">
+          <div className="p-6 md:p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-blue-100/50 hover:-translate-y-1 transition duration-300 group">
+            <div className="w-12 h-12 md:w-14 md:h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+              <Zap size={24} className="md:w-7 md:h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Instantáneo</h3>
-            <p className="text-slate-500 leading-relaxed">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 md:mb-3">Instantáneo</h3>
+            <p className="text-sm md:text-base text-slate-500 leading-relaxed">
               Nuestro <strong>Generador de Nombres para Instagram</strong> procesa miles de palabras clave en milisegundos para darte resultados al instante.
             </p>
           </div>
-          <div className="p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-pink-100/50 hover:-translate-y-1 transition duration-300 group">
-            <div className="w-14 h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <Lightbulb size={28} />
+          <div className="p-6 md:p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-pink-100/50 hover:-translate-y-1 transition duration-300 group">
+            <div className="w-12 h-12 md:w-14 md:h-14 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+              <Lightbulb size={24} className="md:w-7 md:h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">Ideas Aesthetic</h3>
-            <p className="text-slate-500 leading-relaxed">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 md:mb-3">Ideas Aesthetic</h3>
+            <p className="text-sm md:text-base text-slate-500 leading-relaxed">
               Algoritmos entrenados para crear usuarios que destacan. El único <strong>Generador de Nombres para Instagram</strong> enfocado en tendencias virales.
             </p>
           </div>
-          <div className="p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-green-100/50 hover:-translate-y-1 transition duration-300 group">
-            <div className="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-              <ShieldCheck size={28} />
+          <div className="p-6 md:p-8 bg-slate-50/50 rounded-[2rem] border border-slate-100 hover:shadow-xl hover:shadow-green-100/50 hover:-translate-y-1 transition duration-300 group">
+            <div className="w-12 h-12 md:w-14 md:h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+              <ShieldCheck size={24} className="md:w-7 md:h-7" />
             </div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-3">100% Gratis</h3>
-            <p className="text-slate-500 leading-relaxed">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2 md:mb-3">100% Gratis</h3>
+            <p className="text-sm md:text-base text-slate-500 leading-relaxed">
               Usa este <strong>Generador de Nombres para Instagram</strong> tantas veces como quieras. Sin registros, sin pagos y con total privacidad.
             </p>
           </div>
@@ -75,7 +75,7 @@ const InfoSection: React.FC = () => {
           {/* Main Content */}
           <div className="lg:col-span-8 space-y-12 text-slate-600 leading-8 text-lg">
             <section>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">El Mejor Generador de Nombres para Instagram en 2025</h2>
+              <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-6 tracking-tight">El Mejor Generador de Nombres para Instagram en 2025</h2>
               <p className="mb-6">
                 Elegir el usuario perfecto es el primer paso para el éxito en redes sociales. Sin embargo, encontrar disponibilidad es cada vez más difícil. Por eso hemos creado el <strong>Generador de Nombres para Instagram</strong> definitivo. Esta herramienta no solo combina palabras al azar; utiliza inteligencia contextual para crear nombres de usuario (usernames) que sean legibles, memorables y "aesthetic".
               </p>
@@ -83,7 +83,7 @@ const InfoSection: React.FC = () => {
                 Ya sea que busques ser un influencer de moda, abrir una tienda online o simplemente tener un perfil personal cool, nuestro <strong>Generador de Nombres para Instagram</strong> te ahorrará horas de frustración probando combinaciones manualmente.
               </p>
               
-              <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">¿Por qué usar un Generador de Nombres para Instagram?</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mt-10 mb-4">¿Por qué usar un Generador de Nombres para Instagram?</h3>
               <ul className="list-disc pl-6 space-y-3 mb-6">
                 <li><strong>Disponibilidad:</strong> Encontrar un nombre corto es casi imposible sin ayuda. Un <strong>Generador de Nombres para Instagram</strong> añade prefijos y sufijos estratégicos para encontrar huecos libres.</li>
                 <li><strong>Originalidad:</strong> Sal de lo común. Nuestra herramienta sugiere palabras en inglés, latín y jerga actual que quizás no se te habían ocurrido.</li>
@@ -93,7 +93,7 @@ const InfoSection: React.FC = () => {
 
             {/* Do's and Don'ts Table */}
             <section>
-              <h3 className="text-2xl font-bold text-slate-900 mb-6">Consejos para elegir tu usuario</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Consejos para elegir tu usuario</h3>
               <div className="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm mb-8">
                 <table className="min-w-full text-sm md:text-base text-left">
                   <thead className="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
@@ -123,40 +123,40 @@ const InfoSection: React.FC = () => {
               </p>
             </section>
 
-            {/* Targeted Categories */}
-            <section className="space-y-8 mt-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Categorías del Generador</h2>
+            {/* Targeted Categories - Optimized for Mobile Layout */}
+            <section className="space-y-6 md:space-y-8 mt-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Categorías del Generador</h2>
               
-              <div id="cat-mujer" className="bg-gradient-to-br from-pink-50 to-white p-8 rounded-[2rem] border border-pink-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="bg-pink-100 p-2 rounded-lg mr-3">
+              <div id="cat-mujer" className="bg-gradient-to-br from-pink-50 to-white p-6 md:p-8 rounded-[2rem] border border-pink-100 scroll-mt-24 shadow-sm">
+                <div className="flex items-start mb-4">
+                  <div className="bg-pink-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
                     <Heart className="text-pink-500" size={24} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900">Generador de Nombres para Instagram Mujer</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador de Nombres para Instagram Mujer</h3>
                 </div>
                 <p>
                   Para perfiles femeninos, nuestro <strong>Generador de Nombres para Instagram</strong> prioriza términos "aesthetic", suaves y elegantes. Incluye palabras como <em>honey, soft, moon, lady</em> y combinaciones con tu nombre real para un toque personal y sofisticado.
                 </p>
               </div>
 
-              <div id="cat-hombre" className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-[2rem] border border-blue-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="bg-blue-100 p-2 rounded-lg mr-3">
+              <div id="cat-hombre" className="bg-gradient-to-br from-blue-50 to-white p-6 md:p-8 rounded-[2rem] border border-blue-100 scroll-mt-24 shadow-sm">
+                <div className="flex items-start mb-4">
+                  <div className="bg-blue-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
                     <User className="text-blue-500" size={24} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900">Generador de Nombres para Instagram Hombre</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador de Nombres para Instagram Hombre</h3>
                 </div>
                 <p>
                   ¿Buscas algo más minimalista o urbano? El modo masculino del <strong>Generador de Nombres para Instagram</strong> crea usuarios con fuerza, usando prefijos como <em>iam, real, official, mr</em> o simplemente jugando con guiones bajos para un look limpio y profesional.
                 </p>
               </div>
 
-              <div id="cat-negocios" className="bg-gradient-to-br from-purple-50 to-white p-8 rounded-[2rem] border border-purple-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="bg-purple-100 p-2 rounded-lg mr-3">
+              <div id="cat-negocios" className="bg-gradient-to-br from-purple-50 to-white p-6 md:p-8 rounded-[2rem] border border-purple-100 scroll-mt-24 shadow-sm">
+                <div className="flex items-start mb-4">
+                  <div className="bg-purple-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
                      <Briefcase className="text-purple-500" size={24} />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-900">Generador para Empresas</h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador para Empresas</h3>
                 </div>
                 <p>
                   Si tienes una marca, es vital que te encuentren. Usa la opción de Negocios en nuestro <strong>Generador de Nombres para Instagram</strong> para añadir automáticamente tu sector (tienda, agencia, studio) o tu país (mx, es, arg). Esto mejora tu visibilidad local inmediatamente.
@@ -165,7 +165,7 @@ const InfoSection: React.FC = () => {
             </section>
 
             <section id="faq" className="scroll-mt-24 mt-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-8">Preguntas Frecuentes</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Preguntas Frecuentes</h2>
               <div className="space-y-6">
                 {faqs.map((faq, i) => (
                   <div key={i} className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -180,7 +180,7 @@ const InfoSection: React.FC = () => {
           {/* Sidebar */}
           <div className="lg:col-span-4 space-y-6">
              <div className="sticky top-28">
-                <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50">
+                <div className="bg-white p-6 md:p-8 rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50">
                   <h4 className="font-bold text-slate-900 mb-6 text-lg">Accesos Rápidos</h4>
                   <p className="text-sm text-slate-400 mb-4">Navega por las categorías de nuestro <strong>Generador de Nombres para Instagram</strong>:</p>
                   <ul className="space-y-4">

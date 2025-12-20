@@ -507,7 +507,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
   };
 
   return (
-    <section id="generator" className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <section id="generator" className="py-6 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       
       <Toast message={toast.msg} isVisible={toast.visible} />
 
@@ -546,21 +546,21 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
       </button>
 
       {/* Hero Header */}
-      <div className="text-center mb-12 relative">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm animate-fade-in-up">
+      <div className="text-center mb-6 md:mb-12 relative">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm animate-fade-in-up">
             <Sparkles size={14} className="text-yellow-400" />
             <span>Generador Viral 2025</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight text-balance break-words max-w-[90vw] mx-auto">
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight text-balance break-words max-w-[90vw] mx-auto">
           {activeTitle}
         </h1>
-        <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8 font-light">
+        <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-6 md:mb-8 font-light">
           El <strong>Generador de Nombres</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
         </p>
         
         {/* Platform Switcher Tabs */}
-        <div className="flex justify-start md:justify-center mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
+        <div className="flex justify-start md:justify-center mb-6 md:mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
           <div className="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex space-x-1">
              {[
                { id: 'instagram', label: 'Instagram', icon: Instagram, color: 'text-pink-600' },
