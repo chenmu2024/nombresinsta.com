@@ -12,7 +12,8 @@ const BlogPost: React.FC = () => {
   useSEO({
     title: post ? `${post.title} | NombresInsta` : 'Artículo no encontrado | NombresInsta',
     description: post ? post.excerpt : 'Artículo del blog sobre consejos para Instagram.',
-    url: post ? `/blog/${post.id}` : '/blog'
+    url: post ? `/blog/${post.id}` : '/blog',
+    image: post?.image
   });
 
   useEffect(() => {
@@ -30,12 +31,40 @@ const BlogPost: React.FC = () => {
     );
   }
 
+  // BlogPosting Schema
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "image": post.image,
+    "datePublished": post.isoDate,
+    "author": {
+      "@type": "Organization",
+      "name": "NombresInsta",
+      "url": "https://nombresinsta.com"
+    },
+    "description": post.excerpt
+  };
+
   return (
     <article className="bg-white min-h-screen pb-20">
+      
+      {/* Inject Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+
       {/* Hero Header */}
-      <div className={`w-full h-64 md:h-80 ${post.image} relative`}>
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 relative z-10">
+      <div className="w-full h-64 md:h-96 relative overflow-hidden bg-slate-900">
+        <img 
+            src={post.image} 
+            alt={post.title} 
+            className="w-full h-full object-cover opacity-60" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        
+        <div className="absolute inset-0 max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 relative z-10">
           <Link 
             to="/blog"
             className="absolute top-8 left-4 md:left-0 text-white/90 hover:text-white bg-black/20 hover:bg-black/30 backdrop-blur px-4 py-2 rounded-lg flex items-center transition text-sm font-medium"
@@ -43,13 +72,13 @@ const BlogPost: React.FC = () => {
             <ArrowLeft size={16} className="mr-2" /> Volver
           </Link>
           
-          <span className="inline-block bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide w-fit mb-3">
+          <span className="inline-block bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide w-fit mb-3 shadow-md">
             {post.category}
           </span>
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight shadow-sm">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight shadow-sm drop-shadow-md">
             {post.title}
           </h1>
-          <div className="flex items-center text-white/90 text-sm space-x-4">
+          <div className="flex items-center text-white/90 text-sm space-x-4 font-medium">
             <span className="flex items-center"><Calendar size={14} className="mr-1" /> {post.date}</span>
             <span className="flex items-center"><Clock size={14} className="mr-1" /> {post.readTime}</span>
           </div>
@@ -61,7 +90,7 @@ const BlogPost: React.FC = () => {
         {/* Main Content */}
         <div className="lg:col-span-8">
           <div 
-            className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-pink-600 hover:prose-a:text-pink-700 prose-li:text-slate-600"
+            className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-p:text-slate-600 prose-a:text-pink-600 hover:prose-a:text-pink-700 prose-li:text-slate-600 prose-img:rounded-xl prose-img:shadow-lg"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 

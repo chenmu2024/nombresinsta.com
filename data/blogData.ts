@@ -1,12 +1,15 @@
+import { NameCategory } from '../types';
+
 export interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
   date: string;
+  isoDate: string; // Added for Schema
   readTime: string;
-  image: string;
+  image: string; // Changed to URL
   category: string;
-  content: string; // HTML string for rich text content
+  content: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -15,9 +18,10 @@ export const blogPosts: BlogPost[] = [
     title: 'Nombres Insta Aesthetic: La Guía Definitiva para Destacar en 2025',
     excerpt: 'Aprende a crear la identidad visual perfecta. Descubre listas de palabras, combinaciones y la psicología detrás de los nombres aesthetic para triunfar en Instagram.',
     date: '19 Dic, 2025',
+    isoDate: '2025-12-19',
     readTime: '12 min de lectura',
     category: 'Tendencias',
-    image: 'bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-200',
+    image: 'https://images.unsplash.com/photo-1616486029423-aaa478965c96?q=80&w=1200&auto=format&fit=crop',
     content: `
       <p class="lead">Elegir entre millones de <strong>nombres insta</strong> puede ser abrumador. En 2025, la tendencia "Aesthetic" ha dejado de ser una simple moda para convertirse en el estándar de oro de la marca personal. Tu nombre de usuario ya no es solo una dirección; es la primera línea de tu biografía, tu tarjeta de presentación y tu primera oportunidad para captar seguidores.</p>
 
@@ -30,7 +34,7 @@ export const blogPosts: BlogPost[] = [
       <ul class="list-disc pl-6 mb-6 space-y-2">
         <li><strong>Legibilidad:</strong> Evita números largos y cadenas de consonantes. Si no se puede leer en voz alta fácilmente, no sirve.</li>
         <li><strong>Memorabilidad:</strong> Debe ser pegadizo. El uso de aliteraciones (repetición de sonidos) funciona de maravilla.</li>
-        <li><strong>Disponibilidad:</strong> El mayor reto. Aquí es donde herramientas como nuestro <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">Generador de Nombres para Instagram</a> se vuelven indispensables para encontrar variantes libres.</li>
+        <li><strong>Disponibilidad:</strong> El mayor reto. Aquí es donde herramientas como nuestro <a href="/?category=AESTHETIC" class="text-pink-600 font-bold hover:underline">Generador de Nombres Aesthetic</a> se vuelven indispensables para encontrar variantes libres.</li>
       </ul>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Diccionario de Palabras Aesthetic para 2025</h2>
@@ -77,15 +81,12 @@ export const blogPosts: BlogPost[] = [
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Herramientas para Verificar Disponibilidad</h2>
       <p class="mb-4">
-        Antes de encariñarte con un nombre, verifica que esté libre. Puedes hacerlo manualmente en la aplicación o usar nuestro sitio <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">NombresInsta.com</a>, que verifica y sugiere alternativas automáticamente. Además, es recomendable revisar si el dominio web está disponible si planeas crear una marca a futuro. Sitios como <a href="https://es.godaddy.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GoDaddy</a> o verificadores de redes sociales son útiles para esto.
+        Antes de encariñarte con un nombre, verifica que esté libre. Puedes hacerlo manualmente en la aplicación o usar nuestro sitio <a href="/" class="text-pink-600 font-bold hover:underline">NombresInsta.com</a>, que verifica y sugiere alternativas automáticamente. Además, es recomendable revisar si el dominio web está disponible si planeas crear una marca a futuro.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Cómo cambiar tu nombre en Instagram</h2>
       <p class="mb-4">
         Una vez que hayas elegido tu nuevo nombre aesthetic, cambiarlo es sencillo, pero tiene riesgos. Al cambiar tu usuario, tu antigua URL dejará de funcionar. Asegúrate de actualizar tus enlaces en otras redes sociales.
-      </p>
-      <p class="mb-4">
-        Si necesitas ayuda técnica sobre cómo realizar el cambio dentro de la app, consulta siempre la <a href="https://help.instagram.com/1124604297910938" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Ayuda oficial de Instagram</a> para evitar bloqueos temporales por cambios frecuentes.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Conclusión</h2>
@@ -93,7 +94,7 @@ export const blogPosts: BlogPost[] = [
         Crear <strong>nombres insta</strong> memorables es un arte que combina creatividad y estrategia. No tengas miedo de experimentar. Recuerda que lo "aesthetic" es subjetivo; lo más importante es que te sientas identificado con tu identidad digital.
       </p>
       <p class="mb-4">
-        ¿Listo para empezar? Sube al inicio de esta página o ve a <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">nombresinsta.com</a> y deja que nuestra IA haga el trabajo pesado por ti.
+        ¿Listo para empezar? <a href="/?category=AESTHETIC" class="text-pink-600 font-bold hover:underline">Prueba nuestro generador aesthetic aquí</a> y deja que nuestra IA haga el trabajo pesado por ti.
       </p>
     `
   },
@@ -102,9 +103,10 @@ export const blogPosts: BlogPost[] = [
     title: 'Generador de Nombres para Instagram: Estrategias para Negocios y Marcas',
     excerpt: 'Tu nombre de usuario es tu activo digital más valioso. Aprende a usar generadores para crear nombres que atraigan clientes, mejoren tu SEO y vendan más.',
     date: '18 Dic, 2025',
+    isoDate: '2025-12-18',
     readTime: '10 min de lectura',
     category: 'Negocios',
-    image: 'bg-gradient-to-br from-blue-100 via-indigo-100 to-slate-200',
+    image: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1200&auto=format&fit=crop',
     content: `
       <p class="lead">Para un negocio en 2025, no aparecer en Instagram es como no existir. Pero aparecer con el nombre incorrecto puede ser aún peor. Utilizar un <strong>Generador de Nombres para Instagram</strong> no es solo para indecisos; es una herramienta estratégica para encontrar huecos en el mercado y optimizar tu SEO (Search Engine Optimization) dentro de la plataforma.</p>
 
@@ -113,7 +115,7 @@ export const blogPosts: BlogPost[] = [
         Mucha gente no sabe que Instagram funciona como un motor de búsqueda. Si tienes una panadería en Madrid y tu usuario es <em>juan123</em>, nadie te encontrará. Si tu usuario es <em>panaderia.juan.madrid</em>, aparecerás cuando alguien busque "panadería" o "Madrid".
       </p>
       <p class="mb-4">
-        Al usar nuestro <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">Generador de Nombres para Instagram</a>, puedes seleccionar la categoría "Negocios" para que el algoritmo inyecte automáticamente sufijos y prefijos comerciales que ayudan a este posicionamiento.
+        Al usar nuestro <a href="/?category=BUSINESS" class="text-pink-600 font-bold hover:underline">Generador de Nombres para Empresas</a>, puedes seleccionar la categoría "Negocios" para que el algoritmo inyecte automáticamente sufijos y prefijos comerciales que ayudan a este posicionamiento.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Errores fatales al nombrar tu empresa</h2>
@@ -133,7 +135,7 @@ export const blogPosts: BlogPost[] = [
       <p class="mb-4">¿Cuál es el núcleo de tu negocio? ¿Velas? ¿Marketing? ¿Fitness? Esta palabra debe estar presente. Si tu marca tiene un nombre abstracto (ej. "Zyro"), combínalo con tu sector (ej. "ZyroFitness").</p>
 
       <h3 class="text-xl font-bold mt-6 mb-2">Paso 2: Generación Masiva</h3>
-      <p class="mb-4">Usa <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">NombresInsta.com</a>. Introduce tu palabra clave y selecciona la categoría "Negocios". Genera al menos 50 opciones. Copia las que más te resuenen a una lista de "Favoritos".</p>
+      <p class="mb-4">Usa <a href="/?category=BUSINESS" class="text-pink-600 font-bold hover:underline">NombresInsta.com Modo Negocios</a>. Introduce tu palabra clave y selecciona la categoría "Negocios". Genera al menos 50 opciones. Copia las que más te resuenen a una lista de "Favoritos".</p>
 
       <h3 class="text-xl font-bold mt-6 mb-2">Paso 3: La prueba de la "Llamada Telefónica"</h3>
       <p class="mb-4">Lee el nombre en voz alta. Imagina que tienes que dárselo a alguien por teléfono. ¿Tienes que deletrearlo?
@@ -143,9 +145,6 @@ export const blogPosts: BlogPost[] = [
       <h2 class="text-2xl font-bold mt-8 mb-4">Consistencia de Marca (Omnicanalidad)</h2>
       <p class="mb-4">
         Tu nombre en Instagram debe coincidir con tu nombre en TikTok, YouTube y tu dominio web. Esto genera confianza. Si <em>zapateria.lola</em> está libre en Instagram pero ocupado en TikTok, considera buscar una variación que esté libre en ambas, como <em>lola.zapatos</em>.
-      </p>
-      <p class="mb-4">
-        Para gestión de redes sociales avanzadas, plataformas como <a href="https://hootsuite.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Hootsuite</a> o <a href="https://buffer.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Buffer</a> recomiendan mantener la uniformidad para facilitar que los clientes te etiqueten y compartan tu contenido.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">El nombre de usuario vs. El nombre de perfil</h2>
@@ -162,7 +161,7 @@ export const blogPosts: BlogPost[] = [
         Un buen nombre es el activo más barato con el mayor retorno de inversión (ROI) posible. No lo dejes al azar. Utiliza la tecnología a tu favor.
       </p>
       <p class="mb-4">
-        Empieza ahora mismo a construir tu imperio digital. Visita <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">nombresinsta.com</a> y descubre el nombre que llevará tu negocio al siguiente nivel.
+        Empieza ahora mismo a construir tu imperio digital. Visita <a href="/?category=BUSINESS" class="text-pink-600 font-bold hover:underline">nombresinsta.com</a> y descubre el nombre que llevará tu negocio al siguiente nivel.
       </p>
     `
   },
@@ -171,9 +170,10 @@ export const blogPosts: BlogPost[] = [
     title: '¿Nombre de Usuario No Disponible? 10 Trucos Infalibles',
     excerpt: 'Es la pesadilla de todo creador: tu nombre perfecto ya existe. No te desesperes, aquí tienes 10 técnicas profesionales para conseguir un nombre similar y efectivo.',
     date: '15 Dic, 2025',
+    isoDate: '2025-12-15',
     readTime: '8 min de lectura',
     category: 'Tutoriales',
-    image: 'bg-gradient-to-br from-green-100 via-teal-100 to-emerald-100',
+    image: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop',
     content: `
       <p class="lead">Escribes tu nombre ideal. El corazón te late rápido. Pulsas "Siguiente". Y ahí está: el texto rojo que dice <strong>"Este nombre de usuario no está disponible"</strong>. Es frustrante, pero en una red con más de mil millones de usuarios, es normal. La buena noticia es que no tienes que renunciar a tu identidad.</p>
 
@@ -183,7 +183,7 @@ export const blogPosts: BlogPost[] = [
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">10 Estrategias para "Hackear" la Disponibilidad</h2>
-      <p class="mb-4">Usa estas técnicas probadas que nuestro algoritmo en <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">NombresInsta.com</a> aplica automáticamente:</p>
+      <p class="mb-4">Usa estas técnicas probadas que nuestro algoritmo en <a href="/?category=MINIMAL" class="text-pink-600 font-bold hover:underline">NombresInsta.com</a> aplica automáticamente:</p>
 
       <h3 class="text-xl font-bold mt-6 mb-2">1. El Prefijo de Acción</h3>
       <p class="mb-2">Añade un verbo o pronombre al inicio. Funciona genial para marcas personales.</p>
@@ -232,20 +232,20 @@ export const blogPosts: BlogPost[] = [
 
       <h3 class="text-xl font-bold mt-6 mb-2">8. El Generador Automático</h3>
       <p class="mb-4">
-        En lugar de probar manualmente una por una, usa nuestro <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">Generador de Nombres</a>. Introduce tu palabra base y deja que probemos miles de prefijos y sufijos por ti en segundos.
+        En lugar de probar manualmente una por una, usa nuestro <a href="/" class="text-pink-600 font-bold hover:underline">Generador de Nombres</a>. Introduce tu palabra base y deja que probemos miles de prefijos y sufijos por ti en segundos.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Lo que NO debes hacer</h2>
       <p class="mb-4">
-        Evita a toda costa duplicar letras al azar (<em>carrrlos</em>) o añadir números sin significado (<em>carlos8475</em>). Esto hace que tu cuenta parezca un "bot" o una cuenta falsa, lo que disminuye la confianza de los usuarios. Según la <a href="https://www.rae.es/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Real Academia Española (RAE)</a>, la claridad en el lenguaje es fundamental para la comunicación, y esto aplica también a tu identidad digital.
+        Evita a toda costa duplicar letras al azar (<em>carrrlos</em>) o añadir números sin significado (<em>carlos8475</em>). Esto hace que tu cuenta parezca un "bot" o una cuenta falsa.
       </p>
 
       <h2 class="text-2xl font-bold mt-8 mb-4">Resumen</h2>
       <p class="mb-4">
-        Que tu primera opción no esté disponible es una oportunidad disfrazada. Te obliga a ser más creativo y específico. A menudo, el nombre con el "truco" acaba siendo más memorable que la opción original.
+        Que tu primera opción no esté disponible es una oportunidad disfrazada. Te obliga a ser más creativo y específico.
       </p>
       <p class="mb-4">
-        No pierdas horas probando combinaciones. Ve a <a href="https://nombresinsta.com/" class="text-pink-600 font-bold hover:underline">nombresinsta.com</a>, ingresa tu idea y deja que la magia ocurra.
+        No pierdas horas probando combinaciones. Ve a <a href="/" class="text-pink-600 font-bold hover:underline">nombresinsta.com</a>, ingresa tu idea y deja que la magia ocurra.
       </p>
     `
   }

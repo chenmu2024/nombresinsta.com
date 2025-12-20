@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, Trash2, ClipboardList, X, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Instagram, Youtube, Twitter, Music2, History, AlignLeft, ArrowRightLeft, Eye } from 'lucide-react';
 import { NameCategory, GeneratedName, Platform, LengthOption } from '../types';
 import { generateNames } from '../utils/nameGenerator';
@@ -266,6 +267,9 @@ const Generator: React.FC = () => {
     customPrefix: '',
     customSuffix: ''
   });
+
+  const location = useLocation();
+  const [hasInitialized, setHasInitialized] = useState(false);
   
   // Dynamic SEO based on Platform
   const platformTitles = {
@@ -323,6 +327,41 @@ const Generator: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('nombresinsta_history', JSON.stringify(history));
   }, [history]);
+
+  // Deep Linking Logic
+  useEffect(() => {
+    if (hasInitialized) return;
+
+    const params = new URLSearchParams(location.search);
+    const catParam = params.get('category');
+    const keywordParam = params.get('q');
+    
+    let shouldGenerate = false;
+    let targetCategory = NameCategory.ALL;
+    let targetKeyword = '';
+
+    if (catParam) {
+      // Validate category
+      if (Object.values(NameCategory).includes(catParam as NameCategory)) {
+        targetCategory = catParam as NameCategory;
+        setCategory(targetCategory);
+        shouldGenerate = true;
+      }
+    }
+
+    if (keywordParam) {
+      targetKeyword = keywordParam;
+      setKeyword(targetKeyword);
+      shouldGenerate = true;
+    }
+
+    if (shouldGenerate) {
+       handleGenerate(targetKeyword || undefined, targetCategory);
+       // Scroll to results if needed, but on initial load usually staying at top is fine or scrollToAnchor handles it.
+    }
+    
+    setHasInitialized(true);
+  }, [location.search, hasInitialized]);
 
   const showToastMsg = (msg: string) => {
     setToast({ msg, visible: true });

@@ -36,10 +36,15 @@ const BlogList: React.FC = () => {
               to={`/blog/${post.id}`}
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group cursor-pointer block"
             >
-              {/* Image Placeholder / Gradient */}
-              <div className={`h-48 w-full ${post.image} relative overflow-hidden`}>
-                 <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
-                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              {/* Image with proper SEO alt tag */}
+              <div className="h-48 w-full relative overflow-hidden bg-slate-200">
+                 <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                 />
+                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
                     {post.category}
                  </div>
               </div>
