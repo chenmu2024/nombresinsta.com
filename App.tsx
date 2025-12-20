@@ -64,10 +64,17 @@ const App: React.FC = () => {
       <main className="flex-grow relative flex flex-col w-full">
         {isHome && (
            <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10 contain-strict">
-              {/* Optimization: Disable animations on mobile (only md:animate-blob) to reduce Main Thread TBT */}
-              <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-200/40 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] md:animate-blob opacity-50 md:opacity-100"></div>
-              <div className="absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-pink-200/40 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] md:animate-blob animation-delay-2000 opacity-50 md:opacity-100"></div>
-              <div className="absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-blue-100/40 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] md:animate-blob animation-delay-4000 opacity-50 md:opacity-100"></div>
+              {/* Optimization: Use CSS Gradients on Mobile (Zero GPU cost) vs DOM Blobs on Desktop */}
+              
+              {/* Desktop Only: Animated Blobs */}
+              <div className="hidden md:block absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-200/40 dark:bg-purple-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob"></div>
+              <div className="hidden md:block absolute top-[10%] right-[-10%] w-[50%] h-[50%] bg-pink-200/40 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob animation-delay-2000"></div>
+              <div className="hidden md:block absolute bottom-[-10%] left-[20%] w-[50%] h-[50%] bg-blue-100/40 dark:bg-blue-900/20 rounded-full mix-blend-multiply dark:mix-blend-normal filter blur-[80px] animate-blob animation-delay-4000"></div>
+              
+              {/* Mobile Only: Static CSS Gradient (Performance Fix) */}
+              <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-pink-100/30 via-transparent to-transparent dark:from-pink-900/20"></div>
+              <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100/30 via-transparent to-transparent dark:from-blue-900/20"></div>
+
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]"></div>
             </div>
         )}

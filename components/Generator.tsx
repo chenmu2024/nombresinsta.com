@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, Trash2, ClipboardList, X, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Instagram, Youtube, Twitter, Music2, History, AlignLeft, ArrowRightLeft, Eye } from 'lucide-react';
 import { NameCategory, GeneratedName, Platform, LengthOption } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 import { useSEO } from '../hooks/useSEO';
-import ProfilePreviewModal from './ProfilePreviewModal';
+// Lazy load the modal
+const ProfilePreviewModal = React.lazy(() => import('./ProfilePreviewModal'));
 
 // --- Toast Component ---
 const Toast = ({ message, isVisible }: { message: string; isVisible: boolean }) => (
@@ -495,12 +496,14 @@ const Generator: React.FC = () => {
       
       <Toast message={toast.msg} isVisible={toast.visible} />
 
-      <ProfilePreviewModal 
-        isOpen={!!previewName} 
-        onClose={() => setPreviewName(null)} 
-        name={previewName}
-        platform={platform}
-      />
+      <Suspense fallback={null}>
+        <ProfilePreviewModal 
+          isOpen={!!previewName} 
+          onClose={() => setPreviewName(null)} 
+          name={previewName}
+          platform={platform}
+        />
+      </Suspense>
 
       {/* Favorites Modal */}
       <FavoritesModal 

@@ -36,8 +36,11 @@
     <!-- Preload Critical Assets (LCP Optimization) -->
     <link rel="preload" href="https://grainy-gradients.vercel.app/noise.svg" as="image">
     
-    <!-- Fonts with display swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts with non-blocking load strategy -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    </noscript>
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
