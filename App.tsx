@@ -75,7 +75,8 @@ const App: React.FC = () => {
               <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-pink-100/30 via-transparent to-transparent dark:from-pink-900/20"></div>
               <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100/30 via-transparent to-transparent dark:from-blue-900/20"></div>
 
-              <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]"></div>
+              {/* Use local base64 noise pattern instead of external URL */}
+              <div className="absolute inset-0 bg-noise-pattern opacity-[0.03]"></div>
             </div>
         )}
         
