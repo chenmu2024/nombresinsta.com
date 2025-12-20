@@ -1,13 +1,10 @@
 import React from 'react';
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { useSEO } from '../hooks/useSEO';
 
-interface BlogListProps {
-  onReadPost: (id: string) => void;
-}
-
-const BlogList: React.FC<BlogListProps> = ({ onReadPost }) => {
+const BlogList: React.FC = () => {
   useSEO({
     title: "Blog y Consejos | NombresInsta",
     description: "Guías expertas sobre cómo elegir el nombre perfecto para Instagram, tendencias aesthetic 2025 y estrategias de marca personal.",
@@ -34,10 +31,10 @@ const BlogList: React.FC<BlogListProps> = ({ onReadPost }) => {
         {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <article 
+            <Link 
+              to={`/blog/${post.id}`}
               key={post.id} 
               className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 flex flex-col group cursor-pointer"
-              onClick={() => onReadPost(post.id)}
             >
               {/* Image Placeholder / Gradient */}
               <div className={`h-48 w-full ${post.image} relative overflow-hidden`}>
@@ -68,15 +65,12 @@ const BlogList: React.FC<BlogListProps> = ({ onReadPost }) => {
                 </p>
 
                 <div className="mt-auto pt-4 border-t border-slate-100">
-                  <button 
-                    onClick={(e) => { e.stopPropagation(); onReadPost(post.id); }}
-                    className="text-pink-600 font-semibold text-sm flex items-center hover:translate-x-1 transition"
-                  >
+                  <span className="text-pink-600 font-semibold text-sm flex items-center hover:translate-x-1 transition">
                     Leer Artículo <ArrowRight size={16} className="ml-1" />
-                  </button>
+                  </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

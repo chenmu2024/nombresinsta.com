@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Mail, FileText, Users, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
 
 interface LegalViewProps {
   page: 'about' | 'contact' | 'privacy' | 'terms';
-  onBack: () => void;
 }
 
-const LegalView: React.FC<LegalViewProps> = ({ page, onBack }) => {
-  // Dynamic Title & Description SEO using custom Hook
+const LegalView: React.FC<LegalViewProps> = ({ page }) => {
   const seoData = {
       about: { title: 'Sobre Nosotros | NombresInsta', desc: 'Conoce al equipo detrás del mejor generador de nombres en español.' },
       contact: { title: 'Contacto | NombresInsta', desc: 'Contáctanos para soporte o colaboraciones.' },
@@ -205,15 +204,15 @@ const LegalView: React.FC<LegalViewProps> = ({ page, onBack }) => {
   return (
     <div className="bg-white min-h-screen py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button 
-          onClick={onBack}
-          className="group flex items-center text-slate-500 hover:text-pink-600 transition mb-8 font-medium"
+        <Link 
+          to="/"
+          className="group flex items-center text-slate-500 hover:text-pink-600 transition mb-8 font-medium w-fit"
         >
           <div className="bg-slate-100 group-hover:bg-pink-50 p-2 rounded-full mr-3 transition">
             <ArrowLeft size={20} />
           </div>
           Volver al Generador
-        </button>
+        </Link>
         
         <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
           {renderContent()}

@@ -3,8 +3,7 @@ import { Lightbulb, ShieldCheck, Zap, User, Briefcase, Heart, CheckCircle2, XCir
 
 const InfoSection: React.FC = () => {
   return (
-    // content-visibility: auto skips rendering work for off-screen content
-    <div className="bg-white border-t border-slate-100" style={{ contentVisibility: 'auto' }}>
+    <div className="bg-white border-t border-slate-100 relative z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         
         {/* Features Grid - Quick Value Props */}
