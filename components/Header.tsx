@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode, onToggleTheme }) => {
                 <Instagram size={24} className="md:w-[26px] md:h-[26px] text-pink-600 dark:text-pink-500" />
               </div>
             </div>
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-slate-800 dark:text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all duration-300">
+            <span className="text-lg md:text-2xl font-bold tracking-tight text-slate-800 dark:text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all duration-300 truncate max-w-[200px] md:max-w-none">
               NombresInsta
             </span>
           </Link>

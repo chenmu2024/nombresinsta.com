@@ -552,7 +552,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
             <span>Generador Viral 2025</span>
         </div>
 
-        <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight text-balance break-words max-w-[90vw] mx-auto">
           {activeTitle}
         </h1>
         <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8 font-light">
@@ -560,7 +560,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
         </p>
         
         {/* Platform Switcher Tabs */}
-        <div className="flex justify-center mb-10 overflow-x-auto pb-2 custom-scrollbar">
+        <div className="flex justify-start md:justify-center mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
           <div className="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex space-x-1">
              {[
                { id: 'instagram', label: 'Instagram', icon: Instagram, color: 'text-pink-600' },
