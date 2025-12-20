@@ -231,7 +231,7 @@ const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', '
 
 const Generator: React.FC = () => {
   useSEO({
-    title: "Generador de Nombres para Instagram | Crea tu identidad Aesthetic",
+    title: "Generador de Nombres para Instagram",
     description: "¿Necesitas un Generador de Nombres para Instagram? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.",
     url: "/"
   });
@@ -436,13 +436,7 @@ const Generator: React.FC = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-          Generador de Nombres <br className="hidden md:block"/>
-          <span className="text-transparent bg-clip-text bg-insta-gradient relative">
-            para Instagram
-             <svg className="absolute -bottom-2 left-0 w-full h-3 text-pink-300 opacity-50 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none">
-               <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none" />
-             </svg>
-          </span>
+          Generador de Nombres para Instagram
         </h1>
         <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-8 font-light">
           El <strong>Generador de Nombres para Instagram</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
