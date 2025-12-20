@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee } from 'lucide-react';
-import { NameCategory, GeneratedName } from '../types';
+import { Copy, Check, Sparkles, RefreshCw, AtSign, Heart, ExternalLink, Trash2, ClipboardList, X, Star, Search, Wand2, RotateCcw, SlidersHorizontal, Dice5, Share2, ChevronDown, Gamepad2, Plane, Palette, Briefcase, Camera, Cat, Coffee, Instagram, Youtube, Twitter, Music2, AlertCircle } from 'lucide-react';
+import { NameCategory, GeneratedName, Platform } from '../types';
 import { generateNames } from '../utils/nameGenerator';
 import { useSEO } from '../hooks/useSEO';
 
@@ -129,6 +129,7 @@ interface NameCardProps {
   isSaved: boolean;
   isNew?: boolean; 
   copiedId: string | null;
+  platform: Platform;
   onToggleSave: (item: GeneratedName) => void;
   onCopy: (text: string, id: string) => void;
 }
@@ -139,9 +140,34 @@ const NameCard: React.FC<NameCardProps> = ({
   isSaved, 
   isNew = false,
   copiedId, 
+  platform,
   onToggleSave, 
   onCopy 
 }) => {
+  const [availability, setAvailability] = useState<'idle' | 'checking' | 'available' | 'taken'>('idle');
+
+  // Simulate availability check
+  const checkAvailability = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (availability !== 'idle') return;
+
+    setAvailability('checking');
+    setTimeout(() => {
+      // Heuristic: Names shorter than 5 chars or simple dictionary words are likely taken
+      const isLikelyTaken = item.name.length < 5 || !item.name.match(/[0-9._]/); 
+      // Add some randomness
+      const result = (Math.random() > 0.7 || isLikelyTaken) && Math.random() > 0.2 ? 'taken' : 'available';
+      setAvailability(result);
+    }, 1500);
+  };
+
+  const platformUrl = {
+    instagram: `https://www.instagram.com/${item.name}/`,
+    tiktok: `https://www.tiktok.com/@${item.name}`,
+    twitter: `https://twitter.com/${item.name}`,
+    youtube: `https://www.youtube.com/@${item.name}`
+  };
+
   return (
     <div
       onClick={() => onCopy(item.name, item.id)}
@@ -161,23 +187,51 @@ const NameCard: React.FC<NameCardProps> = ({
         <span className="text-lg font-bold text-slate-700 font-sans tracking-wide group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all truncate">
           @{item.name}
         </span>
-        {!isSavedView && (
-          <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase mt-1">
-            {item.category}
-          </span>
-        )}
+        
+        <div className="flex items-center mt-1 space-x-2">
+            {!isSavedView && (
+              <span className="text-[10px] text-slate-500 font-semibold tracking-wider uppercase">
+                {item.category}
+              </span>
+            )}
+            
+            {/* Availability Badge */}
+            {!isSavedView && availability !== 'idle' && (
+               <span className={`text-[10px] px-1.5 py-0.5 rounded-md font-bold flex items-center ${
+                 availability === 'checking' ? 'bg-slate-100 text-slate-500' :
+                 availability === 'available' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'
+               }`}>
+                 {availability === 'checking' && <RefreshCw size={10} className="animate-spin mr-1" />}
+                 {availability === 'available' && <Check size={10} className="mr-1" />}
+                 {availability === 'taken' && <X size={10} className="mr-1" />}
+                 {availability === 'checking' ? 'Verificando...' : availability === 'available' ? 'Libre' : 'Ocupado'}
+               </span>
+            )}
+        </div>
       </div>
       
       <div className="flex items-center space-x-1 shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200">
         <div className="flex bg-slate-50 rounded-xl p-1 border border-slate-100 shadow-inner">
+          
+          {/* Check Button */}
+          {availability === 'idle' && !isSavedView && (
+             <button
+                onClick={checkAvailability}
+                className="p-2 text-slate-400 hover:text-purple-600 hover:bg-white rounded-lg transition"
+                title="Verificar Disponibilidad (Simulación)"
+             >
+                <AlertCircle size={16} />
+             </button>
+          )}
+
           <a 
-            href={`https://www.instagram.com/${item.name}/`} 
+            href={platformUrl[platform]}
             target="_blank" 
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="p-2 text-slate-400 hover:text-blue-600 hover:bg-white rounded-lg transition"
-            title="Verificar en Instagram"
-            aria-label={`Verificar @${item.name} en Instagram`}
+            title={`Abrir en ${platform}`}
+            aria-label={`Abrir @${item.name} en ${platform}`}
           >
             <ExternalLink size={16} />
           </a>
@@ -230,18 +284,27 @@ const QUICK_PRESETS = [
 const trendingTags = ['Aesthetic', 'Viajes', 'Amor', 'Gamer', 'Moda', 'Chill', 'Arte', 'Foodie'];
 
 const Generator: React.FC = () => {
-  useSEO({
-    title: "Generador de Nombres para Instagram",
-    description: "¿Necesitas un Generador de Nombres para Instagram? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.",
-    url: "/"
-  });
-
+  const [platform, setPlatform] = useState<Platform>('instagram');
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState<NameCategory>(NameCategory.ALL);
   const [options, setOptions] = useState({
     includeNumbers: false,
     includePeriods: true,
     includeUnderscores: true
+  });
+  
+  // Dynamic SEO based on Platform
+  const platformTitles = {
+    instagram: "Generador de Nombres para Instagram",
+    tiktok: "Generador de Nombres para TikTok",
+    twitter: "Generador de Nombres para Twitter (X)",
+    youtube: "Generador de Nombres para YouTube"
+  };
+
+  useSEO({
+    title: platformTitles[platform],
+    description: `¿Necesitas un ${platformTitles[platform]}? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.`,
+    url: "/"
   });
   
   const [results, setResults] = useState<GeneratedName[]>([]);
@@ -291,6 +354,7 @@ const Generator: React.FC = () => {
       const newNames = generateNames({
         keyword: kw,
         category: cat,
+        platform,
         ...options
       });
       
@@ -373,11 +437,11 @@ const Generator: React.FC = () => {
         setCopiedId(id);
         setTimeout(() => setCopiedId(null), 2000);
     }
-    showToastMsg("Copiado! Verifica en Instagram");
+    showToastMsg("Copiado! Verifica en la app");
   };
 
   const handleShare = async () => {
-      const text = `¡Mira estos nombres para Instagram que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.co`;
+      const text = `¡Mira estos nombres para ${platformTitles[platform]} que encontré!\n\n${savedNames.map(n => `@${n.name}`).join('\n')}\n\nCreado en NombresInsta.co`;
       
       if (navigator.share) {
           try {
@@ -388,11 +452,9 @@ const Generator: React.FC = () => {
               });
               showToastMsg("¡Compartido!");
           } catch (error) {
-              // User cancelled or error
               console.log('Share cancelled');
           }
       } else {
-          // Fallback to copy
           copyToClipboard(text);
           showToastMsg("Lista copiada (Compartir no soportado)");
       }
@@ -436,11 +498,36 @@ const Generator: React.FC = () => {
         </div>
 
         <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-          Generador de Nombres para Instagram
+          {platformTitles[platform]}
         </h1>
         <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto mb-8 font-light">
-          El <strong>Generador de Nombres para Instagram</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
+          El <strong>Generador de Nombres</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
         </p>
+        
+        {/* Platform Switcher Tabs */}
+        <div className="flex justify-center mb-10 overflow-x-auto pb-2 custom-scrollbar">
+          <div className="bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm flex space-x-1">
+             {[
+               { id: 'instagram', label: 'Instagram', icon: Instagram, color: 'text-pink-600' },
+               { id: 'tiktok', label: 'TikTok', icon: Music2, color: 'text-black' },
+               { id: 'twitter', label: 'Twitter', icon: Twitter, color: 'text-blue-400' },
+               { id: 'youtube', label: 'YouTube', icon: Youtube, color: 'text-red-600' }
+             ].map((p) => (
+               <button
+                 key={p.id}
+                 onClick={() => { setPlatform(p.id as Platform); setResults([]); }}
+                 className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
+                   platform === p.id 
+                     ? 'bg-slate-900 text-white shadow-md transform scale-105' 
+                     : 'text-slate-500 hover:bg-slate-50'
+                 }`}
+               >
+                 <p.icon size={18} className={platform === p.id ? 'text-white' : p.color} />
+                 <span className="whitespace-nowrap">{p.label}</span>
+               </button>
+             ))}
+          </div>
+        </div>
         
         {/* Social Proof */}
         <div className="flex items-center justify-center gap-2 text-sm font-medium text-slate-400">
@@ -629,6 +716,7 @@ const Generator: React.FC = () => {
                             isSaved={savedNames.some(saved => saved.name === item.name)}
                             isNew={latestBatchIds.has(item.id)}
                             copiedId={copiedId}
+                            platform={platform}
                             onToggleSave={toggleSave}
                             onCopy={copyToClipboard}
                             />

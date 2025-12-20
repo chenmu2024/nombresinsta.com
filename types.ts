@@ -6,6 +6,8 @@ export enum NameCategory {
   BUSINESS = 'BUSINESS'
 }
 
+export type Platform = 'instagram' | 'tiktok' | 'twitter' | 'youtube';
+
 export interface GeneratedName {
   id: string;
   name: string;
@@ -16,6 +18,7 @@ export interface GeneratedName {
 export interface GeneratorOptions {
   keyword: string;
   category: NameCategory;
+  platform: Platform;
   includeNumbers: boolean;
   includePeriods: boolean;
   includeUnderscores: boolean;

@@ -1,11 +1,9 @@
 import React from 'react';
-import { ViewState } from '../App';
+import { Link } from 'react-router-dom';
 
-interface FooterProps {
-  onNavigate: (view: ViewState, param?: string) => void;
-}
+const Footer: React.FC = () => {
+  const year = new Date().getFullYear();
 
-const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,37 +12,37 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="col-span-1 md:col-span-1">
             <span className="text-xl font-bold text-white block mb-4">NombresInsta</span>
             <p className="text-sm leading-relaxed mb-4">
-              La herramienta líder para generar nombres de usuario aesthetic y originales para Instagram en 2025.
+              La herramienta líder para generar nombres de usuario aesthetic y originales para Instagram en {year}.
             </p>
-            <p className="text-sm">© {new Date().getFullYear()} NombresInsta.com</p>
+            <p className="text-sm">© {year} NombresInsta.com</p>
           </div>
 
           <div>
             <h4 className="text-white font-semibold mb-4">Generadores</h4>
             <ul className="space-y-2 text-sm">
-              <li><button onClick={() => onNavigate('home', '#cat-mujer')} className="hover:text-pink-400 transition text-left">Nombres para Mujer</button></li>
-              <li><button onClick={() => onNavigate('home', '#cat-hombre')} className="hover:text-blue-400 transition text-left">Nombres para Hombre</button></li>
-              <li><button onClick={() => onNavigate('home', '#cat-negocios')} className="hover:text-purple-400 transition text-left">Nombres para Marcas</button></li>
-              <li><button onClick={() => onNavigate('home', '#generator')} className="hover:text-yellow-400 transition text-left">Nicks Gamer</button></li>
+              <li><Link to="/#cat-mujer" className="hover:text-pink-400 transition">Nombres para Mujer</Link></li>
+              <li><Link to="/#cat-hombre" className="hover:text-blue-400 transition">Nombres para Hombre</Link></li>
+              <li><Link to="/#cat-negocios" className="hover:text-purple-400 transition">Nombres para Marcas</Link></li>
+              <li><Link to="/#generator" className="hover:text-yellow-400 transition">Nicks Gamer</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-semibold mb-4">Recursos</h4>
             <ul className="space-y-2 text-sm">
-              <li><button onClick={() => onNavigate('blog')} className="hover:text-white transition text-left">Blog & Artículos</button></li>
-              <li><button onClick={() => onNavigate('about')} className="hover:text-white transition text-left">Sobre Nosotros</button></li>
-              <li><button onClick={() => onNavigate('home', '#tips')} className="hover:text-white transition text-left">Guía de Nombres</button></li>
-              <li><button onClick={() => onNavigate('home', '#faq')} className="hover:text-white transition text-left">Preguntas Frecuentes</button></li>
+              <li><Link to="/blog" className="hover:text-white transition">Blog & Artículos</Link></li>
+              <li><Link to="/about" className="hover:text-white transition">Sobre Nosotros</Link></li>
+              <li><Link to="/#tips" className="hover:text-white transition">Guía de Nombres</Link></li>
+              <li><Link to="/#faq" className="hover:text-white transition">Preguntas Frecuentes</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
-              <li><button onClick={() => onNavigate('privacy')} className="hover:text-white transition text-left">Política de Privacidad</button></li>
-              <li><button onClick={() => onNavigate('terms')} className="hover:text-white transition text-left">Términos de Uso</button></li>
-              <li><button onClick={() => onNavigate('contact')} className="hover:text-white transition text-left">Contacto</button></li>
+              <li><Link to="/privacy" className="hover:text-white transition">Política de Privacidad</Link></li>
+              <li><Link to="/terms" className="hover:text-white transition">Términos de Uso</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition">Contacto</Link></li>
             </ul>
           </div>
         </div>

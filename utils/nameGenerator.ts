@@ -1,4 +1,4 @@
-import { GeneratedName, NameCategory, GeneratorOptions } from '../types';
+import { GeneratedName, NameCategory, GeneratorOptions, Platform } from '../types';
 
 // --- Helper: Clean Input (Handle Spanish Accents) ---
 const cleanInput = (input: string): string => {
@@ -277,7 +277,7 @@ const replaceChars = (text: string): string => {
 // --- Main Generator ---
 
 export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
-  const { keyword, category, includeNumbers, includePeriods, includeUnderscores } = options;
+  const { keyword, category, platform, includeNumbers, includePeriods, includeUnderscores } = options;
   
   // Clean input and provide a fallback if empty
   const cleanKeyword = cleanInput(keyword);
@@ -286,11 +286,15 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
   const results: GeneratedName[] = [];
   const generatedSet = new Set<string>(); // Prevent duplicates in the same batch
   
+  // Platform Constraints
+  const maxLength = platform === 'twitter' ? 15 : 30;
+  
   // Helper to add a result safely
   const add = (name: string, cat: NameCategory) => {
     let finalName = name;
 
-    // Post-processing: Underscores
+    // Post-processing: Underscores (Platform Logic)
+    // TikTok loves underscores/dots, Youtube handles avoid them usually but possible
     if (includeUnderscores && !finalName.includes('_') && Math.random() > 0.7) {
        const pos = Math.random();
        if (pos < 0.33) finalName = `_${finalName}`;
@@ -310,8 +314,13 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
        finalName += types[Math.floor(Math.random() * types.length)];
     }
 
-    // Limit length to Instagram max (30 chars)
-    if (finalName.length > 30) finalName = finalName.substring(0, 30);
+    // Strict Platform Limit Enforcement
+    if (finalName.length > maxLength) {
+        // If too long, try to trim cleanly
+        finalName = finalName.substring(0, maxLength);
+        // Don't leave a trailing underscore or dot
+        finalName = finalName.replace(/[._]$/, '');
+    }
 
     if (!generatedSet.has(finalName)) {
       generatedSet.add(finalName);
