@@ -1,4 +1,4 @@
-import { GeneratedName, NameCategory, GeneratorOptions, Platform } from '../types';
+import { GeneratedName, NameCategory, GeneratorOptions } from '../types';
 
 // --- Helper: Clean Input (Handle Spanish Accents) ---
 const cleanInput = (input: string): string => {
