@@ -1,5 +1,3 @@
-import { NameCategory } from '../types';
-
 export interface BlogPost {
   id: string;
   title: string;
