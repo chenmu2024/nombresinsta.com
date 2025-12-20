@@ -64,7 +64,8 @@ const BlogPost: React.FC = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
         
-        <div className="absolute inset-0 max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 relative z-10">
+        {/* Fixed positioning: Removed conflicting 'relative' class */}
+        <div className="absolute inset-0 max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 z-10">
           <Link 
             to="/blog"
             className="absolute top-8 left-4 md:left-0 text-white/90 hover:text-white bg-black/20 hover:bg-black/30 backdrop-blur px-4 py-2 rounded-lg flex items-center transition text-sm font-medium"
