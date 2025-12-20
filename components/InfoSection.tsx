@@ -94,18 +94,18 @@ const InfoSection: React.FC = () => {
             {/* Do's and Don'ts Table */}
             <section>
               <h3 className="text-2xl font-bold text-slate-900 mb-6">Consejos para elegir tu usuario</h3>
-              <div className="overflow-hidden border border-slate-200 rounded-2xl shadow-sm mb-8">
+              <div className="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm mb-8">
                 <table className="min-w-full text-sm md:text-base text-left">
                   <thead className="bg-slate-50 text-slate-900 font-bold border-b border-slate-200">
                     <tr>
-                      <th className="px-6 py-5">✅ Lo que hace un buen nombre</th>
-                      <th className="px-6 py-5">❌ Lo que debes evitar</th>
+                      <th className="px-6 py-5 whitespace-nowrap">✅ Lo que hace un buen nombre</th>
+                      <th className="px-6 py-5 whitespace-nowrap">❌ Lo que debes evitar</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
                     <tr className="bg-white hover:bg-slate-50 transition">
-                      <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Corto y fácil de recordar</td>
-                      <td className="px-6 py-4 text-slate-500"><XCircle size={20} className="text-red-400 inline mr-2" /> Demasiado largo o complejo</td>
+                      <td className="px-6 py-4 flex items-start min-w-[200px]"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Corto y fácil de recordar</td>
+                      <td className="px-6 py-4 text-slate-500 min-w-[200px]"><XCircle size={20} className="text-red-400 inline mr-2" /> Demasiado largo o complejo</td>
                     </tr>
                     <tr className="bg-slate-50/50 hover:bg-slate-50 transition">
                       <td className="px-6 py-4 flex items-start"><CheckCircle2 size={20} className="text-green-500 mr-3 mt-0.5 shrink-0" /> Uso limpio de puntos (.)</td>
@@ -185,10 +185,10 @@ const InfoSection: React.FC = () => {
                   <p className="text-sm text-slate-400 mb-4">Navega por las categorías de nuestro <strong>Generador de Nombres para Instagram</strong>:</p>
                   <ul className="space-y-4">
                     {[
-                      { href: "/#cat-mujer", color: "bg-pink-400", label: "Nombres para Mujer" },
-                      { href: "/#cat-hombre", color: "bg-blue-400", label: "Nombres para Hombre" },
-                      { href: "/#cat-negocios", color: "bg-purple-400", label: "Nombres de Empresas" },
-                      { href: "/#generator", color: "bg-yellow-400", label: "Volver al Generador" }
+                      { href: "/nombres-para-mujer", color: "bg-pink-400", label: "Nombres para Mujer" },
+                      { href: "/nombres-para-hombre", color: "bg-blue-400", label: "Nombres para Hombre" },
+                      { href: "/nombres-para-empresas", color: "bg-purple-400", label: "Nombres de Empresas" },
+                      { href: "/nombres-aesthetic", color: "bg-yellow-400", label: "Nombres Aesthetic" }
                     ].map((link, i) => (
                       <li key={i}>
                         <Link to={link.href} className="flex items-center p-3 rounded-xl hover:bg-slate-50 transition group">

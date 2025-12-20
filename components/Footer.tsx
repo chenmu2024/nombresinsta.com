@@ -18,10 +18,10 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-semibold mb-4">Generadores</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/#cat-mujer" className="hover:text-pink-400 transition text-left block">Nombres para Mujer</Link></li>
-              <li><Link to="/#cat-hombre" className="hover:text-blue-400 transition text-left block">Nombres para Hombre</Link></li>
-              <li><Link to="/#cat-negocios" className="hover:text-purple-400 transition text-left block">Nombres para Marcas</Link></li>
-              <li><Link to="/#generator" className="hover:text-yellow-400 transition text-left block">Nicks Gamer</Link></li>
+              <li><Link to="/nombres-para-mujer" className="hover:text-pink-400 transition text-left block">Nombres para Mujer</Link></li>
+              <li><Link to="/nombres-para-hombre" className="hover:text-blue-400 transition text-left block">Nombres para Hombre</Link></li>
+              <li><Link to="/nombres-para-empresas" className="hover:text-purple-400 transition text-left block">Nombres para Marcas</Link></li>
+              <li><Link to="/nombres-gamer" className="hover:text-yellow-400 transition text-left block">Nicks Gamer</Link></li>
             </ul>
           </div>
 

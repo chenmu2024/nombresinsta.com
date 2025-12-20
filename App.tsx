@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Generator from './components/Generator';
+import { NameCategory } from './types';
 
 // Lazy load non-critical components
 const InfoSection = React.lazy(() => import('./components/InfoSection'));
@@ -9,6 +10,7 @@ const Footer = React.lazy(() => import('./components/Footer'));
 const LegalView = React.lazy(() => import('./components/LegalView'));
 const BlogList = React.lazy(() => import('./components/BlogList'));
 const BlogPost = React.lazy(() => import('./components/BlogPost'));
+const NotFound = React.lazy(() => import('./components/NotFound'));
 
 // Fallback with visual feedback
 const LoadingFallback = () => (
@@ -54,7 +56,7 @@ const App: React.FC = () => {
     localStorage.theme = isDark ? 'dark' : 'light';
   };
 
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === '/' || location.pathname.startsWith('/nombres-');
 
   return (
     <div className="flex flex-col min-h-screen font-sans transition-colors duration-300 bg-[#FDF9FB] dark:bg-slate-900">
@@ -83,9 +85,66 @@ const App: React.FC = () => {
         <div className="w-full flex-grow flex flex-col">
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
+              {/* Default Home */}
               <Route path="/" element={
                 <>
                   <Generator />
+                  <InfoSection />
+                </>
+              } />
+
+              {/* SEO Landing Pages (Real Routes) */}
+              <Route path="/nombres-para-mujer" element={
+                <>
+                  <Generator 
+                    initialCategory={NameCategory.AESTHETIC}
+                    seoTitle="Nombres para Instagram Mujer | Generador Aesthetic 2025"
+                    seoDescription="Crea nombres de usuario aesthetic para mujer en Instagram. Ideas originales, lindas y únicas con nuestro generador gratuito."
+                  />
+                  <InfoSection />
+                </>
+              } />
+
+              <Route path="/nombres-para-hombre" element={
+                <>
+                  <Generator 
+                    initialCategory={NameCategory.MINIMAL}
+                    seoTitle="Nombres para Instagram Hombre | Generador de Usuarios 2025"
+                    seoDescription="Generador de nombres para Instagram para hombre. Crea usuarios minimalistas, serios y urbanos para tu perfil personal o marca."
+                  />
+                  <InfoSection />
+                </>
+              } />
+
+              <Route path="/nombres-para-empresas" element={
+                <>
+                  <Generator 
+                    initialCategory={NameCategory.BUSINESS}
+                    seoTitle="Generador de Nombres para Empresas y Marcas (Instagram/TikTok)"
+                    seoDescription="Encuentra el nombre perfecto para tu negocio en Instagram. Nuestro generador optimiza tu usuario para ventas y SEO local."
+                  />
+                  <InfoSection />
+                </>
+              } />
+
+              <Route path="/nombres-gamer" element={
+                <>
+                  <Generator 
+                    initialCategory={NameCategory.FUNNY}
+                    seoTitle="Generador de Nombres Gamer | Nicks para Juegos y Streamers"
+                    seoDescription="Crea nicks gamer épicos para Twitch, Instagram y YouTube. Ideas divertidas y tryhard para destacar en el gaming."
+                  />
+                  <InfoSection />
+                </>
+              } />
+
+              <Route path="/nombres-aesthetic" element={
+                <>
+                  <Generator 
+                    initialCategory={NameCategory.AESTHETIC}
+                    seoTitle="Generador de Nombres Aesthetic | Ideas Soft & Indie 2025"
+                    seoDescription="El mejor generador de nombres aesthetic. Combina palabras soft, indie y vibes para crear el usuario perfecto."
+                  />
                   <InfoSection />
                 </>
               } />
@@ -102,8 +161,8 @@ const App: React.FC = () => {
               
               <Route path="/terms" element={<LegalView page="terms" />} />
               
-              {/* Catch-all redirect to Home */}
-              <Route path="*" element={<Navigate to="/" replace />} />
+              {/* 404 Page (Instead of redirect) */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </div>

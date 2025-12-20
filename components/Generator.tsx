@@ -253,10 +253,16 @@ const QUICK_PRESETS = [
     { label: 'Foodie / Cocina', icon: Coffee, color: 'bg-emerald-100 text-emerald-600', keyword: 'tasty', category: NameCategory.BUSINESS },
 ];
 
-const Generator: React.FC = () => {
+interface GeneratorProps {
+  initialCategory?: NameCategory;
+  seoTitle?: string;
+  seoDescription?: string;
+}
+
+const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDescription }) => {
   const [platform, setPlatform] = useState<Platform>('instagram');
   const [keyword, setKeyword] = useState('');
-  const [category, setCategory] = useState<NameCategory>(NameCategory.ALL);
+  const [category, setCategory] = useState<NameCategory>(initialCategory || NameCategory.ALL);
   const [activeTab, setActiveTab] = useState<'results' | 'history'>('results');
   
   // Settings
@@ -272,7 +278,7 @@ const Generator: React.FC = () => {
   const location = useLocation();
   const [hasInitialized, setHasInitialized] = useState(false);
   
-  // Dynamic SEO based on Platform
+  // Dynamic SEO based on Platform OR Route props
   const platformTitles = {
     instagram: "Generador de Nombres para Instagram",
     tiktok: "Generador de Nombres para TikTok",
@@ -280,10 +286,13 @@ const Generator: React.FC = () => {
     youtube: "Generador de Nombres para YouTube"
   };
 
+  const activeTitle = seoTitle || platformTitles[platform];
+  const activeDesc = seoDescription || `¿Necesitas un ${platformTitles[platform]}? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.`;
+
   useSEO({
-    title: platformTitles[platform],
-    description: `¿Necesitas un ${platformTitles[platform]}? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.`,
-    url: "/"
+    title: activeTitle,
+    description: activeDesc,
+    url: location.pathname
   });
   
   const [results, setResults] = useState<GeneratedName[]>([]);
@@ -329,7 +338,14 @@ const Generator: React.FC = () => {
     localStorage.setItem('nombresinsta_history', JSON.stringify(history));
   }, [history]);
 
-  // Deep Linking Logic
+  // Handle Initial Category prop change (when navigating)
+  useEffect(() => {
+    if (initialCategory) {
+      setCategory(initialCategory);
+    }
+  }, [initialCategory]);
+
+  // Deep Linking Logic (Query Params support for backward compatibility)
   useEffect(() => {
     if (hasInitialized) return;
 
@@ -338,7 +354,7 @@ const Generator: React.FC = () => {
     const keywordParam = params.get('q');
     
     let shouldGenerate = false;
-    let targetCategory = NameCategory.ALL;
+    let targetCategory = initialCategory || NameCategory.ALL; // Prefer prop, then default
     let targetKeyword = '';
 
     if (catParam) {
@@ -358,11 +374,10 @@ const Generator: React.FC = () => {
 
     if (shouldGenerate) {
        handleGenerate(targetKeyword || undefined, targetCategory);
-       // Scroll to results if needed, but on initial load usually staying at top is fine or scrollToAnchor handles it.
     }
     
     setHasInitialized(true);
-  }, [location.search, hasInitialized]);
+  }, [location.search, hasInitialized, initialCategory]);
 
   const showToastMsg = (msg: string) => {
     setToast({ msg, visible: true });
@@ -537,8 +552,8 @@ const Generator: React.FC = () => {
             <span>Generador Viral 2025</span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">
-          {platformTitles[platform]}
+        <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">
+          {activeTitle}
         </h1>
         <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8 font-light">
           El <strong>Generador de Nombres</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
