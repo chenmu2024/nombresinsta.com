@@ -11,14 +11,14 @@ const cleanInput = (input: string): string => {
 
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
-// --- Word Banks (World-Class Depth for 2025) ---
+// --- Word Banks (Refined for High Quality) ---
 
 const aestheticPrefixes = [
-  // Short & Clean (High Utility)
+  // Short & Clean
   'the', 'its', 'just', 'real', 'iam', 'dear', 'oh', 'hey', 'yo', 'ur', 'my', 'im', 'is', 'be', 'so',
   'only', 'simply', 'truly', 'daily', 'ever', 'never', 'always', 'still', 'keep', 'own', 'our', 'all',
   
-  // Coquette / Soft / Dreamy / Colors
+  // Coquette / Soft / Dreamy
   'soft', 'pure', 'honey', 'baby', 'angel', 'lil', 'miss', 'doll', 'bow', 'lace', 'silk', 'satin', 'pearl',
   'bunny', 'kitty', 'teddy', 'sweet', 'cute', 'lovely', 'cloud', 'mist', 'haze', 'blur', 'faint', 'pale',
   'vanilla', 'peach', 'mint', 'rose', 'milk', 'mocha', 'latte', 'chai', 'matcha', 'boba', 'cream', 'sugar',
@@ -28,26 +28,15 @@ const aestheticPrefixes = [
   'velour', 'chiffon', 'bloom', 'petal', 'flora', 'fauna', 'lush', 'warm', 'cozy', 'cold', 'dizzy',
   'violet', 'indigo', 'azure', 'teal', 'coral', 'ivory', 'ebony', 'amber', 'jade', 'ruby', 'opal',
   
-  // Y2K / Cyber / Edgy / Gaming
-  'cyber', 'vapor', 'neo', 'glitch', 'pixel', 'static', 'noise', 'web', 'net', 'digi', 'data', 'beta',
-  'toxic', 'brat', 'savage', 'feral', 'wild', 'mad', 'bad', 'sad', 'rad', 'sick', 'vile', 'grim', 'void',
-  'chaos', 'panic', 'manic', 'lost', 'found', 'gone', 'dead', 'alive', 'faded', 'jaded', 'broken', 'whole',
-  'meta', 'hyper', 'ultra', 'mega', 'giga', 'nano', 'tech', 'mech', 'bot', 'user', 'admin', 'root',
-  'sys', 'alt', 'ctrl', 'shift', 'esc', 'cmd', 'fn', 'log', 'exe', 'bin', 'hex', 'code', 'node',
-  'vortex', 'nexus', 'matrix', 'cipher', 'crypto', 'dark', 'deep', 'null', 'void', 'zero', 'one',
-  
-  // Nature / Elements / Cosmos / Astrology
+  // Nature / Cosmos
   'lunar', 'solar', 'cosmic', 'astral', 'polar', 'arctic', 'zenith', 'nadir', 'nova', 'halo', 'eclipse',
   'ocean', 'river', 'lake', 'rain', 'storm', 'snow', 'ice', 'fire', 'wind', 'earth', 'tide', 'wave',
-  'golden', 'silver', 'crystal', 'ruby', 'jade', 'amber', 'onyx', 'ivory', 'ebony', 'gold', 'opal',
-  'blooming', 'wilting', 'growing', 'flowing', 'glowing', 'shining', 'rising', 'falling',
   'north', 'south', 'east', 'west', 'upper', 'under', 'inner', 'outer',
   'mars', 'venus', 'pluto', 'saturn', 'jupiter', 'mercury', 'moon', 'sun', 'star',
   'karma', 'aura', 'soul', 'spirit', 'fate', 'destiny', 'omen', 'oracle', 'tarot', 'zodiac',
   
-  // Spanish Aesthetic (Emotive & Poetic - Cleaned for Usernames)
+  // Spanish Aesthetic
   'soy', 'yosoy', 'tu', 'mi', 'la', 'el', 'una', 'un',
-  'nina', 'nino', 'chica', 'chico', 'pibe', 'piba', 'nena', 'nene', 'mujer', 'hombre',
   'luna', 'sol', 'mar', 'cielo', 'flor', 'luz', 'paz', 'fe', 'sal', 'arena', 'bruma',
   'dulce', 'suave', 'linda', 'bonita', 'chula', 'guapa', 'bella', 'hermosa', 'divina',
   'alma', 'mente', 'vida', 'amor', 'aire', 'brisa', 'nube', 'raiz', 'hoja',
@@ -61,35 +50,36 @@ const aestheticPrefixes = [
 ];
 
 const aestheticSuffixes = [
-  // Social / Content Creator / Diaries
+  // Social / Content
   'gram', 'vibe', 'vibes', 'mood', 'diary', 'journal', 'log', 'files', 'folder', 'archive', 'dump',
   'pov', 'cam', 'film', 'films', 'clips', 'cuts', 'edits', 'visuals', 'shots', 'snaps', 'pics', 'lens',
   'life', 'style', 'world', 'wrld', 'land', 'planet', 'zone', 'space', 'room', 'corner', 'spot',
   'blog', 'daily', 'weekly', 'notes', 'pages', 'thoughts', 'minds', 'soul', 'heart', 'spirit',
   'feed', 'reel', 'story', 'post', 'view', 'scene', 'frame', 'focus', 'vision', 'capture',
   
-  // Community / Identity
+  // Community
   'club', 'cult', 'gang', 'squad', 'crew', 'team', 'fam', 'house', 'home', 'society', 'union',
   'girl', 'boy', 'kid', 'babe', 'baby', 'doll', 'angel', 'witch', 'fairy', 'queen', 'king', 'prince',
   'lover', 'dreamer', 'thinker', 'maker', 'artist', 'poet', 'muse', 'icon', 'star', 'hero', 'villain',
   'fan', 'stan', 'enthusiast', 'addict', 'junkie', 'geek', 'nerd', 'pro', 'wiz', 'gen', 'pal',
   
-  // Aesthetic Locations/Objects
+  // Locations
   'garden', 'park', 'forest', 'jungle', 'desert', 'beach', 'coast', 'bay', 'city', 'town', 'village',
   'heaven', 'hell', 'limbo', 'void', 'abyss', 'nexus', 'matrix', 'system', 'server', 'portal',
   'castle', 'palace', 'tower', 'fort', 'base', 'hq', 'lab', 'studio', 'atelier', 'loft',
   'plaza', 'market', 'store', 'shop', 'cafe', 'bar', 'hotel', 'motel', 'inn',
   
-  // Abstract / Suffixes
+  // Abstract
   'core', 'wave', 'gaze', 'punk', 'pop', 'bop', 'jam', 'tune', 'beat', 'flow', 'drip',
   'xo', 'xx', 'xxx', 'zzz', 'yyy', 'inc', 'co', 'ltd', 'est', 'hq', 'id', 'os', 'is', 'ia', 'io',
   'mode', 'state', 'mind', 'set', 'kit', 'pack', 'box', 'bag', 'case', 'type',
   'era', 'szn', 'season', 'days', 'nights', 'hours', 'times', 'years', 'moment',
   
-  // Spanish Suffixes
+  // Spanish
   'vida', 'amor', 'sol', 'luna', 'mar', 'mundo', 'landia', 'polis',
   'bby', 'bebe', 'mami', 'papi', 'chula', 'linda', 'guapo',
-  'oficial', 'real', 'fake', 'fan', 'fans', 'club',
+  // Removed 'oficial' and 'fake' from here to avoid misclassification
+  'real', 'fan', 'fans', 'club',
   'verso', 'texto', 'frase', 'cita', 'nota', 'foto', 'video', 'grafia',
   'viaje', 'ruta', 'camino', 'paso', 'huella', 'destino', 'mapa',
   'mente', 'alma', 'ser', 'estar', 'ver', 'oir', 'sentir', 'vivir',
@@ -98,7 +88,6 @@ const aestheticSuffixes = [
 ];
 
 const businessPrefixes = [
-  // Authority / Professional
   'official', 'weare', 'the', 'team', 'group', 'club', 'hq', 'pro', 'get', 'try', 'use', 'go',
   'top', 'best', 'prime', 'elite', 'alpha', 'mega', 'ultra', 'super', 'hyper', 'meta', 'next',
   'global', 'local', 'smart', 'fast', 'easy', 'vip', 'premium', 'select', 'first', 'star',
@@ -107,7 +96,6 @@ const businessPrefixes = [
   'your', 'our', 'my', 'open', 'new', 'now', 'all', 'just', 'only', 'daily',
   'hello', 'hi', 'meet', 'ask', 'join', 'visit', 'follow', 'buy', 'shop',
   
-  // Spanish Business
   'somos', 'grupo', 'equipo', 'tu', 'su', 'mi', 'nuestro', 'vuestro',
   'tienda', 'bazar', 'mercado', 'taller', 'estudio', 'oficina', 'despacho', 'agencia', 'firma',
   'centro', 'punto', 'base', 'sede', 'casa', 'hogar', 'mundo', 'zona', 'area', 'espacio',
@@ -118,7 +106,6 @@ const businessPrefixes = [
 ];
 
 const businessSuffixes = [
-  // Corporate / Entity
   'official', 'biz', 'co', 'inc', 'ltd', 'llc', 'corp', 'group', 'team', 'squad',
   'studio', 'studios', 'agency', 'lab', 'labs', 'works', 'solutions', 'systems', 'tech', 'dev', 'soft',
   'hub', 'center', 'spot', 'place', 'point', 'base', 'station', 'zone', 'area', 'space',
@@ -127,7 +114,6 @@ const businessSuffixes = [
   'ventures', 'partners', 'associates', 'consulting', 'global', 'intl', 'capital', 'holdings',
   'creative', 'digital', 'social', 'network', 'connect',
   
-  // Industry Specific
   'design', 'art', 'creative', 'visuals', 'graphics', 'print', 'ink', 'brand', 'marketing',
   'food', 'eats', 'kitchen', 'cook', 'chef', 'bakes', 'cakes', 'cafe', 'coffee', 'bar', 'grill', 'bistro',
   'fit', 'fitness', 'gym', 'lift', 'run', 'yoga', 'sport', 'health', 'med', 'care', 'wellness',
@@ -136,18 +122,16 @@ const businessSuffixes = [
   'travel', 'trips', 'tours', 'guide', 'go', 'fly', 'stay', 'visit', 'explore', 'adventures',
   'fashion', 'style', 'wear', 'apparel', 'clothing', 'closet', 'wardrobe', 'outfit', 'looks',
   
-  // Spanish & Location
   'oficial', 'mx', 'es', 'arg', 'cl', 'col', 'pe', 've', 'uy', 'cr', 'pa', 'gt',
   'tienda', 'online', 'digital', 'virtual', 'web', 'net', 'app', 'com',
   'mexico', 'madrid', 'bcn', 'cdmx', 'ba', 'bog', 'lim', 'scl', 'mty', 'gdl',
   'servicios', 'asociados', 'consultores', 'asesores', 'expertos', 'profesional',
   'moda', 'belleza', 'salud', 'hogar', 'cocina', 'deporte', 'arte', 'viajes',
   'abogados', 'medicos', 'dentista', 'arquitectos', 'ingenieros', 'contadores',
-  'mx_oficial', 'es_oficial', 'arg_oficial'
+  'mx_oficial', 'es_oficial', 'arg_oficial', 'real' // 'real' can be business too
 ];
 
 const funnyPrefixes = [
-  // Self-Deprecating / Internet Slang
   'not', 'actually', 'maybe', 'just', 'bad', 'sad', 'mad', 'rad', 'ok',
   'ceo_of', 'president_of', 'inventor_of', 'king_of', 'queen_of', 'god_of', 'boss_of', 'fan_of',
   'simp_for', 'stan_', 'fan_of_', 'hater_of_', 'victim_of_', 'friend_of_', 'enemy_of_',
@@ -156,7 +140,6 @@ const funnyPrefixes = [
   'the_real', 'the_fake', 'the_only', 'your_local', 'internet_', 'cyber_', 'virtual_',
   'pls_', 'dont_', 'cant_', 'wont_', 'im_', 'its_', 'who_is_',
   
-  // Spanish Funny
   'el_sr', 'la_sra', 'don', 'doña', 'un_tal', 'una_tal',
   'ese_', 'esa_', 'aquel_', 'aquella_', 'aqui_', 'alli_',
   'soy_el_', 'soy_la_', 'no_soy_', 'falso_', 'verdadero_',
@@ -168,27 +151,34 @@ const funnyPrefixes = [
 ];
 
 const funnySuffixes = [
-  // Actions / States / Memes
   'fail', 'wins', 'plays', 'games', 'gaming', 'tt', 'tv', 'yt', 'live', 'stream',
   'meme', 'memes', 'shitpost', 'posting', 'spam', 'trash', 'junk', 'stuff', 'things',
-  '404', 'exe', 'png', 'jpg', 'gif', 'mp4', 'pdf', 'zip', 'txt', 'mov', 'wav',
-  'lol', 'lmao', 'xd', 'uwu', 'owo', 'omg', 'wtf', 'plz', 'thx', 'bye', 'brb', 'afk',
-  'stop', 'help', 'nope', 'yep', 'maybe', 'idk', 'idc', 'tbh', 'imo', 'irl',
+  // Removed file extensions (pdf, zip, exe) from here to avoid "bellezapdf"
+  'lol', 'lmao', 'xd', 'uwu', 'owo', 'omg', 'wtf', 'plz', 'thx', 'brb', 'afk',
+  'stop', 'help', 'nope', 'yep', 'maybe', 
+  // Removed chat slang that doesn't work as suffix (bye, imo, idk)
   'who', 'what', 'where', 'when', 'why', 'how',
-  'bot', 'npc', 'main', 'alt', 'backup', 'spam', 'afk', 'brb', 'vip', 'mvp',
+  'bot', 'npc', 'main', 'alt', 'backup', 'spam', 'vip', 'mvp',
   
-  // Spanish Actions
   'dice', 'sabe', 'piensa', 'cree', 'siente', 'habla', 'mira', 'oye', 've',
   'loco', 'loca', 'feo', 'fea', 'guapo', 'guapa', 'raro', 'rara', 'chistoso',
   'tonto', 'tonta', 'listo', 'lista', 'genio', 'pro', 'noob', 'manco',
   'triste', 'feliz', 'enojado', 'cansado', 'harto', 'muerto', 'vivo', 'aburrido',
   'pobre', 'rico', 'humilde', 'fresa', 'naco', 'cholo', 'buchon',
-  'oficial', 'fake', 'real', '100', 'mil', '2000', '3000',
+  // Removed 'oficial' from here
+  'fake', '100', 'mil', '2000', '3000',
   'y_sus_amigos', 'y_cia', 'el_regreso', 'la_venganza', 'en_hd', 'en_4k',
   'dice_que_no', 'no_sabe', 'no_quiere', 'se_fue'
 ];
 
+// Specific suffixes for Tech/Gamer context only
+const gamerSuffixes = [
+    '404', 'exe', 'png', 'jpg', 'gif', 'mp4', 'zip', 'bin', 'hex',
+    'bot', 'npc', 'main', 'alt', 'smurf', 'buff', 'nerf', 'op', 'gg', 'ez'
+];
+
 // --- Specialized Noun Banks for Smart Fallback ---
+// (Kept as is, these are good)
 
 // 1. Tech / Business / Abstract (For Business & Minimal)
 const techNouns = [
@@ -269,7 +259,7 @@ const travelNouns = [
   'hike', 'camp', 'trek', 'wild', 'free', 'escape', 'away', 'here'
 ];
 
-// 9. Music / Audio (NEW)
+// 9. Music / Audio
 const musicNouns = [
   'melody', 'tune', 'song', 'lyric', 'chord', 'bass', 'beat', 'rhythm',
   'hymn', 'aria', 'opus', 'note', 'clef', 'solo', 'duet', 'band', 'gig',
@@ -278,7 +268,7 @@ const musicNouns = [
   'verso', 'coro', 'pista', 'disco', 'radio', 'stereo', 'mix', 'remix'
 ];
 
-// 10. Dark / Goth / Alternative (NEW)
+// 10. Dark / Goth / Alternative
 const gothNouns = [
   'goth', 'dark', 'void', 'abyss', 'shadow', 'gloom', 'crypt', 'grave',
   'skull', 'bone', 'blood', 'fang', 'vamp', 'bat', 'raven', 'crow',
@@ -288,7 +278,7 @@ const gothNouns = [
   'tumba', 'dolor', 'miedo', 'terror', 'vacio', 'niebla', 'frio'
 ];
 
-// 11. Art / Design (NEW)
+// 11. Art / Design
 const artNouns = [
   'sketch', 'draw', 'paint', 'ink', 'brush', 'canvas', 'palette', 'hue',
   'gallery', 'frame', 'sculpt', 'mural', 'print', 'design', 'vector',
@@ -304,7 +294,7 @@ const animalNouns = [
   'frog', 'duck', 'goose', 'swan', 'deer', 'elk', 'moose', 'seal', 'otter'
 ];
 
-// 13. Short Abstract Syllables (For "Brandable" Business Names)
+// 13. Short Abstract Syllables
 const shortAbstractNouns = [
   'nov', 'lum', 'sol', 'viv', 'aer', 'urb', 'gen', 'ven', 'vis', 'vox',
   'zen', 'axo', 'omi', 'una', 'iso', 'eco', 'neo', 'pro', 'max', 'min',
@@ -479,6 +469,7 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
     add(`${b}here`, NameCategory.MINIMAL);
     add(`not${b}`, NameCategory.MINIMAL);
     add(`only${b}`, NameCategory.MINIMAL);
+    add(`by${b}`, NameCategory.MINIMAL); // Added 'by'
     
     // Period strategies (Very popular for Minimal)
     if (includePeriods) {
@@ -519,8 +510,10 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
         if(includePeriods && Math.random() > 0.6) add(`${b}.${suf}`, NameCategory.AESTHETIC);
         else add(`${b}${suf}`, NameCategory.AESTHETIC);
         
-        // Sandwich (rare but cool)
-        if(Math.random() > 0.8) add(`${pre}.${b}.${suf}`, NameCategory.AESTHETIC);
+        // Sandwich (rare but cool) - Only if keyword is short to avoid visual clutter
+        if(Math.random() > 0.8 && b.length < 8) {
+           add(`${pre}.${b}.${suf}`, NameCategory.AESTHETIC);
+        }
     }
 
     const bTrans = getBase();
@@ -584,6 +577,12 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
         
         if(Math.random() > 0.3) add(`${b}_${suf}`, NameCategory.FUNNY);
         else add(`${b}${suf}`, NameCategory.FUNNY);
+
+        // Add specific Gamer suffixes if category is strictly FUNNY (used for Gamer presets too)
+        if (category === NameCategory.FUNNY && Math.random() > 0.6) {
+           const techSuf = gamerSuffixes[Math.floor(Math.random() * gamerSuffixes.length)];
+           add(`${b}.${techSuf}`, NameCategory.FUNNY);
+        }
     }
     
     const bFun = getBase();
@@ -591,8 +590,13 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
     add(`odio_a_${bFun}`, NameCategory.FUNNY);
     add(`${bFun}_dice`, NameCategory.FUNNY);
     add(`${bFun}_sabe`, NameCategory.FUNNY);
-    add(leetSpeak(bFun), NameCategory.FUNNY);
-    add(`xX_${bFun}_Xx`, NameCategory.FUNNY);
+    
+    // Restrict Leet Speak to explicit FUNNY category to improve quality of MIX/AESTHETIC
+    if (category === NameCategory.FUNNY) {
+        add(leetSpeak(bFun), NameCategory.FUNNY);
+        add(`xX_${bFun}_Xx`, NameCategory.FUNNY);
+    }
+    
     add(`i_hate_${bFun}`, NameCategory.FUNNY);
     add(`tu_amiga_${bFun}`, NameCategory.FUNNY);
   }
@@ -609,6 +613,7 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
     // Mix keyword with randoms
     const target = (keyword && Math.random() > 0.5) ? cleanKeyword : noun;
     
+    // Prefer simple Adjective + Noun for fillers as they are safe and high quality
     if (r < 0.33 && includePeriods) add(`${target}.${adj}`, NameCategory.ALL);
     else if (r < 0.66) add(`${adj}${target}`, NameCategory.ALL);
     else add(`${target}${adj}`, NameCategory.ALL);
