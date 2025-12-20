@@ -128,8 +128,9 @@ const InfoSection: React.FC = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6">Categorías del Generador</h2>
               
               <div id="cat-mujer" className="bg-gradient-to-br from-pink-50 to-white p-6 md:p-8 rounded-[2rem] border border-pink-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-start mb-4">
-                  <div className="bg-pink-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
+                {/* Changed to flex-col on mobile (stack icon on top) to fix text wrapping issues */}
+                <div className="flex flex-col sm:flex-row items-start mb-4">
+                  <div className="bg-pink-100 p-2 rounded-lg mr-3 mb-3 sm:mb-0 shrink-0">
                     <Heart className="text-pink-500" size={24} />
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador de Nombres para Instagram Mujer</h3>
@@ -140,8 +141,9 @@ const InfoSection: React.FC = () => {
               </div>
 
               <div id="cat-hombre" className="bg-gradient-to-br from-blue-50 to-white p-6 md:p-8 rounded-[2rem] border border-blue-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-start mb-4">
-                  <div className="bg-blue-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
+                 {/* Changed to flex-col on mobile (stack icon on top) to fix text wrapping issues */}
+                <div className="flex flex-col sm:flex-row items-start mb-4">
+                  <div className="bg-blue-100 p-2 rounded-lg mr-3 mb-3 sm:mb-0 shrink-0">
                     <User className="text-blue-500" size={24} />
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador de Nombres para Instagram Hombre</h3>
@@ -152,8 +154,9 @@ const InfoSection: React.FC = () => {
               </div>
 
               <div id="cat-negocios" className="bg-gradient-to-br from-purple-50 to-white p-6 md:p-8 rounded-[2rem] border border-purple-100 scroll-mt-24 shadow-sm">
-                <div className="flex items-start mb-4">
-                  <div className="bg-purple-100 p-2 rounded-lg mr-3 mt-1 shrink-0">
+                 {/* Changed to flex-col on mobile (stack icon on top) to fix text wrapping issues */}
+                <div className="flex flex-col sm:flex-row items-start mb-4">
+                  <div className="bg-purple-100 p-2 rounded-lg mr-3 mb-3 sm:mb-0 shrink-0">
                      <Briefcase className="text-purple-500" size={24} />
                   </div>
                   <h3 className="text-xl md:text-2xl font-bold text-slate-900 leading-tight">Generador para Empresas</h3>

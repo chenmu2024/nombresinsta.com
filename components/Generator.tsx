@@ -507,7 +507,7 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
   };
 
   return (
-    <section id="generator" className="py-6 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+    <section id="generator" className="py-4 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
       
       <Toast message={toast.msg} isVisible={toast.visible} />
 
@@ -546,22 +546,25 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
       </button>
 
       {/* Hero Header */}
-      <div className="text-center mb-6 md:mb-12 relative">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm animate-fade-in-up">
+      <div className="text-center mb-4 md:mb-12 relative">
+        {/* Hidden on mobile to save vertical space */}
+        <div className="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-pink-100 dark:border-slate-700 text-pink-600 dark:text-pink-400 text-xs font-bold uppercase tracking-widest mb-6 shadow-sm animate-fade-in-up">
             <Sparkles size={14} className="text-yellow-400" />
             <span>Generador Viral 2025</span>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-4 md:mb-6 tracking-tight leading-tight text-balance break-words max-w-[90vw] mx-auto">
+        <h1 className="text-2xl sm:text-4xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-2 md:mb-6 tracking-tight leading-tight text-balance break-words max-w-[95vw] mx-auto">
           {activeTitle}
         </h1>
-        <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-6 md:mb-8 font-light">
+        
+        {/* Hidden on mobile to prioritize input field */}
+        <p className="hidden sm:block text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-6 md:mb-8 font-light">
           El <strong>Generador de Nombres</strong> más completo y original. Sin registros, 100% gratis y diseñado para crear usuarios aesthetic, de negocios o personales que destacan.
         </p>
         
-        {/* Platform Switcher Tabs */}
-        <div className="flex justify-start md:justify-center mb-6 md:mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
-          <div className="bg-white dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex space-x-1">
+        {/* Platform Switcher Tabs - Compacted */}
+        <div className="flex justify-start md:justify-center mb-4 md:mb-10 overflow-x-auto pb-2 custom-scrollbar px-1">
+          <div className="bg-white dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex space-x-1">
              {[
                { id: 'instagram', label: 'Instagram', icon: Instagram, color: 'text-pink-600' },
                { id: 'tiktok', label: 'TikTok', icon: Music2, color: 'text-black dark:text-white' },
@@ -571,13 +574,13 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
                <button
                  key={p.id}
                  onClick={() => { setPlatform(p.id as Platform); setResults([]); }}
-                 className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 ${
+                 className={`flex items-center space-x-1.5 px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 ${
                    platform === p.id 
                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md transform scale-105' 
                      : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700'
                  }`}
                >
-                 <p.icon size={18} className={platform === p.id ? 'text-white dark:text-slate-900' : p.color} />
+                 <p.icon size={16} className={platform === p.id ? 'text-white dark:text-slate-900' : p.color} />
                  <span className="whitespace-nowrap">{p.label}</span>
                </button>
              ))}
@@ -588,12 +591,12 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
       <div className="grid lg:grid-cols-12 gap-8 items-start">
         
         {/* Controls Column */}
-        <div className="lg:col-span-4 space-y-6">
-          <div className="glass-card-strong p-6 md:p-8 rounded-[2rem] sticky top-24 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10">
+        <div className="lg:col-span-4 space-y-4 md:space-y-6">
+          <div className="glass-card-strong p-4 md:p-8 rounded-[1.5rem] md:rounded-[2rem] sticky top-20 transition-all duration-300 hover:shadow-2xl hover:shadow-pink-500/10">
             
             {/* Input Area */}
-            <div className="relative group mb-4">
-              <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+            <div className="relative group mb-3 md:mb-4">
+              <div className="absolute inset-y-0 left-3 md:left-4 flex items-center pointer-events-none">
                 <AtSign className="text-pink-500 group-focus-within:text-purple-600 transition-colors" size={20} />
               </div>
               <input
@@ -603,12 +606,12 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
                 onKeyDown={handleKeyDown}
                 placeholder="Palabra clave o Nombre..."
                 aria-label="Ingresa tu palabra clave o nombre"
-                className="w-full pl-12 pr-12 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-pink-300 dark:focus:border-pink-600 focus:ring-4 focus:ring-pink-100 dark:focus:ring-pink-900/20 transition-all outline-none text-lg font-medium text-slate-800 dark:text-white placeholder:text-slate-400 shadow-inner"
+                className="w-full pl-10 pr-10 py-3 md:pl-12 md:pr-12 md:py-4 rounded-xl md:rounded-2xl bg-slate-50 dark:bg-slate-800 border-2 border-transparent focus:bg-white dark:focus:bg-slate-900 focus:border-pink-300 dark:focus:border-pink-600 focus:ring-4 focus:ring-pink-100 dark:focus:ring-pink-900/20 transition-all outline-none text-base md:text-lg font-medium text-slate-800 dark:text-white placeholder:text-slate-400 shadow-inner"
               />
               {keyword && (
                  <button 
                    onClick={clearKeyword}
-                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500 transition"
+                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-500 transition"
                    aria-label="Borrar texto"
                  >
                    <X size={20} />
@@ -620,14 +623,14 @@ const Generator: React.FC<GeneratorProps> = ({ initialCategory, seoTitle, seoDes
             <button
               onClick={() => handleGenerate()}
               disabled={isGenerating}
-              className="w-full bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold py-4 rounded-2xl shadow-xl shadow-slate-900/20 transform transition-all hover:scale-[1.02] active:scale-95 flex justify-center items-center group mb-4"
+              className="w-full bg-slate-900 hover:bg-slate-800 dark:bg-white dark:hover:bg-slate-200 text-white dark:text-slate-900 font-bold py-3 md:py-4 rounded-xl md:rounded-2xl shadow-xl shadow-slate-900/20 transform transition-all hover:scale-[1.02] active:scale-95 flex justify-center items-center group mb-4"
             >
               {isGenerating ? (
                 <RefreshCw className="animate-spin mr-2" />
               ) : (
                 <Wand2 className="mr-2 group-hover:rotate-12 transition-transform" />
               )}
-              {isGenerating ? 'Creando Magia...' : 'Generar Nombres'}
+              {isGenerating ? 'Creando...' : 'Generar Nombres'}
             </button>
 
             {/* Mobile Toggle for Settings */}
