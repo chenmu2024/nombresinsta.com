@@ -277,63 +277,10 @@ const Generator: React.FC = () => {
     youtube: "Generador de Nombres para YouTube"
   };
 
-  // --- STRUCTURED DATA SCHEMAS ---
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "¿Cómo funciona el Generador de Nombres para Instagram?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Es muy sencillo. Solo ingresa una palabra clave (tu nombre, apodo o hobby) en el campo de texto. Nuestro Generador de Nombres para Instagram mezclará esa palabra con cientos de prefijos, sufijos y tendencias actuales para darte opciones únicas."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Es gratis este Generador de Nombres para Instagram?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí, NombresInsta.com es una herramienta 100% gratuita. Puedes usar el Generador de Nombres para Instagram tantas veces como necesites sin pagar nada."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Qué hago si el nombre está ocupado?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Es común. Por eso nuestro Generador de Nombres para Instagram te da muchas variaciones. Si tu primera opción está tomada, prueba con las sugerencias que añaden puntos (.) o términos como 'official' que suelen estar libres."
-        }
-      }
-    ]
-  };
-
-  const softwareAppSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Generador de Nombres para Instagram",
-    "url": "https://nombresinsta.com/",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Web",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": "Herramienta gratuita (Generador de Nombres para Instagram) para crear usuarios aesthetic y originales.",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "ratingCount": "1420"
-    }
-  };
-
   useSEO({
     title: platformTitles[platform],
     description: `¿Necesitas un ${platformTitles[platform]}? Crea miles de usuarios aesthetic, para mujer, hombre y negocios. 100% Gratis y Original.`,
-    url: "/",
-    schema: [softwareAppSchema, faqSchema] // Inject both schemas
+    url: "/"
   });
   
   const [results, setResults] = useState<GeneratedName[]>([]);

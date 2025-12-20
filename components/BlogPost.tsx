@@ -1,61 +1,22 @@
 import React, { useEffect } from 'react';
 import { ArrowLeft, Calendar, Clock, Share2, Sparkles } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { useSEO } from '../hooks/useSEO';
 
-const BlogPost: React.FC = () => {
-  const { postId } = useParams<{ postId: string }>();
+interface BlogPostProps {
+  postId: string;
+  onBack: () => void;
+  onGoToGenerator: () => void;
+}
+
+const BlogPost: React.FC<BlogPostProps> = ({ postId, onBack, onGoToGenerator }) => {
   const post = blogPosts.find(p => p.id === postId);
 
-  // --- STRUCTURED DATA ---
-  const articleSchema = post ? {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "image": [
-      "https://nombresinsta.com/og-image.jpg" // Ideally a specific image per post
-    ],
-    "datePublished": "2025-12-19T08:00:00+08:00", // Would be dynamic in a real DB
-    "dateModified": "2025-12-19T09:20:00+08:00",
-    "author": [{
-      "@type": "Organization",
-      "name": "NombresInsta",
-      "url": "https://nombresinsta.com"
-    }],
-    "description": post.excerpt
-  } : undefined;
-
-  const breadcrumbSchema = post ? {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [{
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Inicio",
-      "item": "https://nombresinsta.com/"
-    },{
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Blog",
-      "item": "https://nombresinsta.com/blog"
-    },{
-      "@type": "ListItem",
-      "position": 3,
-      "name": post.title
-    }]
-  } : undefined;
-
-  const schemas = [];
-  if (articleSchema) schemas.push(articleSchema);
-  if (breadcrumbSchema) schemas.push(breadcrumbSchema);
-
-  // Apply SEO tags
+  // Apply SEO tags specifically for this article
   useSEO({
     title: post ? `${post.title} | NombresInsta` : 'Artículo no encontrado | NombresInsta',
     description: post ? post.excerpt : 'Artículo del blog sobre consejos para Instagram.',
-    url: post ? `/blog/${post.id}` : '/blog',
-    schema: schemas
+    url: post ? `/blog/${post.id}` : '/blog'
   });
 
   useEffect(() => {
@@ -67,7 +28,7 @@ const BlogPost: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-slate-800">Artículo no encontrado</h2>
-          <Link to="/blog" className="text-pink-600 mt-4 hover:underline block">Volver al Blog</Link>
+          <button onClick={onBack} className="text-pink-600 mt-4 hover:underline">Volver al Blog</button>
         </div>
       </div>
     );
@@ -79,12 +40,12 @@ const BlogPost: React.FC = () => {
       <div className={`w-full h-64 md:h-80 ${post.image} relative`}>
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8 md:pb-12 relative z-10">
-          <Link 
-            to="/blog"
+          <button 
+            onClick={onBack}
             className="absolute top-8 left-4 md:left-0 text-white/90 hover:text-white bg-black/20 hover:bg-black/30 backdrop-blur px-4 py-2 rounded-lg flex items-center transition text-sm font-medium"
           >
             <ArrowLeft size={16} className="mr-2" /> Volver
-          </Link>
+          </button>
           
           <span className="inline-block bg-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide w-fit mb-3">
             {post.category}
@@ -128,12 +89,12 @@ const BlogPost: React.FC = () => {
               <p className="text-slate-300 mb-6 leading-relaxed">
                 Pon en práctica estos consejos y genera miles de ideas únicas ahora mismo.
               </p>
-              <Link 
-                to="/#generator"
-                className="block w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:scale-105 active:scale-95"
+              <button 
+                onClick={onGoToGenerator}
+                className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg transform transition hover:scale-105 active:scale-95"
               >
                 Generar Nombres Gratis
-              </Link>
+              </button>
             </div>
           </div>
         </div>
