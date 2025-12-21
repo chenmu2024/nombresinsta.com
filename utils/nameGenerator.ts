@@ -15,81 +15,100 @@ const generateId = () => Math.random().toString(36).substr(2, 9);
 // Mapping common keywords to related aesthetic/popular terms
 const SYNONYMS: Record<string, string[]> = {
   // Emotions/Vibes
-  'feliz': ['happy', 'joy', 'smile', 'lucky', 'sunny'],
-  'happy': ['feliz', 'joy', 'smile', 'lucky', 'sunny'],
-  'sad': ['triste', 'blue', 'grey', 'mood', 'alone'],
-  'triste': ['sad', 'blue', 'grey', 'mood', 'alone'],
-  'love': ['amor', 'heart', 'luv', 'xoxo', 'soul', 'bae'],
-  'amor': ['love', 'heart', 'corazon', 'latido', 'passion'],
-  'life': ['vida', 'live', 'world', 'days', 'diary'],
-  'vida': ['life', 'vivir', 'mundo', 'diario', 'alma'],
+  'feliz': ['happy', 'joy', 'smile', 'lucky', 'sunny', 'fun'],
+  'happy': ['feliz', 'joy', 'smile', 'lucky', 'sunny', 'vibe'],
+  'sad': ['triste', 'blue', 'grey', 'mood', 'alone', 'broken'],
+  'triste': ['sad', 'blue', 'grey', 'mood', 'alone', 'melancholy'],
+  'love': ['amor', 'heart', 'luv', 'xoxo', 'soul', 'bae', 'crush'],
+  'amor': ['love', 'heart', 'corazon', 'latido', 'passion', 'ternura'],
+  'life': ['vida', 'live', 'world', 'days', 'diary', 'daily'],
+  'vida': ['life', 'vivir', 'mundo', 'diario', 'alma', 'vital'],
+  
+  // Beauty & Fashion (Expanded)
+  'belleza': ['beauty', 'glow', 'glam', 'skin', 'pretty', 'linda', 'muse', 'diva', 'face', 'aura'],
+  'beauty': ['belleza', 'glow', 'glam', 'cosmetic', 'pretty', 'lovely', 'muse'],
+  'makeup': ['mua', 'face', 'look', 'glam', 'paint', 'shade', 'tint', 'blush'],
+  'maquillaje': ['makeup', 'mua', 'look', 'color', 'arte', 'face'],
+  'skin': ['piel', 'derma', 'glow', 'care', 'soft', 'face'],
+  'piel': ['skin', 'face', 'care', 'derma', 'suave', 'glow'],
+  'hair': ['pelo', 'cabello', 'style', 'cut', 'waves', 'curls'],
+  'pelo': ['hair', 'melena', 'rizos', 'look', 'style'],
   
   // Categories
-  'viaje': ['travel', 'trip', 'wander', 'tour', 'fly', 'map', 'ruta'],
-  'travel': ['viaje', 'trip', 'wander', 'world', 'nomad', 'go'],
-  'moda': ['fashion', 'style', 'look', 'outfit', 'wear', 'chic', 'vogue'],
-  'fashion': ['moda', 'style', 'look', 'trend', 'classy', 'glam'],
-  'game': ['play', 'gamer', 'win', 'quest', 'level', 'pixel'],
-  'gamer': ['play', 'game', 'win', 'pro', 'noob', 'gg'],
-  'juego': ['play', 'game', 'fun', 'win'],
-  'arte': ['art', 'draw', 'sketch', 'paint', 'ink', 'color'],
-  'art': ['arte', 'design', 'visual', 'creative', 'muse'],
-  'music': ['musica', 'song', 'tune', 'beat', 'sound', 'audio'],
-  'musica': ['music', 'cancion', 'ritmo', 'sonido', 'voz'],
-  'foto': ['photo', 'pic', 'cam', 'shot', 'lens', 'focus'],
-  'photo': ['foto', 'pic', 'image', 'visual', 'capture'],
-  'tech': ['code', 'data', 'dev', 'soft', 'app', 'web'],
-  'book': ['libro', 'read', 'page', 'story', 'novel'],
-  'libro': ['book', 'leer', 'hoja', 'cuento', 'texto'],
-  'food': ['comida', 'eat', 'yum', 'chef', 'cook', 'tasty'],
-  'comida': ['food', 'rico', 'sabor', 'delish', 'cocina'],
-  'fit': ['gym', 'run', 'strong', 'power', 'health', 'body'],
-  'gym': ['fit', 'lift', 'sport', 'train', 'muscle'],
+  'viaje': ['travel', 'trip', 'wander', 'tour', 'fly', 'map', 'ruta', 'world'],
+  'travel': ['viaje', 'trip', 'wander', 'world', 'nomad', 'go', 'journey'],
+  'moda': ['fashion', 'style', 'look', 'outfit', 'wear', 'chic', 'vogue', 'trend'],
+  'fashion': ['moda', 'style', 'look', 'trend', 'classy', 'glam', 'runway'],
+  'game': ['play', 'gamer', 'win', 'quest', 'level', 'pixel', 'arcade'],
+  'gamer': ['play', 'game', 'win', 'pro', 'noob', 'gg', 'player'],
+  'juego': ['play', 'game', 'fun', 'win', 'zone'],
+  'arte': ['art', 'draw', 'sketch', 'paint', 'ink', 'color', 'visual'],
+  'art': ['arte', 'design', 'visual', 'creative', 'muse', 'gallery'],
+  'music': ['musica', 'song', 'tune', 'beat', 'sound', 'audio', 'vibe'],
+  'musica': ['music', 'cancion', 'ritmo', 'sonido', 'voz', 'melodia'],
+  'foto': ['photo', 'pic', 'cam', 'shot', 'lens', 'focus', 'frame'],
+  'photo': ['foto', 'pic', 'image', 'visual', 'capture', 'studio'],
+  'tech': ['code', 'data', 'dev', 'soft', 'app', 'web', 'cyber'],
+  'book': ['libro', 'read', 'page', 'story', 'novel', 'words'],
+  'libro': ['book', 'leer', 'hoja', 'cuento', 'texto', 'letras'],
+  'food': ['comida', 'eat', 'yum', 'chef', 'cook', 'tasty', 'bites'],
+  'comida': ['food', 'rico', 'sabor', 'delish', 'cocina', 'gusto'],
+  'fit': ['gym', 'run', 'strong', 'power', 'health', 'body', 'train'],
+  'gym': ['fit', 'lift', 'sport', 'train', 'muscle', 'active'],
   
   // Colors/Nature
-  'luna': ['moon', 'night', 'lunar', 'cielo', 'star'],
-  'moon': ['luna', 'night', 'orbit', 'sky', 'glow'],
-  'sol': ['sun', 'sunny', 'shine', 'light', 'day'],
-  'sun': ['sol', 'sunny', 'shine', 'ray', 'bright'],
-  'mar': ['sea', 'ocean', 'wave', 'blue', 'agua'],
-  'sea': ['mar', 'ocean', 'beach', 'coast', 'water'],
-  'flor': ['flower', 'bloom', 'rose', 'garden', 'nature'],
-  'flower': ['flor', 'bloom', 'petal', 'rose', 'lily']
+  'luna': ['moon', 'night', 'lunar', 'cielo', 'star', 'cosmos'],
+  'moon': ['luna', 'night', 'orbit', 'sky', 'glow', 'phase'],
+  'sol': ['sun', 'sunny', 'shine', 'light', 'day', 'ray'],
+  'sun': ['sol', 'sunny', 'shine', 'ray', 'bright', 'golden'],
+  'mar': ['sea', 'ocean', 'wave', 'blue', 'agua', 'tide'],
+  'sea': ['mar', 'ocean', 'beach', 'coast', 'water', 'salt'],
+  'flor': ['flower', 'bloom', 'rose', 'garden', 'nature', 'petal'],
+  'flower': ['flor', 'bloom', 'petal', 'rose', 'lily', 'botanic']
 };
 
-// --- Word Banks (Existing) ---
+// --- Word Banks (Refined for Spanish Context) ---
 const aestheticPrefixes = [
+  // English (Global Aesthetic)
   'the', 'its', 'just', 'real', 'iam', 'dear', 'oh', 'hey', 'yo', 'ur', 'my', 'im', 'is', 'be', 'so',
-  'only', 'simply', 'truly', 'daily', 'ever', 'never', 'always', 'still', 'keep', 'own', 'our', 'all',
-  'soft', 'pure', 'honey', 'baby', 'angel', 'lil', 'miss', 'doll', 'bow', 'lace', 'silk', 'satin', 'pearl',
-  'bunny', 'kitty', 'teddy', 'sweet', 'cute', 'lovely', 'cloud', 'mist', 'haze', 'blur', 'faint', 'pale',
-  'vanilla', 'peach', 'mint', 'rose', 'milk', 'mocha', 'latte', 'chai', 'matcha', 'boba', 'cream', 'sugar',
-  'sage', 'beige', 'noir', 'blanc', 'luxe', 'velvet', 'linen', 'cotton', 'fleur', 'cherry', 'berry',
-  'dreamy', 'sleepy', 'fairy', 'pixie', 'witch', 'magic', 'mystic', 'divine', 'sacred', 'blessed', 'cursed',
-  'glossy', 'shiny', 'icy', 'rosy', 'golden', 'silver', 'bronze', 'copper', 'glass', 'crystal',
-  'lunar', 'solar', 'cosmic', 'astral', 'polar', 'arctic', 'zenith', 'nadir', 'nova', 'halo', 'eclipse',
+  'only', 'simply', 'truly', 'daily', 'ever', 'never', 'still', 'keep', 'own', 'our', 'all',
+  'soft', 'pure', 'honey', 'baby', 'angel', 'lil', 'miss', 'doll', 'bow', 'lace', 'silk',
+  'bunny', 'kitty', 'sweet', 'cute', 'lovely', 'cloud', 'mist', 'pale',
+  'vanilla', 'peach', 'mint', 'rose', 'milk', 'mocha', 'latte', 'chai',
+  'sage', 'beige', 'noir', 'blanc', 'luxe', 'velvet',
+  'dreamy', 'fairy', 'magic', 'mystic', 'divine',
+  'glossy', 'shiny', 'icy', 'rosy', 'golden', 'silver', 'glass', 'crystal',
+  'lunar', 'solar', 'cosmic', 'astral', 'nova', 'halo',
+  
+  // Spanish (Natural & Aesthetic)
   'soy', 'yosoy', 'tu', 'mi', 'la', 'el', 'una', 'un',
-  'luna', 'sol', 'mar', 'cielo', 'flor', 'luz', 'paz', 'fe', 'sal', 'arena', 'bruma',
+  'luna', 'sol', 'mar', 'cielo', 'flor', 'luz', 'paz', 'sal', 'arena', 'bruma',
   'dulce', 'suave', 'linda', 'bonita', 'chula', 'guapa', 'bella', 'hermosa', 'divina',
-  'alma', 'mente', 'vida', 'amor', 'aire', 'brisa', 'nube', 'raiz', 'hoja',
-  'magia', 'aura', 'vibra', 'onda', 'ritmo', 'eco', 'caos', 'fuego', 'hielo'
+  'alma', 'mente', 'vida', 'amor', 'aire', 'brisa', 'nube',
+  'magia', 'aura', 'vibra', 'onda', 'ritmo', 'eco', 'fuego', 'hielo',
+  'zona', 'mundo', 'espacio', 'rincon', 'diario', 'nota', 'carta',
+  'puro', 'eterno', 'nuevo', 'simple', 'real'
 ];
 
 const aestheticSuffixes = [
+  // English
   'gram', 'vibe', 'vibes', 'mood', 'diary', 'journal', 'log', 'files', 'folder', 'archive', 'dump',
   'pov', 'cam', 'film', 'films', 'clips', 'cuts', 'edits', 'visuals', 'shots', 'snaps', 'pics', 'lens',
   'life', 'style', 'world', 'wrld', 'land', 'planet', 'zone', 'space', 'room', 'corner', 'spot',
   'blog', 'daily', 'weekly', 'notes', 'pages', 'thoughts', 'minds', 'soul', 'heart', 'spirit',
   'club', 'cult', 'gang', 'squad', 'crew', 'team', 'fam', 'house', 'home', 'society', 'union',
   'girl', 'boy', 'kid', 'babe', 'baby', 'doll', 'angel', 'witch', 'fairy', 'queen', 'king', 'prince',
-  'fan', 'stan', 'enthusiast', 'addict', 'junkie', 'geek', 'nerd', 'pro', 'wiz', 'gen', 'pal',
+  'fan', 'stan', 'enthusiast', 'addict', 'lover', 'geek', 'pro',
   'core', 'wave', 'gaze', 'punk', 'pop', 'bop', 'jam', 'tune', 'beat', 'flow', 'drip',
-  'xo', 'xx', 'xxx', 'zzz', 'yyy', 'inc', 'co', 'ltd', 'est', 'hq', 'id', 'os', 'is', 'ia', 'io',
-  'vida', 'amor', 'sol', 'luna', 'mar', 'mundo', 'landia', 'polis',
+  'xo', 'xx', 'xxx', 'inc', 'co', 'hq', 'id', 'os', 'is', 'ia', 'io',
+  
+  // Spanish
+  'vida', 'amor', 'sol', 'luna', 'mar', 'mundo', 'landia',
   'bby', 'bebe', 'mami', 'papi', 'chula', 'linda', 'guapo',
-  'real', 'fan', 'fans', 'club',
+  'real', 'fan', 'fans', 'club', 'blog',
   'verso', 'texto', 'frase', 'cita', 'nota', 'foto', 'video', 'grafia',
-  'viaje', 'ruta', 'camino', 'paso', 'huella', 'destino', 'mapa'
+  'viaje', 'ruta', 'camino', 'destino', 'mapa',
+  'mx', 'es', 'arg', 'latino', 'latina'
 ];
 
 const businessPrefixes = [
@@ -116,13 +135,14 @@ const businessSuffixes = [
   'oficial', 'mx', 'es', 'arg', 'cl', 'col', 'pe', 've', 'uy', 'cr', 'pa', 'gt',
   'tienda', 'online', 'digital', 'virtual', 'web', 'net', 'app', 'com',
   'mexico', 'madrid', 'bcn', 'cdmx', 'ba', 'bog', 'lim', 'scl', 'mty', 'gdl',
-  'servicios', 'asociados', 'consultores', 'asesores', 'expertos', 'profesional'
+  'servicios', 'asociados', 'consultores', 'asesores', 'expertos', 'profesional', 'negocios'
 ];
 
+// Removed negative adjectives like "feo", "tonto", "noob"
 const funnyPrefixes = [
   'not', 'actually', 'maybe', 'just', 'bad', 'sad', 'mad', 'rad', 'ok',
   'ceo_of', 'president_of', 'inventor_of', 'king_of', 'queen_of', 'god_of', 'boss_of', 'fan_of',
-  'simp_for', 'stan_', 'fan_of_', 'hater_of_', 'victim_of_', 'friend_of_', 'enemy_of_',
+  'simp_for', 'stan_', 'fan_of_', 'friend_of_',
   'mr', 'mrs', 'ms', 'miss', 'dr', 'prof', 'capt', 'sir', 'lord', 'lady', 'baron', 'duke',
   'lil', 'big', 'yung', 'old', 'smol', 'tol', 'fat', 'thin', 'tall', 'short',
   'the_real', 'the_fake', 'the_only', 'your_local', 'internet_', 'cyber_', 'virtual_',
@@ -134,15 +154,17 @@ const funnyPrefixes = [
   'tu_ex_', 'tu_crush_', 'tu_vecino_', 'tu_patron_', 'tu_tio_', 'tu_tia_', 'tu_novio_'
 ];
 
+// Removed negative adjectives and added more "Internet culture" terms
 const funnySuffixes = [
   'fail', 'wins', 'plays', 'games', 'gaming', 'tt', 'tv', 'yt', 'live', 'stream',
   'meme', 'memes', 'shitpost', 'posting', 'spam', 'trash', 'junk', 'stuff', 'things',
   'lol', 'lmao', 'xd', 'uwu', 'owo', 'omg', 'wtf', 'plz', 'thx', 'brb', 'afk',
   'dice', 'sabe', 'piensa', 'cree', 'siente', 'habla', 'mira', 'oye', 've',
-  'loco', 'loca', 'feo', 'fea', 'guapo', 'guapa', 'raro', 'rara', 'chistoso',
-  'tonto', 'tonta', 'listo', 'lista', 'genio', 'pro', 'noob', 'manco',
+  'loco', 'loca', 'guapo', 'guapa', 'raro', 'rara', 'chistoso',
+  'listo', 'lista', 'genio', 'pro', 'god', 'master',
   'fake', '100', 'mil', '2000', '3000',
-  'y_sus_amigos', 'y_cia', 'el_regreso', 'la_venganza', 'en_hd', 'en_4k'
+  'y_sus_amigos', 'y_cia', 'el_regreso', 'la_venganza', 'en_hd', 'en_4k',
+  'oficial', 'real', 'verse', 'verso', 'zone'
 ];
 
 const gamerSuffixes = ['404', 'exe', 'png', 'jpg', 'gif', 'mp4', 'zip', 'bin', 'hex', 'bot', 'npc', 'main', 'alt', 'smurf', 'buff', 'nerf', 'op', 'gg', 'ez'];
@@ -223,8 +245,9 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
 
   // Helper to pick a base word for this iteration
   const getBase = () => {
-     // 30% chance to pick a synonym if available (and if not empty search)
-     if (cleanKeyword && keywordPool.length > 1 && Math.random() < 0.3) {
+     // PRIORITY TO USER KEYWORD: Only 10% chance to pick a synonym if available (was 40%)
+     // This addresses the user feedback about "belleza" being the desired term.
+     if (cleanKeyword && keywordPool.length > 1 && Math.random() < 0.1) {
          return keywordPool[Math.floor(Math.random() * keywordPool.length)];
      }
      return cleanKeyword || keywordPool[Math.floor(Math.random() * keywordPool.length)];
@@ -397,19 +420,20 @@ export const generateNames = (options: GeneratorOptions): GeneratedName[] => {
     }
   }
 
-  // Fillers
-  let safetyCount = 0;
-  while (results.length < 60 && safetyCount < 200) {
-    safetyCount++;
-    const adj = randomAdjectives[Math.floor(Math.random() * randomAdjectives.length)];
-    const noun = keywordPool.length > 0 
-        ? keywordPool[Math.floor(Math.random() * keywordPool.length)] 
-        : fallbackNouns[Math.floor(Math.random() * fallbackNouns.length)];
-    
-    const r = Math.random();
-    if (r < 0.33 && includePeriods) add(`${noun}.${adj}`, NameCategory.ALL);
-    else if (r < 0.66) add(`${adj}${noun}`, NameCategory.ALL);
-    else add(`${noun}${adj}`, NameCategory.ALL);
+  // Fillers - REMOVED random filling if the user has a keyword.
+  // We only use fillers if the input was empty to begin with.
+  if (keywordPool.length === 0 || (!cleanKeyword && results.length < 60)) {
+      let safetyCount = 0;
+      while (results.length < 60 && safetyCount < 200) {
+        safetyCount++;
+        const adj = randomAdjectives[Math.floor(Math.random() * randomAdjectives.length)];
+        const noun = fallbackNouns[Math.floor(Math.random() * fallbackNouns.length)];
+        
+        const r = Math.random();
+        if (r < 0.33 && includePeriods) add(`${noun}.${adj}`, NameCategory.ALL);
+        else if (r < 0.66) add(`${adj}${noun}`, NameCategory.ALL);
+        else add(`${noun}${adj}`, NameCategory.ALL);
+      }
   }
 
   return results.sort(() => 0.5 - Math.random()).slice(0, 60);
