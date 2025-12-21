@@ -87,7 +87,7 @@ const aestheticPrefixes = [
   'alma', 'mente', 'vida', 'amor', 'aire', 'brisa', 'nube',
   'magia', 'aura', 'vibra', 'onda', 'ritmo', 'eco', 'fuego', 'hielo',
   'zona', 'mundo', 'espacio', 'rincon', 'diario', 'nota', 'carta',
-  'puro', 'eterno', 'nuevo', 'simple', 'real'
+  'puro', 'eterna', 'nuevo', 'simple', 'real', 'brillo', 'esencia', 'destello'
 ];
 
 const aestheticSuffixes = [
@@ -104,7 +104,7 @@ const aestheticSuffixes = [
   
   // Spanish
   'vida', 'amor', 'sol', 'luna', 'mar', 'mundo', 'landia',
-  'bby', 'bebe', 'mami', 'papi', 'chula', 'linda', 'guapo',
+  'bby', 'bebe', 'mami', 'papi', 'chula', 'linda', 'guapo', 'nena', 'chica', 'musa',
   'real', 'fan', 'fans', 'club', 'blog',
   'verso', 'texto', 'frase', 'cita', 'nota', 'foto', 'video', 'grafia',
   'viaje', 'ruta', 'camino', 'destino', 'mapa',
@@ -138,33 +138,37 @@ const businessSuffixes = [
   'servicios', 'asociados', 'consultores', 'asesores', 'expertos', 'profesional', 'negocios'
 ];
 
-// Removed negative adjectives like "feo", "tonto", "noob"
+// Removed negative adjectives and English slang that doesn't fit beauty context well
 const funnyPrefixes = [
   'not', 'actually', 'maybe', 'just', 'bad', 'sad', 'mad', 'rad', 'ok',
-  'ceo_of', 'president_of', 'inventor_of', 'king_of', 'queen_of', 'god_of', 'boss_of', 'fan_of',
+  'ceo_of', 'president_of', 'inventor_of', 'king_of', 'queen_of', 'god_of', 'fan_of',
   'simp_for', 'stan_', 'fan_of_', 'friend_of_',
   'mr', 'mrs', 'ms', 'miss', 'dr', 'prof', 'capt', 'sir', 'lord', 'lady', 'baron', 'duke',
   'lil', 'big', 'yung', 'old', 'smol', 'tol', 'fat', 'thin', 'tall', 'short',
   'the_real', 'the_fake', 'the_only', 'your_local', 'internet_', 'cyber_', 'virtual_',
+  // Spanish Slang & Funny
   'el_sr', 'la_sra', 'don', 'doña', 'un_tal', 'una_tal',
   'ese_', 'esa_', 'aquel_', 'aquella_', 'aqui_', 'alli_',
   'soy_el_', 'soy_la_', 'no_soy_', 'falso_', 'verdadero_',
   'casi_', 'medio_', 'super_', 'mega_', 're_', 'ultra_', 'archi_',
   'el_toxico', 'la_toxica', 'el_brayan', 'la_brittany', 'el_kev',
-  'tu_ex_', 'tu_crush_', 'tu_vecino_', 'tu_patron_', 'tu_tio_', 'tu_tia_', 'tu_novio_'
+  'tu_ex_', 'tu_crush_', 'tu_vecino_', 'tu_tio_', 'tu_tia_', 'tu_novio_',
+  'la_jefa', 'el_jefe', 'la_patrona', 'el_patron', 'tu_diosa', 'su_majestad',
+  'fan_num_1', 'la_mera', 'el_mero', 'anti_'
 ];
 
-// Removed negative adjectives and added more "Internet culture" terms
+// Cleaned up "dirty" words like shitpost/junk to be brand safe
 const funnySuffixes = [
   'fail', 'wins', 'plays', 'games', 'gaming', 'tt', 'tv', 'yt', 'live', 'stream',
-  'meme', 'memes', 'shitpost', 'posting', 'spam', 'trash', 'junk', 'stuff', 'things',
+  'meme', 'memes', 'posting', 'spam', 'stuff', 'things', 'logs', 'vlog',
   'lol', 'lmao', 'xd', 'uwu', 'owo', 'omg', 'wtf', 'plz', 'thx', 'brb', 'afk',
   'dice', 'sabe', 'piensa', 'cree', 'siente', 'habla', 'mira', 'oye', 've',
   'loco', 'loca', 'guapo', 'guapa', 'raro', 'rara', 'chistoso',
   'listo', 'lista', 'genio', 'pro', 'god', 'master',
   'fake', '100', 'mil', '2000', '3000',
   'y_sus_amigos', 'y_cia', 'el_regreso', 'la_venganza', 'en_hd', 'en_4k',
-  'oficial', 'real', 'verse', 'verso', 'zone'
+  'oficial', 'real', 'verse', 'verso', 'zone', 'vip', 'drama', 'queen', 'king', 'flow',
+  'caos', 'problema', 'toxica', 'toxico'
 ];
 
 const gamerSuffixes = ['404', 'exe', 'png', 'jpg', 'gif', 'mp4', 'zip', 'bin', 'hex', 'bot', 'npc', 'main', 'alt', 'smurf', 'buff', 'nerf', 'op', 'gg', 'ez'];
